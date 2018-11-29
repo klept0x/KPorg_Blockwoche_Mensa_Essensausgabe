@@ -7,7 +7,7 @@ import io.Statistics;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Student extends TheObject {
+public class Student extends TheObject implements Cloneable {
 
 //    private double guthaben;
 
@@ -57,6 +57,10 @@ public class Student extends TheObject {
         this.iqueueStartTime=Simulation.getGlobalTime();
     }
 
+    public Student clone(){
+        return new Student(this.getLabel(),this.getStationsToGo(),this.getProcessTime(),this.getMySpeed(),this.xPos,this.yPos,this.getImage(),this.getMaxWait());
+    }
+
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
@@ -80,7 +84,7 @@ public class Student extends TheObject {
          */
         public Measurement(Student pOutObject) {
 
-            this.outObject= pOutObject;
+            this.outObject= pOutObject.clone();
             this.addObserver(OurStatistic.getObjectBeobachter());
         }
 
