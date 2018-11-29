@@ -14,6 +14,7 @@ public class Student extends TheObject   {
 //    private double guthaben;
 
     private static ArrayList<Student> allStudents = new ArrayList<Student>();
+    private static long startTime;
     private ArrayList<PlotterPane> dataDias;
     Measurement measurement;
     private int maxWait;
@@ -35,13 +36,18 @@ public class Student extends TheObject   {
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
+        allStudents.add(this);
         dataDias= new ArrayList<PlotterPane>();
         initDias();
     }
 
+    public static void setStartTime(long globalTime) {
+        startTime= globalTime;
+    }
+
     private void initDias() {
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten","Globaltime",this.label+" GesamtKosten"));
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"WarteZeit","Globaltime",this.label+" GesamtWarteZeit"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten","Globaltime","GesamtKosten"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"WarteZeit","Globaltime","GesamtWarteZeit"));
     }
 
 
@@ -102,8 +108,8 @@ public class Student extends TheObject   {
             return outObject;
         }
 
-        void aenderGuthaben(){
-            this.guthaben++;
+        void aenderGuthaben(double preis){
+            this.guthaben= this.guthaben+preis;
             notifyObservers(this.guthaben);
         }
 
@@ -116,6 +122,14 @@ public class Student extends TheObject   {
         public void notifyObservers(Object arg) {
             setChanged();
             super.notifyObservers(arg);
+        }
+
+        public int getGesWarteZeit() {
+            return gesWarteZeit;
+        }
+
+        public double getGuthaben() {
+            return guthaben;
         }
     }
 
@@ -130,5 +144,14 @@ public class Student extends TheObject   {
 
     public static ArrayList<Student> getAllStudents() {
         return allStudents;
+    }
+
+
+    public static long getStartTime() {
+        return startTime;
+    }
+
+    public static void setzeVisible() {
+       allStudents.get(0).getDataDias().get(0).setVisible(true);
     }
 }

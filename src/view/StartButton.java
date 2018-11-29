@@ -2,9 +2,12 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import controller.Simulation;
 import model.MensaEntrance;
+import model.MensaStationen;
+import model.Student;
 
 
 /**
@@ -31,9 +34,18 @@ public class StartButton extends JButton implements ActionListener {
         //set the simulation on
         Simulation.isRunning = true;
 
+        MensaStationen.setStartTime(Simulation.getGlobalTime());
+        Student.setStartTime(Simulation.getGlobalTime());
+        setzeVisible();
+
         //wake up the start station -> lets the simulation run
         MensaEntrance.getStartStation().wakeUp();
 
+    }
+
+    private void setzeVisible(){
+       MensaStationen.setzeVisible();
+       Student.setzeVisible();
     }
 
 

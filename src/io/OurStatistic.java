@@ -51,12 +51,32 @@ public class OurStatistic extends Statistics {
         System.out.println("\n"+" Student update");
         Student.Measurement s = (Student.Measurement)o;
         Student theStudent = s.getOuterClass();
+        trageDatenEin(s);
         System.out.println(theStudent.getLabel());
-        Statistics.show(String.valueOf(arg.getClass()));
-        if(arg instanceof  Integer){
-                int daten = (int) arg;
+
+        }
+
+    private void trageDatenEin(Student.Measurement measurement) {
+        for (Student s1 : Student.getAllStudents()){
+            if(measurement.getOuterClass().getLabel().equals(s1.getLabel())) {
+                for (PlotterPane p : s1.getDataDias()) {
+                    String title = p.getTheTitle();
+                    switch (title) {
+                        case "GesamtKosten":
+                            System.out.println(s1.getLabel() + " Gesamtkosten");
+                            p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-Student.getStartTime()),(int)measurement.getGuthaben()));
+                            break;
+                        case "GesamtWarteZeit":
+                            System.out.println(s1.getLabel() + " Gesamtkosten");
+                            p.addPoint(new CustomPoint(((int)(Simulation.getGlobalTime())),measurement.getGesWarteZeit()));
+                            break;
+
+
+                    }
+                }
             }
         }
+    }
     }
 
     static class MensaStationenBeobachter implements Observer{
@@ -82,18 +102,24 @@ public class OurStatistic extends Statistics {
 
         private void trageDatenEin(MensaStationen.Measurement measurement) {
             for (MensaStationen m : MensaStationen.getAllMensaStation()){
-                for(PlotterPane p : m.getDatenDias()){
-                    String title= p.getTheTitle();
-                    switch(title){
-                        case "InUseTime":
-                            System.out.println(m.getLabel()+" InUse");
-                           break;
-                        case "IdleTime":
-                            System.out.println(m.getLabel()+" IdleTime");
-                            break;
-                        case "numberOfVisitedObject":
-                            System.out.println(m.getLabel()+" number");
+                if(measurement.getOuterClass().getLabel().equals(m.getLabel())) {
+                    for (PlotterPane p : m.getDatenDias()) {
+                        String title = p.getTheTitle();
+                        switch (title) {
+                            case "InUseTime":
+                                System.out.println(m.getLabel() + " InUse");
+                                System.out.println();
+                                p.addPoint(new CustomPoint((int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getInUseTime()));
+                                break;
+                            case "IdleTime":
+                                System.out.println(m.getLabel() + " IdleTime");
+                                p.addPoint(new CustomPoint((int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getIdleTime()));
+                                break;
+                            case "numberOfVisitedObject":
+                                System.out.println(m.getLabel() + " number");
+                                p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getNumbOfVisitedObjects()));
 
+                        }
                     }
                 }
             }

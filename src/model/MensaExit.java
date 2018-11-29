@@ -55,7 +55,7 @@ public class MensaExit extends EndStation {
     protected void endSimulation(){
         if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()) {
             super.endSimulation();
-            datenAbfrage();
+            //datenAbfrage();
             Statistics.show("hier PopUp");
         }
     }
