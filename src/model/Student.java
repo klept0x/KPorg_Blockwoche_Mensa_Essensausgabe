@@ -1,17 +1,19 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Student extends TheObject {
+public class Student extends TheObject implements Cloneable {
 
 //    private double guthaben;
 
     private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
-    Measurement measurement = new Measurement();
+    Measurement measurement;
     private int maxWait;
     private long iqueueStartTime;
 
@@ -29,13 +31,9 @@ public class Student extends TheObject {
     private Student(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait) {
 
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
-        //     this.guthaben = guthaben;
-
-        //    Student.allStudentAlts.add(this);
-        Student.allStudents.add(this);
-        
-        //the longest time for a Student to wait in a queue
-        this.maxWait = pMaxWait;
+        this.maxWait=pMaxWait;
+        measurement= new Measurement(this);
+        Statistics.show("Student Konstruktor methode wurde aufgerufen");
     }
 
 
@@ -60,19 +58,58 @@ public class Student extends TheObject {
         this.iqueueStartTime=Simulation.getGlobalTime();
     }
 
+    public Student clone(){
+        return new Student(this.getLabel(),this.getStationsToGo(),this.getProcessTime(),this.getMySpeed(),this.xPos,this.yPos,this.getImage(),this.getMaxWait());
+    }
+
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
      */
-    static class Measurement {
+    public static class Measurement extends Observable {
 
+        private Student outObject;
+
+        int gesWarteZeit;
         /**
          * the treated time by all processing stations, in seconds
          */
         int myTreatmentTime = 0;
-
+        /**
+         * number of payment
+         */
         double guthaben = 0.0;
 
+        /**
+         * constructor
+         */
+        public Measurement(Student pOutObject) {
+            //Statistics.show("Student wird geklont");
+            //this.outObject= pOutObject.clone();
+            this.outObject= pOutObject;
+            this.addObserver(OurStatistic.getObjectBeobachter());
+        }
+
+        public Student getOuterClass(){
+            System.out.println();
+            return outObject;
+        }
+
+        void aenderGuthaben(){
+            this.guthaben++;
+            notifyObservers(this.guthaben);
+        }
+
+        void aenderWarteZeit(int pWarteZeit){
+            this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
+            notifyObservers(this.gesWarteZeit);
+        }
+
+        @Override
+        public void notifyObservers(Object arg) {
+            setChanged();
+            super.notifyObservers(arg);
+        }
     }
 
     /**
@@ -81,11 +118,10 @@ public class Student extends TheObject {
     protected void printStatistics() {
         super.printStatistics();
         Statistics.show("Der Student musss " + measurement.guthaben + "€ zahlen.");
-
+        Statistics.show("Der Student hat insgesammt " + measurement.gesWarteZeit + " Ticks an den Stationen gewartet.");
     }
 
     public static ArrayList<Student> getAllStudents() {
         return allStudents;
     }
 }
-

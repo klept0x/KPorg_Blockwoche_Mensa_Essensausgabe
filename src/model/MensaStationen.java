@@ -1,10 +1,12 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
 /**
  * Beschreibung der Klasse MensaStationen.
@@ -16,42 +18,62 @@ import java.util.Collection;
  * @version 1.0
  */
 
-public class MensaStationen extends ProcessStation{
+public class MensaStationen extends ProcessStation implements Cloneable{
 
-    double preis;
+    private String image;
+    private double preis;
+
+    Measurement measurement;
 
     private static int maximalOfCashRegister = 3;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
-
-       // this.preis = preis;
+        measurement = new Measurement(this);
+        this.image = image;
+        this.preis = preis;
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
 
-            //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
-            if(label == "Kasse" && maximalOfCashRegister > 0){
-                maximalOfCashRegister = maximalOfCashRegister -1;
-                new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
-                Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
-            }
-            else if(label == "Kasse" && maximalOfCashRegister == 0){
-                throw new CashRegisterLimitExceededException();
-            }
-            else{
-                new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
-            }
+        //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
+        if(label == "Kasse" && maximalOfCashRegister > 0){
+            maximalOfCashRegister = maximalOfCashRegister -1;
+            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+            Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
         }
+        else if(label == "Kasse" && maximalOfCashRegister == 0){
+            throw new CashRegisterLimitExceededException();
+        }
+        else{
+            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+        }
+    }
 
-
+    /**
+     * Clont Mensa Station
+     *
+     * @return MensaStation,  if it has Label "Kasse"
+     * @throws CloneNotSupportedException MensaStation is not cloneable, if it has Label "Kasse"
+     */
+    public MensaStationen clone() throws CloneNotSupportedException{
+        if(label == "Kasse"){
+            throw new CloneNotSupportedException();}
+        else{
+            return new MensaStationen(this.getLabel(),this.getAllInQueues(),this.getAllOutQueues(),this.troughPut,this.xPos,this.yPos,this.image,this.preis);
+        }
+    }
 
     @Override
     protected void handleObject(TheObject theObject) {
         Statistics.show("EssenAusgabe");
         super.handleObject(theObject);
         Student s = (Student) theObject;
-        s.measurement.guthaben++;
+        s.measurement.aenderGuthaben();
+        s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
+        this.measurement.idleTime= super.measurement.idleTime;
+        this.measurement.numbOfVisitedObjects= super.measurement.numbOfVisitedObjects;
+        this.measurement.aenderInUseTime(super.measurement.inUseTime);
     }
 
     /**
@@ -132,6 +154,60 @@ public class MensaStationen extends ProcessStation{
 
     public static class CashRegisterLimitExceededException extends Exception{
         public CashRegisterLimitExceededException() {
+        }
+    }
+
+    /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
+
+    public static class Measurement extends Observable {
+
+        protected MensaStationen theOutObject;
+        /**
+         * the total time the station is in use
+         */
+        protected int inUseTime = 0;
+
+        /**
+         * the number of all objects that visited this station
+         */
+        protected int numbOfVisitedObjects = 0;
+
+        protected int idleTime = 0;
+
+        public Measurement( MensaStationen outObject) {
+            theOutObject= outObject;
+            this.addObserver(OurStatistic.getMensaBeo());
+
+        }
+
+        /**
+         * Get the average time for treatment
+         *
+         * @return the average time for treatment
+         */
+       /* protected int avgTreatmentTime() {
+
+            if (numbOfVisitedObjects == 0) return 0; //in case that a station wasn't visited
+            else
+                return inUseTime / numbOfVisitedObjects;
+
+        }*/
+
+
+        public MensaStationen getOuterClass() {
+            return theOutObject;
+        }
+
+        void aenderInUseTime(int pInUseTime){
+            this.inUseTime= pInUseTime;
+            notifyObservers(this.inUseTime);
+        }
+
+
+        @Override
+        public void notifyObservers(Object arg) {
+            setChanged();
+            super.notifyObservers(arg);
         }
     }
 }

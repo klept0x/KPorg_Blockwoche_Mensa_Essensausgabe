@@ -100,7 +100,6 @@ public class EndStation extends SimpleStation {
 
 			// end simulation
 			// System.exit(0);
-
 		}
 	}
 

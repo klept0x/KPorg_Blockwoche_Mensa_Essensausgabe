@@ -1,4 +1,3 @@
-
 package model;
 
 import io.Statistics;
@@ -44,7 +43,10 @@ public class TheObject extends Actor {
 
     /** the instance of our static inner Measurement class*/
     Measurement measurement = new Measurement();
+
     private long inQueueTime;
+
+    private String image;
 
 
     /** (private!) Constructor, creates a new object model and send it to the start station
@@ -59,7 +61,7 @@ public class TheObject extends Actor {
      */
     protected TheObject(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait){
         super(label, xPos, yPos);
-
+        this.image = image;
         //create the view
         this.theView = TheObjectView.create(label, image, xPos, yPos);
 
@@ -262,7 +264,7 @@ public class TheObject extends Actor {
      * These values can be used for statistic evaluation.
      */
     static class Measurement {
-
+        public int gesWarteZeit;
         /** the treated time by all processing stations, in seconds */
         int myTreatmentTime = 0;
 
@@ -275,6 +277,7 @@ public class TheObject extends Actor {
 
         String theString = "\nObjekt: " + this.label;
         theString = theString + "\nZeit zum Behandeln des Objekts: " + measurement.myTreatmentTime;
+        theString = theString + "\nDer Student hat isgesammt: " + measurement.gesWarteZeit+" an den Stationen gewartet";
 
         Statistics.show(theString);
 
@@ -307,4 +310,15 @@ public class TheObject extends Actor {
         return processTime;
     }
 
+    public int getMySpeed() {
+        return mySpeed;
+    }
+
+    public ArrayList<String> getStationsToGo() {
+        return stationsToGo;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }
