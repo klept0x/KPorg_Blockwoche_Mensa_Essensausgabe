@@ -17,11 +17,10 @@ public class OurStatistic extends Statistics {
     private static OurStatistic statistic;
     static Objectbeobachter obectb= new Objectbeobachter();
     static MensaStationenBeobachter mensaBeo= new MensaStationenBeobachter();
-    PlotterPane p;
 
 
     private OurStatistic(){
-        p = new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten in €","Zeiteinheit","Kosten pro Station");
+        ;
     }
 
     public static OurStatistic createStatistic(){
@@ -62,8 +61,8 @@ public class OurStatistic extends Statistics {
                 for (PlotterPane p : s1.getDataDias()) {
                     String title = p.getTheTitle();
                     switch (title) {
-                        case "GesamtKosten":
-                            System.out.println(s1.getLabel() + " Gesamtkosten");
+                        case "GesamtEinnahmen":
+                            System.out.println(s1.getLabel() + " GesamtEinnahmen");
                             p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-Student.getStartTime()),(int)measurement.getGuthaben()));
                             break;
                         case "GesamtWarteZeit":

@@ -46,8 +46,8 @@ public class Student extends TheObject   {
     }
 
     private void initDias() {
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten","Globaltime","GesamtKosten"));
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"WarteZeit","Globaltime","GesamtWarteZeit"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"Kosten","Globaltime","GesamtEinnahmen"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"WarteZeit","Globaltime","GesamtWarteZeit"));
     }
 
 
