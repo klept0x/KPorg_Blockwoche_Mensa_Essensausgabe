@@ -33,6 +33,7 @@ public class Student extends TheObject implements Cloneable {
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
+        Statistics.show("Student Konstruktor methode wurde aufgerufen");
     }
 
 
@@ -83,8 +84,9 @@ public class Student extends TheObject implements Cloneable {
          * constructor
          */
         public Measurement(Student pOutObject) {
-
-            this.outObject= pOutObject.clone();
+            //Statistics.show("Student wird geklont");
+            //this.outObject= pOutObject.clone();
+            this.outObject= pOutObject;
             this.addObserver(OurStatistic.getObjectBeobachter());
         }
 
