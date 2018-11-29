@@ -65,7 +65,7 @@ public class FactoryXML extends Factory {
                 int processtime = 0;
                 int speed = 0;
                 String image = null;
-
+                int maxWait=0;
 
                 // read data
                 label = theObject.getChildText("label");
@@ -75,6 +75,7 @@ public class FactoryXML extends Factory {
 
                 processtime = Integer.parseInt(theObject.getChildText("processtime"));
                 speed = Integer.parseInt(theObject.getChildText("speed"));
+                maxWait= Integer.parseInt(theObject.getChildText("maxWait"));
 
                 //the <view> ... </view> node
                 Element viewGroup = theObject.getChild("view");
@@ -102,7 +103,7 @@ public class FactoryXML extends Factory {
                 //in the XML-file is an extra tag <schleife></schleife>, so that one object in the XML-file can be multiplied
                 for (int i = 0; i < schleife; i++) {
                     //creating a new TheObject object
-                    Student.create(label + "_" + i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image);
+                    Student.create(label + "_" + i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
                     Statistics.show(label +" Student wurde erzeugt" + i);
                 }
             }
@@ -257,6 +258,66 @@ public class FactoryXML extends Factory {
 
             //creating a new StartStation object
             MensaEntrance.create(label, theInQueue, theOutQueue, XPOS_STARTSTATION, YPOS_STARTSTATION, image);
+
+
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * create the end station
+     */
+    protected static void createEndStation() {
+
+        try {
+
+            //read the information from the XML file into a JDOM Document
+            Document theXMLDoc = new SAXBuilder().build(theEndStationDataFile);
+
+            //the <settings> ... </settings> node
+            Element root = theXMLDoc.getRootElement();
+
+            //get the end_station into a List object
+            Element endStation = root.getChild("end_station");
+
+            //get label
+            String label = endStation.getChildText("label");
+
+            //position
+            int xPos = Integer.parseInt(endStation.getChildText("x_position"));
+            int yPos = Integer.parseInt(endStation.getChildText("y_position"));
+
+            //the <view> ... </view> node
+            Element viewGroup = endStation.getChild("view");
+            // the image
+            String image = viewGroup.getChildText("image");
+
+            //CREATE THE INQUEUE
+            //the <inqueue> ... </inqueue> node
+            Element inqueueGroup = endStation.getChild("inqueue");
+
+            // the positions
+            int xPosInQueue = Integer.parseInt(inqueueGroup.getChildText("x_position"));
+            int yPosInQueue = Integer.parseInt(inqueueGroup.getChildText("y_position"));
+
+            //create the inqueue
+            SynchronizedQueue theInQueue = SynchronizedQueue.createQueue(QueueViewText.class, xPosInQueue, yPosInQueue);
+
+            //CREATE THE OUTQUEUE
+            //the <outqueue> ... </outqueue> node
+            Element outqueueGroup = endStation.getChild("outqueue");
+
+            // the positions
+            int xPosOutQueue = Integer.parseInt(outqueueGroup.getChildText("x_position"));
+            int yPosOutQueue = Integer.parseInt(outqueueGroup.getChildText("y_position"));
+
+            //create the outqueue
+            SynchronizedQueue theOutQueue = SynchronizedQueue.createQueue(QueueViewText.class, xPosOutQueue, yPosOutQueue);
+
+            //creating a new EndStation object
+            EndStation.create(label, theInQueue, theOutQueue, xPos, yPos, image);
 
 
         } catch (JDOMException e) {

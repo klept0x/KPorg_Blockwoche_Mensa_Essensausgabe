@@ -2,9 +2,10 @@
   "settings":[{
     "object":[{
       "label": "Object_1",
-      "schleife":"20",
+      "schleife":"2",
       "processtime":"10",
       "speed":"10",
+      "maxWait":"2",
       "view":[{
         "image": "hamburger.png"
       }
@@ -12,14 +13,15 @@
       "sequence":[
         "Start_Station",
         "Station_1",
-        "Station_2",
+        "Kasse",
         "End_Station"
       ]
     },{
       "label": "Object_2",
       "processtime":"10",
-      "schleife":"111",
+      "schleife":"1",
       "speed":"10",
+      "maxWait":"2",
       "view":[{
         "image": "hamburger.png"
       }
@@ -27,7 +29,7 @@
       "sequence":[
         "Start_Station",
         "Station_1",
-        "Station_2",
+        "Kasse",
         "End_Station"
       ]
     }
