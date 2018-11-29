@@ -1,9 +1,11 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class Student extends TheObject {
 
@@ -89,12 +91,12 @@ public class Student extends TheObject {
 
         void aenderGuthaben(){
             this.guthaben++;
-            notifyObservers();
+            notifyObservers(this.guthaben);
         }
 
         void aenderWarteZeit(int pWarteZeit){
             this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
-            notifyObservers();
+            notifyObservers(this.gesWarteZeit);
         }
 
         @Override

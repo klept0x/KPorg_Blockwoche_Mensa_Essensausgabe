@@ -1,6 +1,6 @@
 package plotter.src.test.java;
 
-import org.junit.jupiter.api.Test;
+
 import plotter.src.main.java.model.CustomPoint;
 import plotter.src.main.java.view.PlotterPane;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class GraphPlotterTest {
 
-    @Test
+
     public void createDiagramWithInitialDataPoints() {
         ArrayList<CustomPoint> points = new ArrayList<>();
         points.add(new CustomPoint(10, 23.0));
@@ -31,7 +31,7 @@ public class GraphPlotterTest {
         }
     }
 
-    @Test
+
     public void addPoints() {
         ArrayList<CustomPoint> points = new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class GraphPlotterTest {
         }
     }
 
-    @Test
+
     public void combinedSolution() {
         ArrayList<CustomPoint> points = new ArrayList<>();
         points.add(new CustomPoint(10, 23.0));

@@ -16,11 +16,14 @@ public class OurStatistic extends Statistics {
     static Objectbeobachter obectb= new Objectbeobachter();
     static MensaStationenBeobachter mensaBeo= new MensaStationenBeobachter();
     PlotterPane p;
+
+
     private OurStatistic(){
-        p= new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten in €","Zeiteinheit","Kosten pro Station");
+        p = new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten in €","Zeiteinheit","Kosten pro Station");
     }
+
     public static OurStatistic createStatistic(){
-        statistic= new OurStatistic();
+        statistic = new OurStatistic();
         return  statistic;
     }
 
@@ -47,14 +50,18 @@ public class OurStatistic extends Statistics {
         Student.Measurement s = (Student.Measurement)o;
         Student theStudent = s.getOuterClass();
         System.out.println(theStudent.getLabel());
+        Statistics.show(String.valueOf(arg.getClass()));
+        if(arg instanceof  Integer){
+                int daten = (int) arg;
+            }
         }
-
     }
 
     static class MensaStationenBeobachter implements Observer{
 
         @Override
         public void update(Observable o, Object arg) {
+
             System.out.println("\n"+" MensaStation update");
             MensaStationen.Measurement measurement = (MensaStationen.Measurement)o;
             MensaStationen theStation = measurement.getOuterClass();

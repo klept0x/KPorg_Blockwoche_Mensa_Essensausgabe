@@ -1,10 +1,12 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
 /**
  * Beschreibung der Klasse MensaStationen.
@@ -19,12 +21,13 @@ import java.util.Collection;
 public class MensaStationen extends ProcessStation{
 
     double preis;
+    Measurement measurement;
 
     private static int maximalOfCashRegister = 3;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
-        measurement= new Measurement(this);
+        measurement = new Measurement(this);
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
@@ -181,8 +184,9 @@ public class MensaStationen extends ProcessStation{
 
         void aenderInUseTime(int pInUseTime){
             this.inUseTime= pInUseTime;
-            notifyObservers();
+            notifyObservers(this.inUseTime);
         }
+
 
         @Override
         public void notifyObservers(Object arg) {
