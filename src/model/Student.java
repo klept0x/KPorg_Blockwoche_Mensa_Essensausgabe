@@ -1,9 +1,11 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class Student extends TheObject {
 
@@ -11,7 +13,7 @@ public class Student extends TheObject {
 
     private static ArrayList<Student> allStudentAlts = new ArrayList<Student>();
 
-    Measurement measurement = new Measurement();
+    Measurement measurement ;
     private int maxWait;
     private long iqueueStartTime;
 
@@ -32,6 +34,7 @@ public class Student extends TheObject {
         //     this.guthaben = guthaben;
         //    Student.allStudentAlts.add(this);
         this.maxWait=pMaxWait;
+        measurement= new Measurement(this);
 
     }
 
@@ -57,19 +60,54 @@ public class Student extends TheObject {
         this.iqueueStartTime=Simulation.getGlobalTime();
     }
 
+
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
      */
-    static class Measurement {
+    public static class Measurement extends Observable {
 
+        private Student outObject;
+
+         int gesWarteZeit;
         /**
          * the treated time by all processing stations, in seconds
          */
         int myTreatmentTime = 0;
-
+        /**
+         * number of payment
+         */
         double guthaben = 0.0;
 
+        /**
+         * constructor
+         */
+        public Measurement(Student pOutObject) {
+
+            this.outObject= pOutObject;
+            this.addObserver(OurStatistic.getObjectBeobachter());
+        }
+
+        public Student getOuterClass(){
+            System.out.println();
+            return outObject;
+        }
+
+        void aenderGuthaben(){
+            this.guthaben++;
+            notifyObservers();
+        }
+
+        void aenderWarteZeit(int pWarteZeit){
+            this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
+            notifyObservers();
+        }
+
+        @Override
+        public void notifyObservers(Object arg) {
+            setChanged();
+            super.notifyObservers(arg);
+        }
     }
 
     /**
@@ -77,7 +115,8 @@ public class Student extends TheObject {
      */
     protected void printStatistics() {
         super.printStatistics();
-        Statistics.show("Der Student musss " + measurement.guthaben + "€ zahlen.");
+        Statistics.show("Der Student muss " + measurement.guthaben + "€ zahlen.");
+        Statistics.show("Der Student hat insgesammt " + measurement.gesWarteZeit + " Ticks an den Stationen gewartet.");
 
     }
 

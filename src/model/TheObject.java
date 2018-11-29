@@ -263,6 +263,7 @@ public class TheObject extends Actor {
      */
     static class Measurement {
 
+        public int gesWarteZeit;
         /** the treated time by all processing stations, in seconds */
         int myTreatmentTime = 0;
 
@@ -275,6 +276,7 @@ public class TheObject extends Actor {
 
         String theString = "\nObjekt: " + this.label;
         theString = theString + "\nZeit zum Behandeln des Objekts: " + measurement.myTreatmentTime;
+        theString = theString + "\nDer Student hat isgesammt: " + measurement.gesWarteZeit+" an den Stationen gewartet";
 
         Statistics.show(theString);
 

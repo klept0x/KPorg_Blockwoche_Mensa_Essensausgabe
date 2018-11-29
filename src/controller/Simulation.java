@@ -1,10 +1,7 @@
 package controller;
 
-import io.FactoryJSON;
-import io.FactoryXML;
+import io.*;
 import view.SimulationView;
-import io.Factory;
-import io.Statistics;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -28,6 +25,8 @@ import static model.Actor.getAllActors;
  */
 public class Simulation {
 
+
+    OurStatistic statistic;
     /**
      * is the simulation running
      */
@@ -180,6 +179,8 @@ public class Simulation {
      * initialize the simulation
      */
     private void init() {
+
+         statistic=OurStatistic.createStatistic();
 
         //the view of our simulation
         new SimulationView();

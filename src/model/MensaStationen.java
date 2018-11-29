@@ -1,10 +1,12 @@
 package model;
 
 import controller.Simulation;
+import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
 /**
  * Beschreibung der Klasse MensaStationen.
@@ -20,10 +22,11 @@ public class MensaStationen extends ProcessStation{
 
 
     double preis;
+    Measurement measurement;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
-
+        measurement= new Measurement(this);
        // this.preis = preis;
     }
 
@@ -36,7 +39,11 @@ public class MensaStationen extends ProcessStation{
         Statistics.show("EssenAusgabe");
         super.handleObject(theObject);
         Student s = (Student) theObject;
-        s.measurement.guthaben++;
+        s.measurement.aenderGuthaben();
+        s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
+        this.measurement.idleTime= super.measurement.idleTime;
+        this.measurement.numbOfVisitedObjects= super.measurement.numbOfVisitedObjects;
+        this.measurement.aenderInUseTime(super.measurement.inUseTime);
     }
 
     /**
@@ -113,6 +120,63 @@ public class MensaStationen extends ProcessStation{
         }
 
     }
+
+
+
+    /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
+
+    public static class Measurement extends Observable {
+
+        protected MensaStationen theOutObject;
+        /**
+         * the total time the station is in use
+         */
+        protected int inUseTime = 0;
+
+        /**
+         * the number of all objects that visited this station
+         */
+        protected int numbOfVisitedObjects = 0;
+
+        protected int idleTime = 0;
+
+        public Measurement( MensaStationen outObject) {
+            theOutObject= outObject;
+            this.addObserver(OurStatistic.getMensaBeo());
+
+        }
+
+        /**
+         * Get the average time for treatment
+         *
+         * @return the average time for treatment
+         */
+       /* protected int avgTreatmentTime() {
+
+            if (numbOfVisitedObjects == 0) return 0; //in case that a station wasn't visited
+            else
+                return inUseTime / numbOfVisitedObjects;
+
+        }*/
+
+
+        public MensaStationen getOuterClass() {
+            return theOutObject;
+        }
+
+        void aenderInUseTime(int pInUseTime){
+            this.inUseTime= pInUseTime;
+            notifyObservers();
+        }
+
+        @Override
+        public void notifyObservers(Object arg) {
+            setChanged();
+            super.notifyObservers(arg);
+        }
+    }
+
+
 
 
 }
