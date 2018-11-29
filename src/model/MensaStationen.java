@@ -3,6 +3,8 @@ package model;
 import controller.Simulation;
 import io.OurStatistic;
 import io.Statistics;
+import plotter.src.main.java.model.CustomPoint;
+import plotter.src.main.java.view.PlotterPane;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,12 +24,22 @@ public class MensaStationen extends ProcessStation{
 
     double preis;
     Measurement measurement;
-
+    private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
+    private ArrayList<PlotterPane> datenDias;
     private static int maximalOfCashRegister = 3;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
+        allMensaStation.add(this);
+        datenDias= new ArrayList<PlotterPane>();
+        initDias();
+    }
+
+    private void initDias() {
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
@@ -141,6 +153,14 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
+    public static ArrayList<MensaStationen> getAllMensaStation() {
+        return allMensaStation;
+    }
+
+    public ArrayList<PlotterPane> getDatenDias() {
+        return datenDias;
+    }
+
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
 
     public static class Measurement extends Observable {
@@ -192,6 +212,19 @@ public class MensaStationen extends ProcessStation{
         public void notifyObservers(Object arg) {
             setChanged();
             super.notifyObservers(arg);
+        }
+
+
+        public int getInUseTime() {
+            return inUseTime;
+        }
+
+        public int getNumbOfVisitedObjects() {
+            return numbOfVisitedObjects;
+        }
+
+        public int getIdleTime() {
+            return idleTime;
         }
     }
 }

@@ -3,16 +3,18 @@ package model;
 import controller.Simulation;
 import io.OurStatistic;
 import io.Statistics;
+import plotter.src.main.java.model.CustomPoint;
+import plotter.src.main.java.view.PlotterPane;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Student extends TheObject {
+public class Student extends TheObject   {
 
 //    private double guthaben;
 
     private static ArrayList<Student> allStudents = new ArrayList<Student>();
-
+    private ArrayList<PlotterPane> dataDias;
     Measurement measurement;
     private int maxWait;
     private long iqueueStartTime;
@@ -33,6 +35,13 @@ public class Student extends TheObject {
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
+        dataDias= new ArrayList<PlotterPane>();
+        initDias();
+    }
+
+    private void initDias() {
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten","Globaltime",this.label+" GesamtKosten"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"WarteZeit","Globaltime",this.label+" GesamtWarteZeit"));
     }
 
 
@@ -55,6 +64,10 @@ public class Student extends TheObject {
         System.out.println("enter inqueue Student");
         super.enterInQueue(station);
         this.iqueueStartTime=Simulation.getGlobalTime();
+    }
+
+    public ArrayList<PlotterPane> getDataDias() {
+        return dataDias;
     }
 
     /**
