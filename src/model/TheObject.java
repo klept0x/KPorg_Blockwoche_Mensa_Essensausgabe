@@ -95,7 +95,7 @@ public class TheObject extends Actor {
      *
      * @return the next station or null if no station was found
      */
-    private Station getNextStation(){
+    protected Station getNextStation(){
 
         //we are at the end of the list
         if(this.stationsToGo.size() < stationListPointer) return null;

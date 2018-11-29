@@ -8,7 +8,7 @@ public class Student extends TheObject {
 
 //    private double guthaben;
 
-    private static ArrayList<Student> allStudentAlts = new ArrayList<Student>();
+    private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
     Measurement measurement = new Measurement();
 
@@ -27,7 +27,7 @@ public class Student extends TheObject {
 
         super(label, stationsToGo, processtime, speed, xPos, yPos, image);
         //     this.guthaben = guthaben;
-        //    Student.allStudentAlts.add(this);
+        Student.allStudents.add(this);
     }
 
 
@@ -61,6 +61,8 @@ public class Student extends TheObject {
 
     }
 
-
+    public static ArrayList<Student> getAllStudents() {
+        return allStudents;
+    }
 }
 
