@@ -122,7 +122,7 @@ public class FactoryJSON {
 			//erstelle Outqueue
 			SynchronizedQueue theOutqueue=SynchronizedQueue.createQueue(QueueViewText.class,xOutqueuePos,yOutqueuePos);
 			//erstelle StartStaion
-			StartStation.create(label,theInqueue,theOutqueue,XPOS_STARTSTATION,YPOS_STARTSTATION,image);
+			MensaEntrance.create(label,theInqueue,theOutqueue,XPOS_STARTSTATION,YPOS_STARTSTATION,image);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -162,11 +162,13 @@ public class FactoryJSON {
 				int speed = 0;
 				String image = null;
 				int schleife=0;
+				int maxWait=0;
 
 				label= theobject.getString("label");
 				processtime= Integer.parseInt(theobject.getString("processtime"));
 				speed = Integer.parseInt(theobject.getString("speed"));
 				schleife= Integer.parseInt(theobject.getString("schleife"));
+				maxWait= Integer.parseInt(theobject.getString("maxWait"));
 
 				JSONArray theview = theobject.getJSONArray("view");
 				JSONObject view = (JSONObject) theview.get(0);
@@ -182,7 +184,7 @@ public class FactoryJSON {
 
 				for(int i = 0; i<schleife;i++) {
 					label=label+i;
-					TheObject.create(label, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image);
+					Student.create(label, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
 				}
 			}
 
@@ -234,11 +236,15 @@ public class FactoryJSON {
 				int xPos = 0;
 				int yPos = 0;
 				String image = null;
+				double preis =0;
 
 				//label
 				label = (String) st.get("label");
 				//troughput
 				troughPut = Double.parseDouble(st.getString("troughput"));
+
+				preis= Double.parseDouble(st.getString("preis"));
+
 				//location
 				xPos= Integer.parseInt(st.getString("x_Position"));
 				yPos=Integer.parseInt(st.getString("y_Position"));
@@ -270,7 +276,7 @@ public class FactoryJSON {
 					int yOutqueuePos = Integer.parseInt(outqueue.getString("y_Position"));
 					theOutqueues.add(SynchronizedQueue.createQueue(QueueViewText.class,xOutqueuePos,yOutqueuePos));
 				}
-				ProcessStation.create(label,theInqueues,theOutqueues,troughPut,xPos,yPos,image);
+				MensaStationen.create(label,theInqueues,theOutqueues,troughPut,xPos,yPos,image,preis);
 			}
 
 
@@ -343,7 +349,7 @@ public class FactoryJSON {
 			//erstelle Outqueue
 			SynchronizedQueue theOutqueue=SynchronizedQueue.createQueue(QueueViewText.class,xOutqueuePos,yOutqueuePos);
 			//erstelle EndStation
-			EndStation.create(label,theInqueue,theOutqueue,xPos,yPos,image);
+			MensaExit.create(label,theInqueue,theOutqueue,xPos,yPos,image);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

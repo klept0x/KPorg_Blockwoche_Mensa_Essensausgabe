@@ -20,6 +20,7 @@ import controller.Simulation;
 
 public class TheObject extends Actor {
 
+    private int maxWait;
     /** the view of the object */
     public TheObjectView theView;
 
@@ -43,6 +44,7 @@ public class TheObject extends Actor {
 
     /** the instance of our static inner Measurement class*/
     Measurement measurement = new Measurement();
+    private long inQueueTime;
 
 
     /** (private!) Constructor, creates a new object model and send it to the start station
@@ -55,7 +57,7 @@ public class TheObject extends Actor {
      * @param yPos y position of the object
      * @param image image of the object
      */
-    protected TheObject(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image){
+    protected TheObject(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait){
         super(label, xPos, yPos);
 
         //create the view
@@ -66,6 +68,7 @@ public class TheObject extends Actor {
         this.stationsToGo = stationsToGo;
         this.processTime = processtime;
         this.mySpeed = speed;
+        this.maxWait=pMaxWait;
 
         //the first station to go to is the start station
         Station station = this.getNextStation();
@@ -85,9 +88,9 @@ public class TheObject extends Actor {
      * @param yPos y position of the object
      * @param image image of the object
      */
-    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed ,int xPos, int yPos, String image){
+    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed ,int xPos, int yPos, String image,int pMaxWait){
 
-        new TheObject(label, stationsToGo, processtime, speed, xPos, yPos, image);
+        new TheObject(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         Statistics.show("TheObject create() methode wurde aufgerufen");
     }
 
@@ -118,7 +121,7 @@ public class TheObject extends Actor {
      * @param station the station from where the queue should be chosen
      *
      */
-    private void enterInQueue(Station station){
+    protected void enterInQueue(Station station){
 
         //get the stations incoming queues
         ArrayList<SynchronizedQueue> inQueues = station.getAllInQueues();
@@ -151,6 +154,7 @@ public class TheObject extends Actor {
         //set actual station to the just entered station
         this.actualStation = station;
 
+        this.inQueueTime=Simulation.getGlobalTime();
     }
 
 
@@ -243,6 +247,14 @@ public class TheObject extends Actor {
 
 
 
+    }
+
+    public int getMaxWait() {
+        return this.maxWait;
+    }
+
+    public long getInqueueStartTime() {
+        return inQueueTime;
     }
 
     /**

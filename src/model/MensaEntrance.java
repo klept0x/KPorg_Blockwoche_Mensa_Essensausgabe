@@ -42,15 +42,7 @@ public class MensaEntrance extends StartStation {
         super.handleObject(theObject);
     }
 
-    @Override
-    protected Student getNextInQueueObject() {
-        return (Student) super.getNextInQueueObject();
-    }
 
-    @Override
-    protected Student getNextOutQueueObject() {
-        return (Student) super.getNextOutQueueObject();
-    }
 
 }
 
