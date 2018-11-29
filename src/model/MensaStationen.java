@@ -22,20 +22,25 @@ import java.util.Observable;
 
 public class MensaStationen extends ProcessStation{
 
+    private static long startTime;
     double preis;
     Measurement measurement;
     private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
     private ArrayList<PlotterPane> datenDias;
     private static int maximalOfCashRegister = 3;
 
-    private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
+    private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
+        this.preis=pPreis;
         allMensaStation.add(this);
         datenDias= new ArrayList<PlotterPane>();
         initDias();
     }
 
+    public static void setStartTime(long globalTime) {
+        startTime =globalTime;
+    }
     private void initDias() {
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
@@ -65,7 +70,7 @@ public class MensaStationen extends ProcessStation{
         Statistics.show("EssenAusgabe");
         super.handleObject(theObject);
         Student s = (Student) theObject;
-        s.measurement.aenderGuthaben();
+        s.measurement.aenderGuthaben(preis);
         s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
         this.measurement.idleTime= super.measurement.idleTime;
         this.measurement.numbOfVisitedObjects= super.measurement.numbOfVisitedObjects;
@@ -147,6 +152,10 @@ public class MensaStationen extends ProcessStation{
 
     }
 
+    public static long getStartTime() {
+        return startTime;
+    }
+
 
     public static class CashRegisterLimitExceededException extends Exception{
         public CashRegisterLimitExceededException() {
@@ -159,6 +168,9 @@ public class MensaStationen extends ProcessStation{
 
     public ArrayList<PlotterPane> getDatenDias() {
         return datenDias;
+    }
+    public static void setzeVisible() {
+       allMensaStation.get(0).getDatenDias().get(0).setVisible(true);
     }
 
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
