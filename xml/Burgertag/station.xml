@@ -2,7 +2,7 @@
 <settings>
     <station>
         <label>Salate_1</label>
-        <Essensportion></Essensportion>
+        <preis>5.2</preis>
         <troughput>4</troughput>
         <x_position>400</x_position>
         <y_position>150</y_position>
@@ -20,7 +20,7 @@
     </station>
     <station>
         <label>Salate_2</label>
-        <Essensportion></Essensportion>
+        <preis>2.1</preis>
         <troughput>4</troughput>
         <x_position>400</x_position>
         <y_position>50</y_position>
@@ -38,7 +38,7 @@
     </station>
     <station>
         <label>Salate_3</label>
-        <Essensportion></Essensportion>
+        <preis>4.0</preis>
         <troughput>4</troughput>
         <x_position>575</x_position>
         <y_position>150</y_position>
@@ -56,7 +56,7 @@
     </station>
     <station>
         <label>Warmes_Essen_1</label>
-        <Essensportion></Essensportion>
+        <preis>4.3</preis>
         <troughput>4</troughput>
         <x_position>225</x_position>
         <y_position>150</y_position>
@@ -74,7 +74,7 @@
     </station>
     <station>
         <label>Warmes_Essen_2</label>
-        <Essensportion></Essensportion>
+        <preis>3.2</preis>
         <troughput>4</troughput>
         <x_position>225</x_position>
         <y_position>50</y_position>
@@ -92,7 +92,7 @@
     </station>
     <station>
         <label>Warmes_Essen_3</label>
-        <Essensportion></Essensportion>
+        <preis>7.2</preis>
         <troughput>4</troughput>
         <x_position>50</x_position>
         <y_position>150</y_position>
@@ -110,7 +110,7 @@
     </station>
     <station>
         <label>Burger_Stand</label>
-        <Essensportion></Essensportion>
+        <preis>7.5</preis>
         <troughput>8</troughput>
         <x_position>800</x_position>
         <y_position>50</y_position>
@@ -128,7 +128,7 @@
     </station>
     <station>
         <label>Kasse</label>
-        <Essensportion></Essensportion>
+        <preis>0.0</preis>
         <troughput>10</troughput>
         <x_position>400</x_position>
         <y_position>300</y_position>

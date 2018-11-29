@@ -5,6 +5,7 @@
         <schleife>1</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
+        <maxWait>2</maxWait>
         <view>
             <image>object.png</image>
         </view>
@@ -24,6 +25,7 @@
         <schleife>1</schleife>
         <processtime>5</processtime>
         <speed>5</speed>
+        <maxWait>2</maxWait>
         <view>
             <image>object.png</image>
         </view>
@@ -42,6 +44,7 @@
         <schleife>1</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
+        <maxWait>2</maxWait>
         <view>
             <image>object.png</image>
         </view>
@@ -60,6 +63,7 @@
         <schleife>1</schleife>
         <processtime>9</processtime>
         <speed>2</speed>
+        <maxWait>2</maxWait>
         <view>
             <image>object.png</image>
         </view>

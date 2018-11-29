@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <object>
-        <label>Männlein</label>
+        <label>MännleinAlpha</label>
         <schleife>1</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
@@ -21,7 +21,7 @@
         </sequence>
     </object>
     <object>
-        <label>Weiblein</label>
+        <label>WeibleinAlpha</label>
         <schleife>7</schleife>
         <processtime>5</processtime>
         <speed>5</speed>
@@ -40,7 +40,7 @@
         </sequence>
     </object>
     <object>
-        <label>Männlein</label>
+        <label>MännleinBeta</label>
         <schleife>3</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
@@ -59,7 +59,7 @@
         </sequence>
     </object>
     <object>
-        <label>Weiblein</label>
+        <label>WeibleinBeta</label>
         <schleife>5</schleife>
         <processtime>9</processtime>
         <speed>2</speed>
@@ -78,7 +78,7 @@
         </sequence>
     </object>
     <object>
-        <label>Weiblein</label>
+        <label>WeibleinCharlie</label>
         <schleife>1</schleife>
         <processtime>12</processtime>
         <speed>3</speed>

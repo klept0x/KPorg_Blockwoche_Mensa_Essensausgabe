@@ -11,6 +11,8 @@ import view.QueueViewText;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+
 
 /**
  * The class FactoryXML extends the class Factory.
@@ -39,8 +41,7 @@ public class FactoryXML extends Factory {
     /**
      * create some objects out of the XML file
      */
-    protected static void createObjects() {
-
+    protected static void createObjects(){
         try {
 
             //read the information from the XML file into a JDOM Document
@@ -86,10 +87,19 @@ public class FactoryXML extends Factory {
                 //the <sequence> ... </sequence> node
                 Element sequenceGroup = theObject.getChild("sequence");
 
-                List<Element> allStations = sequenceGroup.getChildren("station");
+                ArrayList<String> studentList = new ArrayList<String>();
+
+                List<Element> allStations =  sequenceGroup.getChildren("station");
+
+
+                studentList.add(theObject.getChildText("object"));
 
                 //get the elements into a list
                 ArrayList<String> stationsToGo = new ArrayList<String>();
+
+
+
+
 
                 for (Element theStation : allStations) {
 
@@ -98,13 +108,16 @@ public class FactoryXML extends Factory {
                 }
 
 
-
                 //creates multiple objects
                 //in the XML-file is an extra tag <schleife></schleife>, so that one object in the XML-file can be multiplied
                 for (int i = 0; i < schleife; i++) {
                     //creating a new TheObject object
                     Student.create(label + "_" + i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
                     Statistics.show(label +" Student wurde erzeugt" + i);
+                    Collections.shuffle(studentList);
+
+
+
                 }
             }
 
