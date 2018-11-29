@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <settings>
     <object>
-        <label>Männlein</label>
-        <schleife>20</schleife>
+        <label>Pascal</label>
+        <schleife>1</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
         <maxWait>2</maxWait>
-
         <view>
             <image>object.png</image>
         </view>
@@ -22,12 +21,11 @@
         </sequence>
     </object>
     <object>
-        <label>Weiblein</label>
-        <schleife>20</schleife>
+        <label>Malte</label>
+        <schleife>1</schleife>
         <processtime>5</processtime>
         <speed>5</speed>
         <maxWait>2</maxWait>
-
         <view>
             <image>object.png</image>
         </view>
@@ -42,12 +40,11 @@
         </sequence>
     </object>
     <object>
-        <label>Männlein</label>
-        <schleife>44</schleife>
+        <label>Benny</label>
+        <schleife>1</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
         <maxWait>2</maxWait>
-
         <view>
             <image>object.png</image>
         </view>
@@ -62,12 +59,11 @@
         </sequence>
     </object>
     <object>
-        <label>Weiblein</label>
-        <schleife>15</schleife>
+        <label>Marvin</label>
+        <schleife>1</schleife>
         <processtime>9</processtime>
         <speed>2</speed>
         <maxWait>2</maxWait>
-
         <view>
             <image>object.png</image>
         </view>
@@ -77,25 +73,6 @@
             <station>Warmes_Essen_1</station>
             <station>Salate_3</station>
             <station>Burger_Stand</station>
-            <station>Kasse</station>
-            <station>End_Station</station>
-        </sequence>
-    </object>
-    <object>
-        <label>Weiblein</label>
-        <schleife>12</schleife>
-        <processtime>12</processtime>
-        <speed>3</speed>
-        <maxWait>2</maxWait>
-
-        <view>
-            <image>object.png</image>
-        </view>
-        <sequence>
-            <station>Start_Station</station>
-            <station>Salate_3</station>
-            <station>Warmes_Essen_3</station>
-            <station>Salate_1</station>
             <station>Kasse</station>
             <station>End_Station</station>
         </sequence>

@@ -1,5 +1,7 @@
 package model;
 
+import io.Statistics;
+
 public class MensaExit extends EndStation {
 
 
@@ -19,5 +21,17 @@ public class MensaExit extends EndStation {
 
     public static void create(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
         new MensaExit(label,inQueue,outQueue,xPos,yPos,image);
+    }
+
+    /** End the simulation if the condition is met
+     *
+     *
+     */
+
+    protected void endSimulation(){
+        super.endSimulation();
+
+        Statistics.show("hier PopUp");
+
     }
 }

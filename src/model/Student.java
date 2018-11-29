@@ -1,19 +1,17 @@
 package model;
 
 import controller.Simulation;
-import io.OurStatistic;
 import io.Statistics;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class Student extends TheObject {
 
 //    private double guthaben;
 
-    private static ArrayList<Student> allStudentAlts = new ArrayList<Student>();
+    private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
-    Measurement measurement ;
+    Measurement measurement;
     private int maxWait;
     private long iqueueStartTime;
 
@@ -31,11 +29,8 @@ public class Student extends TheObject {
     private Student(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait) {
 
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
-        //     this.guthaben = guthaben;
-        //    Student.allStudentAlts.add(this);
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
-
     }
 
 
@@ -60,7 +55,6 @@ public class Student extends TheObject {
         this.iqueueStartTime=Simulation.getGlobalTime();
     }
 
-
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
@@ -69,7 +63,7 @@ public class Student extends TheObject {
 
         private Student outObject;
 
-         int gesWarteZeit;
+        int gesWarteZeit;
         /**
          * the treated time by all processing stations, in seconds
          */
@@ -115,11 +109,11 @@ public class Student extends TheObject {
      */
     protected void printStatistics() {
         super.printStatistics();
-        Statistics.show("Der Student muss " + measurement.guthaben + "€ zahlen.");
+        Statistics.show("Der Student musss " + measurement.guthaben + "€ zahlen.");
         Statistics.show("Der Student hat insgesammt " + measurement.gesWarteZeit + " Ticks an den Stationen gewartet.");
-
     }
 
-
+    public static ArrayList<Student> getAllStudents() {
+        return allStudents;
+    }
 }
-

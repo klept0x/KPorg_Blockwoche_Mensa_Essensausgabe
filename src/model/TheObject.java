@@ -1,4 +1,3 @@
-
 package model;
 
 import io.Statistics;
@@ -98,7 +97,7 @@ public class TheObject extends Actor {
      *
      * @return the next station or null if no station was found
      */
-    private Station getNextStation(){
+    protected Station getNextStation(){
 
         //we are at the end of the list
         if(this.stationsToGo.size() < stationListPointer) return null;
@@ -262,7 +261,6 @@ public class TheObject extends Actor {
      * These values can be used for statistic evaluation.
      */
     static class Measurement {
-
         public int gesWarteZeit;
         /** the treated time by all processing stations, in seconds */
         int myTreatmentTime = 0;
@@ -308,5 +306,4 @@ public class TheObject extends Actor {
     public int getProcessTime() {
         return processTime;
     }
-
 }

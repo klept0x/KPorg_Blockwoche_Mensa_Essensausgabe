@@ -1,12 +1,10 @@
 package model;
 
-import io.OurStatistic;
 import io.Statistics;
-
+import io.OurStatistic;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Observable;
-
 import controller.Simulation;
 
 /**
@@ -35,7 +33,7 @@ public class ProcessStation extends Station {
     /**
      * the instance of our static inner Measurement class
      */
-    Measurement measurement ;
+    Measurement measurement;
 
     /**
      * (private!) Constructor, creates a new process station
@@ -59,7 +57,6 @@ public class ProcessStation extends Station {
         this.inComingQueues = inQueues;
         this.outGoingQueues = outQueues;
         measurement= new Measurement(this);
-
     }
 
     /**
@@ -213,7 +210,7 @@ public class ProcessStation extends Station {
      * A (static) inner class for measurement jobs. The class records specific values of the station during the simulation.
      * These values can be used for statistic evaluation.
      */
-   protected static class Measurement extends Observable {
+    protected static class Measurement extends Observable {
 
         protected ProcessStation theOutObject;
         /**
@@ -234,6 +231,7 @@ public class ProcessStation extends Station {
 
         }
 
+
         /**
          * Get the average time for treatment
          *
@@ -246,7 +244,6 @@ public class ProcessStation extends Station {
                 return inUseTime / numbOfVisitedObjects;
 
         }
-
 
         public ProcessStation getOuterClass() {
             return theOutObject;

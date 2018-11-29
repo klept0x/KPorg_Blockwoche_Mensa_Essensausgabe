@@ -81,7 +81,7 @@ public class EndStation extends SimpleStation {
 	 *
 	 *
 	 */
-	private void endSimulation(){
+	protected void endSimulation(){
 
 		// Are all objects in the stations outgoing queue, then we are finish
 		if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()){

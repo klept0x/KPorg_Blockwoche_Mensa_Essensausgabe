@@ -2,7 +2,7 @@
 <settings>
     <station>
         <label>Salate_1</label>
-        <preis>5.2</preis>
+        <preis>7.2</preis>
         <troughput>4</troughput>
         <x_position>400</x_position>
         <y_position>150</y_position>
@@ -20,7 +20,7 @@
     </station>
     <station>
         <label>Salate_2</label>
-        <preis>2.1</preis>
+        <preis>1.1</preis>
         <troughput>4</troughput>
         <x_position>400</x_position>
         <y_position>50</y_position>
@@ -38,7 +38,7 @@
     </station>
     <station>
         <label>Salate_3</label>
-        <preis>4.0</preis>
+        <preis>0.9</preis>
         <troughput>4</troughput>
         <x_position>575</x_position>
         <y_position>150</y_position>
@@ -56,7 +56,7 @@
     </station>
     <station>
         <label>Warmes_Essen_1</label>
-        <preis>4.3</preis>
+        <preis>0.7</preis>
         <troughput>4</troughput>
         <x_position>225</x_position>
         <y_position>150</y_position>
@@ -74,7 +74,7 @@
     </station>
     <station>
         <label>Warmes_Essen_2</label>
-        <preis>3.2</preis>
+        <preis>0.8</preis>
         <troughput>4</troughput>
         <x_position>225</x_position>
         <y_position>50</y_position>
@@ -92,7 +92,7 @@
     </station>
     <station>
         <label>Warmes_Essen_3</label>
-        <preis>7.2</preis>
+        <preis>0.3</preis>
         <troughput>4</troughput>
         <x_position>50</x_position>
         <y_position>150</y_position>
@@ -110,7 +110,7 @@
     </station>
     <station>
         <label>Burger_Stand</label>
-        <preis>7.5</preis>
+        <preis>12.2</preis>
         <troughput>8</troughput>
         <x_position>800</x_position>
         <y_position>50</y_position>

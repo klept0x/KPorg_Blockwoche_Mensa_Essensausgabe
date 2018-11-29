@@ -199,6 +199,8 @@ public class FactoryXML extends Factory {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (MensaStationen.CashRegisterLimitExceededException e) {
+            e.printStackTrace();
         }
 
     }
@@ -317,7 +319,7 @@ public class FactoryXML extends Factory {
             SynchronizedQueue theOutQueue = SynchronizedQueue.createQueue(QueueViewText.class, xPosOutQueue, yPosOutQueue);
 
             //creating a new EndStation object
-            EndStation.create(label, theInQueue, theOutQueue, xPos, yPos, image);
+            MensaExit.create(label, theInQueue, theOutQueue, xPos, yPos, image);
 
 
         } catch (JDOMException e) {
