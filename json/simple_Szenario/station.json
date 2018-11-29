@@ -5,6 +5,7 @@
       "troughput":"2",
       "x_Position":"348",
       "y_Position":"154",
+      "preis":"2.0",
       "view":[{
        "image": "essensausgabe.png"
       }
@@ -20,10 +21,11 @@
       }
       ]
     },{
-      "label": "Station_2",
+      "label": "Kasse",
       "troughput":"1",
       "x_Position":"522",
       "y_Position":"320",
+      "preis":"2.0",
       "view":[{
         "image": "kasse.png"
       }

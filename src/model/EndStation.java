@@ -25,7 +25,7 @@ public class EndStation extends SimpleStation {
 	 * @param yPos y position of the station
 	 * @param image image of the station
 	 */
-	private EndStation(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
+	protected EndStation(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
 		super(label, inQueue, outQueue, xPos, yPos, image);
 
 
