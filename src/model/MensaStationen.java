@@ -18,9 +18,11 @@ import java.util.Observable;
  * @version 1.0
  */
 
-public class MensaStationen extends ProcessStation{
+public class MensaStationen extends ProcessStation implements Cloneable{
 
-    double preis;
+    private String image;
+    private double preis;
+
     Measurement measurement;
 
     private static int maximalOfCashRegister = 3;
@@ -28,6 +30,8 @@ public class MensaStationen extends ProcessStation{
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
+        this.image = image;
+        this.preis = preis;
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
@@ -46,7 +50,19 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
-
+    /**
+     * Clont Mensa Station
+     *
+     * @return MensaStation,  if it has Label "Kasse"
+     * @throws CloneNotSupportedException MensaStation is not cloneable, if it has Label "Kasse"
+     */
+    public MensaStationen clone() throws CloneNotSupportedException{
+        if(label == "Kasse"){
+            throw new CloneNotSupportedException();}
+        else{
+            return new MensaStationen(this.getLabel(),this.getAllInQueues(),this.getAllOutQueues(),this.troughPut,this.xPos,this.yPos,this.image,this.preis);
+        }
+    }
 
     @Override
     protected void handleObject(TheObject theObject) {
