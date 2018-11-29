@@ -9,7 +9,7 @@ public class Student extends TheObject {
 
 //    private double guthaben;
 
-    private static ArrayList<Student> allStudentAlts = new ArrayList<Student>();
+    private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
     Measurement measurement = new Measurement();
     private int maxWait;
@@ -30,9 +30,12 @@ public class Student extends TheObject {
 
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         //     this.guthaben = guthaben;
-        //    Student.allStudentAlts.add(this);
-        this.maxWait=pMaxWait;
 
+        //    Student.allStudentAlts.add(this);
+        Student.allStudents.add(this);
+        
+        //the longest time for a Student to wait in a queue
+        this.maxWait = pMaxWait;
     }
 
 
@@ -81,6 +84,8 @@ public class Student extends TheObject {
 
     }
 
-
+    public static ArrayList<Student> getAllStudents() {
+        return allStudents;
+    }
 }
 

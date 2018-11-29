@@ -2,6 +2,8 @@ package controller;
 
 import io.FactoryJSON;
 import io.FactoryXML;
+import model.MensaEntrance;
+import model.MensaStationen;
 import view.SimulationView;
 import io.Factory;
 import io.Statistics;
@@ -61,7 +63,7 @@ public class Simulation {
         //a new simulation
         Simulation theSimulation = new Simulation();
         theSimulation.xmlOderJson();
-        theSimulation.init();
+        theSimulation.initOhneView();
 
     }
 
@@ -69,7 +71,7 @@ public class Simulation {
     /**
      * Show's a pop up messages where you can decide if you want to choose XML Files or JSON Files
      */
-    private void xmlOderJson() {
+    public void xmlOderJson() {
 
         String[] option = {"XML", "JSON"};
         try {
@@ -96,6 +98,42 @@ public class Simulation {
         }
 
     }
+
+    /**
+     * Display's the different JSON-"Szenarien" in a pop up message and let the user choose which he wants to execute
+     *
+     * @throws IOException
+     */
+    private void welchesSzenarioJSON() throws IOException {
+        //ließt subdirectories
+        Path path = Paths.get("json");
+        path = path.toRealPath(LinkOption.NOFOLLOW_LINKS);
+
+
+        File file = new File(String.valueOf(path));
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+        //zeigt sie im fenster an
+
+        try {
+            int i = JOptionPane.showOptionDialog(null, "Welches Szenario?", "Szenarioauswahl", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, directories, directories[0]);
+            String dateiEndung = ".json";
+            //Statistics.show("json/" + directories[i] + "/object"+ dateiEndung);
+            FactoryJSON.setTheObjectDataFile("json/" + directories[i] + "/object" + dateiEndung);
+            FactoryJSON.setTheStartStationDataFile("json/" + directories[i] + "/startstation" + dateiEndung);
+            FactoryJSON.setTheStationDataFile("json/" + directories[i] + "/station" + dateiEndung);
+            FactoryJSON.setTheEndStationDataFile("json/" + directories[i] + "/endstation" + dateiEndung);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // e.printStackTrace();
+            System.exit(0);
+        }
+
+    }
+
 
     /**
      * Display's the different XML-"Szenarien" in a pop up message and let the user choose which he wants to execute
@@ -141,42 +179,6 @@ public class Simulation {
     }
 
     /**
-     * Display's the different JSON-"Szenarien" in a pop up message and let the user choose which he wants to execute
-     *
-     * @throws IOException
-     */
-    private void welchesSzenarioJSON() throws IOException {
-        //ließt subdirectories
-        Path path = Paths.get("json");
-        path = path.toRealPath(LinkOption.NOFOLLOW_LINKS);
-
-
-        File file = new File(String.valueOf(path));
-        String[] directories = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                return new File(current, name).isDirectory();
-            }
-        });
-        //zeigt sie im fenster an
-
-        try {
-            int i = JOptionPane.showOptionDialog(null, "Welches Szenario?", "Szenarioauswahl", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, directories, directories[0]);
-            String dateiEndung = ".json";
-            //Statistics.show("json/" + directories[i] + "/object"+ dateiEndung);
-            FactoryJSON.setTheObjectDataFile("json/" + directories[i] + "/object" + dateiEndung);
-            FactoryJSON.setTheStartStationDataFile("json/" + directories[i] + "/startstation" + dateiEndung);
-            FactoryJSON.setTheStationDataFile("json/" + directories[i] + "/station" + dateiEndung);
-            FactoryJSON.setTheEndStationDataFile("json/" + directories[i] + "/endstation" + dateiEndung);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // e.printStackTrace();
-            System.exit(0);
-        }
-
-    }
-
-
-    /**
      * initialize the simulation
      */
     private void init() {
@@ -208,12 +210,46 @@ public class Simulation {
 			
 			e.printStackTrace();
 		}
-		
+
+
 		//wake up the start station -> lets the simulation run
 		StartStation.getStartStation().wakeUp();
 		
 		*/
 
+    }
+
+
+    /**
+     * initialize the simulation
+     */
+    public void initOhneView(){
+
+        //the view of our simulation
+        //new SimulationView();
+
+        // set up the the heartbeat (clock) of the simulation
+        new HeartBeat().start();
+
+        Statistics.show("---- Simulation gestartet ---\n");
+
+        // start all the actor threads
+        for (Actor actor : getAllActors()) {
+            actor.start();
+
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+        }
+
+        Simulation.isRunning = true;
+
+        //wake up the start station -> lets the simulation run
+        MensaEntrance.getStartStation().wakeUp();
     }
 
 

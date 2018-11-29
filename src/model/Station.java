@@ -42,6 +42,7 @@ public abstract class Station extends Actor {
 
 		//let the thread wait only if there are no objects in the incoming and outgoing queues
 		if (numberOfInQueueObjects() == 0 && numberOfOutQueueObjects() == 0){
+			//
 			increaseIdleTime();
 			return false;
 		}
