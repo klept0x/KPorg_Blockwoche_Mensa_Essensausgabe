@@ -17,6 +17,7 @@ import java.util.List;
 public class PlotterPane extends JFrame implements GraphPlotter {
     private final int SCROLLBAR_PAD = 10;
     private final DiagramPane diagramPane;
+    private final String theTitle;
 
     /**
 	 * Creates a frame and a ScollPane inside of it. The diagram will be drawn inside the ScrollPane.
@@ -28,8 +29,8 @@ public class PlotterPane extends JFrame implements GraphPlotter {
                        String xLabel,
                        String yLabel,
                        String title) {
+	    theTitle= title;
         this.diagramPane = new DiagramPane(dataPoints, diagramWidth, diagramHeight, showLines, xLabel, yLabel);
-
         JScrollPane scrollPane = new JScrollPane(diagramPane);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -89,5 +90,9 @@ public class PlotterPane extends JFrame implements GraphPlotter {
             }
         });
         return points;
+    }
+
+    public String getTheTitle() {
+        return theTitle;
     }
 }

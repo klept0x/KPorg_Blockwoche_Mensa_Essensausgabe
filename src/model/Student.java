@@ -3,16 +3,18 @@ package model;
 import controller.Simulation;
 import io.OurStatistic;
 import io.Statistics;
+import plotter.src.main.java.model.CustomPoint;
+import plotter.src.main.java.view.PlotterPane;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Student extends TheObject implements Cloneable {
+public class Student extends TheObject   {
 
 //    private double guthaben;
 
     private static ArrayList<Student> allStudents = new ArrayList<Student>();
-
+    private ArrayList<PlotterPane> dataDias;
     Measurement measurement;
     private int maxWait;
     private long iqueueStartTime;
@@ -33,7 +35,13 @@ public class Student extends TheObject implements Cloneable {
         super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
-        Statistics.show("Student Konstruktor methode wurde aufgerufen");
+        dataDias= new ArrayList<PlotterPane>();
+        initDias();
+    }
+
+    private void initDias() {
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Kosten","Globaltime",this.label+" GesamtKosten"));
+        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"WarteZeit","Globaltime",this.label+" GesamtWarteZeit"));
     }
 
 
@@ -58,8 +66,8 @@ public class Student extends TheObject implements Cloneable {
         this.iqueueStartTime=Simulation.getGlobalTime();
     }
 
-    public Student clone(){
-        return new Student(this.getLabel(),this.getStationsToGo(),this.getProcessTime(),this.getMySpeed(),this.xPos,this.yPos,this.getImage(),this.getMaxWait());
+    public ArrayList<PlotterPane> getDataDias() {
+        return dataDias;
     }
 
     /**
@@ -84,8 +92,7 @@ public class Student extends TheObject implements Cloneable {
          * constructor
          */
         public Measurement(Student pOutObject) {
-            //Statistics.show("Student wird geklont");
-            //this.outObject= pOutObject.clone();
+
             this.outObject= pOutObject;
             this.addObserver(OurStatistic.getObjectBeobachter());
         }

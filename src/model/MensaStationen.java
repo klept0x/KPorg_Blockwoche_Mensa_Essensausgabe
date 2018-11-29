@@ -3,6 +3,8 @@ package model;
 import controller.Simulation;
 import io.OurStatistic;
 import io.Statistics;
+import plotter.src.main.java.model.CustomPoint;
+import plotter.src.main.java.view.PlotterPane;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,20 +20,26 @@ import java.util.Observable;
  * @version 1.0
  */
 
-public class MensaStationen extends ProcessStation implements Cloneable{
+public class MensaStationen extends ProcessStation{
 
-    private String image;
-    private double preis;
-
+    double preis;
     Measurement measurement;
-
+    private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
+    private ArrayList<PlotterPane> datenDias;
     private static int maximalOfCashRegister = 3;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
-        this.image = image;
-        this.preis = preis;
+        allMensaStation.add(this);
+        datenDias= new ArrayList<PlotterPane>();
+        initDias();
+    }
+
+    private void initDias() {
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
@@ -50,19 +58,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         }
     }
 
-    /**
-     * Clont Mensa Station
-     *
-     * @return MensaStation,  if it has Label "Kasse"
-     * @throws CloneNotSupportedException MensaStation is not cloneable, if it has Label "Kasse"
-     */
-    public MensaStationen clone() throws CloneNotSupportedException{
-        if(label == "Kasse"){
-            throw new CloneNotSupportedException();}
-        else{
-            return new MensaStationen(this.getLabel(),this.getAllInQueues(),this.getAllOutQueues(),this.troughPut,this.xPos,this.yPos,this.image,this.preis);
-        }
-    }
+
 
     @Override
     protected void handleObject(TheObject theObject) {
@@ -157,6 +153,14 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         }
     }
 
+    public static ArrayList<MensaStationen> getAllMensaStation() {
+        return allMensaStation;
+    }
+
+    public ArrayList<PlotterPane> getDatenDias() {
+        return datenDias;
+    }
+
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
 
     public static class Measurement extends Observable {
@@ -208,6 +212,19 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         public void notifyObservers(Object arg) {
             setChanged();
             super.notifyObservers(arg);
+        }
+
+
+        public int getInUseTime() {
+            return inUseTime;
+        }
+
+        public int getNumbOfVisitedObjects() {
+            return numbOfVisitedObjects;
+        }
+
+        public int getIdleTime() {
+            return idleTime;
         }
     }
 }
