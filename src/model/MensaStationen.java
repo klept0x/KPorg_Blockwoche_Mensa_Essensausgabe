@@ -18,8 +18,9 @@ import java.util.Collection;
 
 public class MensaStationen extends ProcessStation{
 
-
     double preis;
+
+    private static int maximalOfCashRegister = 3;
 
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
@@ -27,9 +28,23 @@ public class MensaStationen extends ProcessStation{
        // this.preis = preis;
     }
 
-    public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis){
-        new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
-    }
+    public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
+
+            //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
+            if(label == "Kasse" && maximalOfCashRegister > 0){
+                maximalOfCashRegister = maximalOfCashRegister -1;
+                new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+                Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
+            }
+            else if(label == "Kasse" && maximalOfCashRegister == 0){
+                throw new CashRegisterLimitExceededException();
+            }
+            else{
+                new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+            }
+        }
+
+
 
     @Override
     protected void handleObject(TheObject theObject) {
@@ -115,4 +130,8 @@ public class MensaStationen extends ProcessStation{
     }
 
 
+    public static class CashRegisterLimitExceededException extends Exception{
+        public CashRegisterLimitExceededException() {
+        }
+    }
 }

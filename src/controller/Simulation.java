@@ -63,7 +63,7 @@ public class Simulation {
         //a new simulation
         Simulation theSimulation = new Simulation();
         theSimulation.xmlOderJson();
-        theSimulation.initOhneView();
+        theSimulation.init();
 
     }
 

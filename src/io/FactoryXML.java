@@ -199,6 +199,8 @@ public class FactoryXML extends Factory {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (MensaStationen.CashRegisterLimitExceededException e) {
+            e.printStackTrace();
         }
 
     }

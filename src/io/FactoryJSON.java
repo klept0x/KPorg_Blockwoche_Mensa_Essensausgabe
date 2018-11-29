@@ -284,6 +284,8 @@ public class FactoryJSON {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (MensaStationen.CashRegisterLimitExceededException e) {
+			e.printStackTrace();
 		}
 
 	}
