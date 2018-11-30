@@ -1,0 +1,203 @@
+{
+  "settings": [
+    {
+      "station": [
+        {
+          "label": "Salate_1",
+          "troughput": "2",
+          "x_Position": "400",
+          "y_Position": "150",
+          "preis": "5.2",
+          "view": [
+            {
+              "image": "salad.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "370",
+              "y_Position": "180"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "475",
+              "y_Position": "180"
+            }
+          ]
+        },
+        {
+          "label": "Salate_2",
+          "troughput": "2",
+          "x_Position": "400",
+          "y_Position": "50",
+          "preis": "2.1",
+          "view": [
+            {
+              "image": "salad.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "370",
+              "y_Position": "60"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "475",
+              "y_Position": "60"
+            }
+          ]
+        },
+        {
+          "label": "Salate_3",
+          "troughput": "2",
+          "x_Position": "575",
+          "y_Position": "150",
+          "preis": "4.0",
+          "view": [
+            {
+              "image": "salad.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "545",
+              "y_Position": "180"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "650",
+              "y_Position": "180"
+            }
+          ]
+        },
+        {
+          "label": "Warmes_Essen_1",
+          "troughput": "2",
+          "x_Position": "225",
+          "y_Position": "150",
+          "preis": "4.3",
+          "view": [
+            {
+              "image": "fleisch.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "195",
+              "y_Position": "180"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "300",
+              "y_Position": "180"
+            }
+          ]
+        },
+        {
+          "label": "Warmes_Essen_2",
+          "troughput": "2",
+          "x_Position": "225",
+          "y_Position": "50",
+          "preis": "3.2",
+          "view": [
+            {
+              "image": "fleisch.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "195",
+              "y_Position": "70"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "300",
+              "y_Position": "70"
+            }
+          ]
+        },
+        {
+          "label": "Warmes_Essen_3",
+          "troughput": "2",
+          "x_Position": "50",
+          "y_Position": "150",
+          "preis": "7.2",
+          "view": [
+            {
+              "image": "fleisch.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "20",
+              "y_Position": "180"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "125",
+              "y_Position": "180"
+            }
+          ]
+        },
+        {
+          "label": "Burger_Stand",
+          "troughput": "2",
+          "x_Position": "800",
+          "y_Position": "50",
+          "preis": "7.5",
+          "view": [
+            {
+              "image": "burgerino.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "770",
+              "y_Position": "60"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "875",
+              "y_Position": "60"
+            }
+          ]
+        },
+        {
+          "label": "Kasse",
+          "troughput": "1",
+          "x_Position": "400",
+          "y_Position": "300",
+          "preis": "0.0",
+          "view": [
+            {
+              "image": "kasse.png"
+            }
+          ],
+          "inqueue": [
+            {
+              "x_Position": "370",
+              "y_Position": "310"
+            }
+          ],
+          "outqueue": [
+            {
+              "x_Position": "475",
+              "y_Position": "310"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+

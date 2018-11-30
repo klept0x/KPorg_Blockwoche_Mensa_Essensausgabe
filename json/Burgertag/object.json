@@ -1,0 +1,113 @@
+{
+  "settings": [
+    {
+      "object": [
+        {
+          "label": "Maennlein",
+          "schleife": "20",
+          "processtime": "4",
+          "speed": "6",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "Salatebar",
+            "WarmesEssen",
+            "WarmesEssen",
+            "Burger_Stand",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "20",
+          "processtime": "5",
+          "speed": "5",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Burger_Stand",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Maennlein",
+          "schleife": "44",
+          "processtime": "7",
+          "speed": "4",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Burger_Stand",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "15",
+          "processtime": "9",
+          "speed": "2",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Burger_Stand",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "12",
+          "processtime": "12",
+          "speed": "3",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Kasse",
+            "End_Station"
+          ]
+        }
+      ]
+    }
+  ]
+}
