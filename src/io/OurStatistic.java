@@ -40,11 +40,11 @@ public class OurStatistic extends Statistics {
         for(MensaStationen ms : MensaStationen.getAllMensaStation()){
             if (ms.getLabel().equals(label)){
                 MensaStationen.Measurement m = ms.getMeasurement();
-                PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),400,600,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
+                PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),400,400,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
                 p1.setVisible(true);
-                PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),400,600,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
+                PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),400,400,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
                 p2.setVisible(true);
-                PlotterPane p3 = new PlotterPane(m.getNumberOVP(),400,600,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
+                PlotterPane p3 = new PlotterPane(m.getNumberOVP(),400,400,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
                 p3.setVisible(true);
             }
         }
@@ -52,9 +52,9 @@ public class OurStatistic extends Statistics {
         for(Student st : Student.getAllStudents()){
             if (st.getLabel().equals(label)){
                 Student.Measurement m = st.getMeasurement();
-                PlotterPane p1 = new PlotterPane(m.getGesWarteP(),400,600,true,"time","GesammtWartezeit",st.getLabel()+" GesammtWartezeit/time");
+                PlotterPane p1 = new PlotterPane(m.getGesWarteP(),400,400,true,"time","GesammtWartezeit",st.getLabel()+" GesammtWartezeit/time");
                 p1.setVisible(true);
-                PlotterPane p2 = new PlotterPane(m.getGuthabenP(),400,600,true,"time","Rechnungsbetrag",st.getLabel()+" Rechnungsbetrag/time");
+                PlotterPane p2 = new PlotterPane(m.getGuthabenP(),400,400,true,"time","Rechnungsbetrag",st.getLabel()+" Rechnungsbetrag/time");
                 p2.setVisible(true);
 
             }

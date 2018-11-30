@@ -10,7 +10,9 @@ import view.QueueViewText;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The class FactoryXML extends the class Factory.
@@ -74,6 +76,7 @@ public class FactoryXML extends Factory {
                 //
 
                 processtime = Integer.parseInt(theObject.getChildText("processtime"));
+                processtime= processtime+5;
                 speed = Integer.parseInt(theObject.getChildText("speed"));
                 maxWait= Integer.parseInt(theObject.getChildText("maxWait"));
 
@@ -99,10 +102,12 @@ public class FactoryXML extends Factory {
 
 
 
+
                 //creates multiple objects
                 //in the XML-file is an extra tag <schleife></schleife>, so that one object in the XML-file can be multiplied
                 for (int i = 0; i < schleife; i++) {
                     //creating a new TheObject object
+                    stationsToGo=shuffelStationen(stationsToGo);
                     Student.create(label + "_" + i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
                     Statistics.show(label +" Student wurde erzeugt" + i);
                 }
@@ -113,6 +118,31 @@ public class FactoryXML extends Factory {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static ArrayList<String> shuffelStationen(ArrayList<String> allStations) {
+        String start= "Start_Station";
+        String end="End_Station";
+        String kasse= "Kasse";
+        ArrayList<String>shuffelliste = new ArrayList<>();
+        ArrayList<String>stationToGoNeu = new ArrayList<>();
+        for(String s : allStations){
+            if(s.equals(start)||s.equals(end)||s.equals(kasse)){
+
+            }else{
+             shuffelliste.add(s);
+            }
+        }
+        System.out.println(shuffelliste);
+        Collections.shuffle(shuffelliste);
+        System.out.println(shuffelliste);
+        stationToGoNeu.add(start);
+        for(String s: shuffelliste){
+            stationToGoNeu.add(s);
+        }
+        stationToGoNeu.add(kasse);
+        stationToGoNeu.add(end);
+        return stationToGoNeu;
     }
 
     /**
