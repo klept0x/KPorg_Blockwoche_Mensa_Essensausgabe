@@ -72,7 +72,7 @@ public class PlotterPane extends JFrame implements GraphPlotter {
             diagramPane.resizePane(new Dimension(width, height));
             //diagramPane = new DiagramPane(dataPoints, width, height, showLines);
 
-            System.out.println(componentEvent.paramString() + " | WIDTH: " + width + " | HEIGHT: " + height);
+            //System.out.println(componentEvent.paramString() + " | WIDTH: " + width + " | HEIGHT: " + height);
             // create DiagramPane and add it to a ScrollbarPane.
 
         }

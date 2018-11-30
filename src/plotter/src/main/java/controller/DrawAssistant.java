@@ -102,7 +102,7 @@ public class DrawAssistant {
     private void checkForResizing() {
         if (this.maxX > this.lastMax.x && this.maxY > this.maxXValue) {
             Dimension newDimension = this.scales.calcNewDimension(this.maxX, this.maxXValue, this.maxY);
-            System.out.println("new DImension: " + newDimension);
+            //System.out.println("new DImension: " + newDimension);
             resizeListener.resizePane(newDimension);
         }
         this.lastMax = new Point(this.maxX, this.maxY);

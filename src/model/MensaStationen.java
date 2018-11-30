@@ -23,61 +23,105 @@ import java.util.Observable;
 public class MensaStationen extends ProcessStation{
 
     private static long startTime;
+    private static final int  maxSalatbarInObjects=6;
+    private static final int  maxWarmesEssenInObjects=6;
+    private static final int  maxBurgerInObjects=6;
     double preis;
+    private String gruppierung="";
     Measurement measurement;
     private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
+    private static ArrayList<MensaStationen> allSalatBar= new ArrayList<MensaStationen>();
+    private static ArrayList<MensaStationen> allWarmesEssen= new ArrayList<MensaStationen>();
+    private static ArrayList<MensaStationen> allBurgerEssen= new ArrayList<MensaStationen>();
+    private boolean offenZustand;
     private ArrayList<PlotterPane> datenDias;
-    private static int maximalOfCashRegister = 3;
+    private static final int  maximalOfCashRegister = 3;
+    private static ArrayList<MensaStationen>allKassen= new ArrayList<MensaStationen>();
+    private static final int maxKasseInObjects=4;
 
-    private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis) {
+    private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis,boolean pOffenZ,String pGruppe) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
         this.preis=pPreis;
+        this.offenZustand=pOffenZ;
+        this.gruppierung= pGruppe;
+        System.out.println(this.label+" "+this.gruppierung);
         allMensaStation.add(this);
+        trageKategorieListe(this);
         datenDias= new ArrayList<PlotterPane>();
-        initDias();
+        System.out.println(this.label+" "+pOffenZ);
+
+        //initDias();
     }
 
-    public static void setStartTime(long globalTime) {
-        startTime =globalTime;
-    }
-    private void initDias() {
+
+
+
+    /*private void initDias() {
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
-    }
+    }*/
 
-    public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
+    public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis,boolean pOffenZ,String pGruppe) throws CashRegisterLimitExceededException {
 
         //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
+       int zaehler = maximalOfCashRegister;
         if(label == "Kasse" && maximalOfCashRegister > 0){
-            maximalOfCashRegister = maximalOfCashRegister -1;
-            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+            zaehler = maximalOfCashRegister -1;
+            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
             Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
         }
         else if(label == "Kasse" && maximalOfCashRegister == 0){
             throw new CashRegisterLimitExceededException();
         }
         else{
-            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis);
+            new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
         }
+    }
+
+
+    private void trageKategorieListe(MensaStationen mensaStationen) {
+        switch (mensaStationen.gruppierung){
+            case "Salatebar":
+                allSalatBar.add(mensaStationen);
+                break;
+            case"WarmesEssen":
+                allWarmesEssen.add(mensaStationen);
+                break;
+            case "Burger":
+                allBurgerEssen.add(mensaStationen);
+                break;
+            case"Kasse":
+                allKassen.add(mensaStationen);
+        }
+
+
+
+
+    }
+
+
+    public static void setStartTime(long globalTime) {
+        startTime =globalTime;
     }
 
 
 
     @Override
     protected void handleObject(TheObject theObject) {
-        Statistics.show("EssenAusgabe");
+        Statistics.show(this.label);
+        this.pruefeFreischalten();
         Student s = (Student) theObject;
         System.out.println(s.getLabel()+" "+s.measurement.guthaben);
         s.measurement.aenderGuthaben(preis);
         System.out.println(s.getLabel()+" "+s.measurement.guthaben);
         s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
         super.handleObject(theObject);
-        this.measurement.aenderIdleTime(super.measurement.idleTime);
         this.measurement.aenderNumOV(super.measurement.numbOfVisitedObjects);
         this.measurement.aenderInUseTime(super.measurement.inUseTime);
     }
+
 
 
 
@@ -88,7 +132,7 @@ public class MensaStationen extends ProcessStation{
     @Override
     protected TheObject getNextInQueueObject() {
         System.out.println("next Object "+"\n");
-        if(!(this.label.equals("Kasse"))){
+        if(!(this.gruppierung.equals("Kasse"))){
             checkObjectWarte();
         }
         return super.getNextInQueueObject();
@@ -178,12 +222,16 @@ public class MensaStationen extends ProcessStation{
         return datenDias;
     }
 
-    public static void setzeVisible() {
-       allMensaStation.get(0).getDatenDias().get(0).setVisible(true);
-    }
 
+    /*public static void setzeVisible() {
+       allMensaStation.get(0).getDatenDias().get(0).setVisible(true);
+    }*/
+
+    /**
+     * Methode for checking idleTime
+     */
     public  void pruefeIdleTime(){
-        if (numberOfInQueueObjects() == 0 && numberOfOutQueueObjects() == 0){
+        if (numberOfInQueueObjects() == 0 && numberOfOutQueueObjects() == 0 && (this.offenZustand!=false)){
             if(this.label.equals("Kasse")){
                 System.out.println(this.label+" "+this.measurement.idleTime+"---------------------------------");
             }
@@ -192,6 +240,9 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
+    /**
+     * checking idleTime every heartbeat
+     */
     public static void Tacktruf(){
         if(Simulation.isRunning && !(MensaExit.getMensaExit().isEnd())){
             for (MensaStationen ms : getAllMensaStation()){
@@ -199,6 +250,72 @@ public class MensaStationen extends ProcessStation{
             }
         }
 
+    }
+
+    /**
+     * check if we need to open another station
+     */
+    private void pruefeFreischalten() {
+
+        switch (this.gruppierung){
+            case "Salatebar":
+                if(this.numberOfInQueueObjects()>=maxSalatbarInObjects){
+                    this.oeffneStation(allSalatBar);
+                }
+                break;
+            case"WarmesEssen":
+                if(this.numberOfInQueueObjects()>=maxWarmesEssenInObjects){
+                    this.oeffneStation(allWarmesEssen);
+                }
+                break;
+            case "Burger":
+                if(this.numberOfInQueueObjects()>=maxBurgerInObjects){
+                    this.oeffneStation(allBurgerEssen);
+                }
+                break;
+            case "Kasse":
+                if(this.numberOfInQueueObjects()>=maxKasseInObjects){
+                    this.oeffneStation(allKassen);
+                }
+                break;
+        }
+    }
+
+    /**
+     *
+     * @param liste list of all Object from a specific kind
+     */
+    private void oeffneStation(ArrayList<MensaStationen> liste ) {
+        int zaehler=0;
+        for (MensaStationen m : liste){
+            if(m.offenZustand== false&& zaehler==0){
+                m.offenZustand= true;
+
+                System.out.println(m.label+" wurde geöffnet");
+                zaehler=1;
+            }
+            System.out.println("\n"+"keine weitere Station gefunden");
+        }
+    }
+
+    public static ArrayList<MensaStationen> getAllSalatBar() {
+        return allSalatBar;
+    }
+
+    public static ArrayList<MensaStationen> getAllWarmesEssen() {
+        return allWarmesEssen;
+    }
+
+    public static ArrayList<MensaStationen> getAllBurgerEssen() {
+        return allBurgerEssen;
+    }
+
+    public static ArrayList<MensaStationen> getAllKassen() {
+        return allKassen;
+    }
+
+    public boolean isOffenZustand() {
+        return offenZustand;
     }
 
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/

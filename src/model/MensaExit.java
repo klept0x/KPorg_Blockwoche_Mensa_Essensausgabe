@@ -28,6 +28,7 @@ public class MensaExit extends EndStation {
     }
 
     public static MensaExit getMensaExit() {
+
         return theExit;
     }
 
@@ -64,6 +65,9 @@ public class MensaExit extends EndStation {
             super.endSimulation();
             //datenAbfrage();
             Statistics.show("hier PopUp");
+            for (MensaStationen ms : MensaStationen.getAllMensaStation()){
+                System.out.println(ms.label+" "+ms.isOffenZustand());
+            }
         }
     }
 
@@ -73,4 +77,5 @@ public class MensaExit extends EndStation {
         }
         return false;
     }
+
 }

@@ -6,6 +6,7 @@
       "x_Position":"348",
       "y_Position":"154",
       "preis":"2.0",
+      "initZustand":"true",
       "view":[{
        "image": "essensausgabe.png"
       }
@@ -26,6 +27,7 @@
       "x_Position":"522",
       "y_Position":"320",
       "preis":"2.0",
+      "initZustand":"true",
       "view":[{
         "image": "kasse.png"
       }

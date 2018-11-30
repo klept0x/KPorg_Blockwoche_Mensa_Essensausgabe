@@ -133,9 +133,9 @@ public class FactoryXML extends Factory {
              shuffelliste.add(s);
             }
         }
-        System.out.println(shuffelliste);
+        //System.out.println(shuffelliste);
         Collections.shuffle(shuffelliste);
-        System.out.println(shuffelliste);
+        //System.out.println(shuffelliste);
         stationToGoNeu.add(start);
         for(String s: shuffelliste){
             stationToGoNeu.add(s);
@@ -171,6 +171,8 @@ public class FactoryXML extends Factory {
                 int yPos = 0;
                 String image = null;
                 double preis = 0.0;
+                boolean pOffenZ;
+                String gruppierung= null;
 
                 // read data
                 label = station.getChildText("label");
@@ -179,7 +181,8 @@ public class FactoryXML extends Factory {
                 yPos = Integer.parseInt(station.getChildText("y_position"));
                 // the price
                 preis = Double.parseDouble(station.getChildText("preis"));
-
+                pOffenZ= Boolean.valueOf(station.getChildText("initZustand"));
+                gruppierung= station.getChildText("gruppierung");
                 //the <view> ... </view> node
                 Element viewGroup = station.getChild("view");
                 // read data
@@ -220,7 +223,7 @@ public class FactoryXML extends Factory {
                 }
 
                 //creating a new Station object
-                MensaStationen.create(label, theInqueues, theOutqueues, troughPut, xPos, yPos, image, preis);
+                MensaStationen.create(label, theInqueues, theOutqueues, troughPut, xPos, yPos, image, preis,pOffenZ,gruppierung);
 
             }
 

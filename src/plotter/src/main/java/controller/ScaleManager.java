@@ -31,7 +31,7 @@ public class ScaleManager {
         this.HEIGHT = height;
         this.LEFT_GAP = PADDING + LABEL_PAD;
         this.TOP_GAP = PADDING;
-        System.out.println("Scale Manger created. WIDTH: " + width + "| HEIGHT: " + height);
+        //System.out.println("Scale Manger created. WIDTH: " + width + "| HEIGHT: " + height);
     }
 
     public Dimension calcNewDimension(int biggestX, int maxXValue, int biggestY) {
