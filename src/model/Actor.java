@@ -98,6 +98,7 @@ public abstract class Actor extends Thread {
             try {
                 Statistics.show(this.getLabel() + " wait()");
                 wait();
+                //sleep(Simulation.CLOCKBEAT);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

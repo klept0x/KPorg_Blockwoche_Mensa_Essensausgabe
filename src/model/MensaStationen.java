@@ -68,14 +68,18 @@ public class MensaStationen extends ProcessStation{
     @Override
     protected void handleObject(TheObject theObject) {
         Statistics.show("EssenAusgabe");
-        super.handleObject(theObject);
         Student s = (Student) theObject;
+        System.out.println(s.getLabel()+" "+s.measurement.guthaben);
         s.measurement.aenderGuthaben(preis);
+        System.out.println(s.getLabel()+" "+s.measurement.guthaben);
         s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
-        this.measurement.idleTime= super.measurement.idleTime;
-        this.measurement.numbOfVisitedObjects= super.measurement.numbOfVisitedObjects;
+        super.handleObject(theObject);
+        this.measurement.aenderIdleTime(super.measurement.idleTime);
+        this.measurement.aenderNumOV(super.measurement.numbOfVisitedObjects);
         this.measurement.aenderInUseTime(super.measurement.inUseTime);
     }
+
+
 
     /**
      *
@@ -156,6 +160,10 @@ public class MensaStationen extends ProcessStation{
         return startTime;
     }
 
+    public Measurement getMeasurement() {
+        return this.measurement;
+    }
+
 
     public static class CashRegisterLimitExceededException extends Exception{
         public CashRegisterLimitExceededException() {
@@ -169,13 +177,39 @@ public class MensaStationen extends ProcessStation{
     public ArrayList<PlotterPane> getDatenDias() {
         return datenDias;
     }
+
     public static void setzeVisible() {
        allMensaStation.get(0).getDatenDias().get(0).setVisible(true);
+    }
+
+    public  void pruefeIdleTime(){
+        if (numberOfInQueueObjects() == 0 && numberOfOutQueueObjects() == 0){
+            if(this.label.equals("Kasse")){
+                System.out.println(this.label+" "+this.measurement.idleTime+"---------------------------------");
+            }
+           this.measurement.aenderIdleTime(this.measurement.idleTime+=1);
+
+        }
+    }
+
+    public static void Tacktruf(){
+        if(Simulation.isRunning && !(MensaExit.getMensaExit().isEnd())){
+            for (MensaStationen ms : getAllMensaStation()){
+                ms.pruefeIdleTime();
+            }
+        }
+
     }
 
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
 
     public static class Measurement extends Observable {
+
+        protected ArrayList<CustomPoint>inUseTimeP;
+        protected ArrayList<CustomPoint>numberOVP;
+        protected ArrayList<CustomPoint>idleTimeP;
+
+
 
         protected MensaStationen theOutObject;
         /**
@@ -192,6 +226,9 @@ public class MensaStationen extends ProcessStation{
 
         public Measurement( MensaStationen outObject) {
             theOutObject= outObject;
+            inUseTimeP= new ArrayList<CustomPoint>();
+            idleTimeP= new ArrayList<CustomPoint>();
+            numberOVP= new ArrayList<CustomPoint>();
             this.addObserver(OurStatistic.getMensaBeo());
 
         }
@@ -216,9 +253,9 @@ public class MensaStationen extends ProcessStation{
 
         void aenderInUseTime(int pInUseTime){
             this.inUseTime= pInUseTime;
+            this.inUseTimeP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.inUseTime));
             notifyObservers(this.inUseTime);
         }
-
 
         @Override
         public void notifyObservers(Object arg) {
@@ -238,5 +275,31 @@ public class MensaStationen extends ProcessStation{
         public int getIdleTime() {
             return idleTime;
         }
+
+        public void aenderIdleTime(int idleTime) {
+
+            this.idleTime= idleTime;
+            this.idleTimeP.add(new CustomPoint((int)(Simulation.getGlobalTime()),this.idleTime));
+            notifyObservers(this.idleTime);
+        }
+
+        public void aenderNumOV(int numbOfVisitedObjects) {
+            this.numbOfVisitedObjects= numbOfVisitedObjects;
+            this.numberOVP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.numbOfVisitedObjects));
+            this.notifyObservers(this.numbOfVisitedObjects);
+        }
+
+        public ArrayList<CustomPoint> getInUseTimeP() {
+            return inUseTimeP;
+        }
+
+        public ArrayList<CustomPoint> getNumberOVP() {
+            return numberOVP;
+        }
+
+        public ArrayList<CustomPoint> getIdleTimeP() {
+            return idleTimeP;
+        }
+
     }
 }

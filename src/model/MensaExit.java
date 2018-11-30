@@ -5,6 +5,8 @@ import javax.swing.*;
 
 public class MensaExit extends EndStation {
 
+    private static MensaExit theExit;
+
 
     /**
      * (private!) Constructor, creates a new end station
@@ -18,10 +20,15 @@ public class MensaExit extends EndStation {
      */
     private MensaExit(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image) {
         super(label, inQueue, outQueue, xPos, yPos, image);
+        theExit= this;
     }
 
     public static void create(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
         new MensaExit(label,inQueue,outQueue,xPos,yPos,image);
+    }
+
+    public static MensaExit getMensaExit() {
+        return theExit;
     }
 
     /**
@@ -58,5 +65,12 @@ public class MensaExit extends EndStation {
             //datenAbfrage();
             Statistics.show("hier PopUp");
         }
+    }
+
+    public  boolean isEnd(){
+        if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()){
+            return true;
+        }
+        return false;
     }
 }

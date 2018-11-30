@@ -16,6 +16,9 @@ public class Student extends TheObject   {
     private static ArrayList<Student> allStudents = new ArrayList<Student>();
     private static long startTime;
     private ArrayList<PlotterPane> dataDias;
+    private ArrayList<CustomPoint> kostenpunkte= new ArrayList<CustomPoint>();
+    private ArrayList<CustomPoint> warteZeitPoints= new ArrayList<CustomPoint>();
+
     Measurement measurement;
     private int maxWait;
     private long iqueueStartTime;
@@ -37,6 +40,8 @@ public class Student extends TheObject   {
         this.maxWait=pMaxWait;
         measurement= new Measurement(this);
         allStudents.add(this);
+        kostenpunkte.add(new CustomPoint((int)Simulation.getGlobalTime(),this.measurement.guthaben));
+        warteZeitPoints.add(new CustomPoint((int)Simulation.getGlobalTime(),this.measurement.gesWarteZeit));
         dataDias= new ArrayList<PlotterPane>();
         initDias();
     }
@@ -76,15 +81,24 @@ public class Student extends TheObject   {
         return dataDias;
     }
 
+    public Measurement getMeasurement() {
+        return this.measurement;
+    }
+
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
      */
     public static class Measurement extends Observable {
 
+       protected ArrayList<CustomPoint> gesWarteP;
+       protected ArrayList<CustomPoint> guthabenP;
+
+
+
         private Student outObject;
 
-        int gesWarteZeit;
+        int gesWarteZeit=0;
         /**
          * the treated time by all processing stations, in seconds
          */
@@ -100,7 +114,15 @@ public class Student extends TheObject   {
         public Measurement(Student pOutObject) {
 
             this.outObject= pOutObject;
+            gesWarteP= this.listInit();
+            guthabenP= this.listInit();
             this.addObserver(OurStatistic.getObjectBeobachter());
+        }
+
+        private ArrayList<CustomPoint> listInit() {
+            ArrayList<CustomPoint> list= new ArrayList<CustomPoint>();
+            list.add(new CustomPoint((int)Simulation.getGlobalTime(),0));
+            return list;
         }
 
         public Student getOuterClass(){
@@ -115,6 +137,7 @@ public class Student extends TheObject   {
 
         void aenderWarteZeit(int pWarteZeit){
             this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
+
             notifyObservers(this.gesWarteZeit);
         }
 
@@ -124,6 +147,14 @@ public class Student extends TheObject   {
             super.notifyObservers(arg);
         }
 
+        public ArrayList<CustomPoint> getGesWarteP() {
+            return gesWarteP;
+        }
+
+        public ArrayList<CustomPoint> getGuthabenP() {
+            return guthabenP;
+        }
+
         public int getGesWarteZeit() {
             return gesWarteZeit;
         }
@@ -131,6 +162,8 @@ public class Student extends TheObject   {
         public double getGuthaben() {
             return guthaben;
         }
+
+
     }
 
     /**
