@@ -30,6 +30,7 @@ public class MensaExit extends EndStation {
     }
 
     public static MensaExit getMensaExit() {
+
         return theExit;
     }
 
@@ -66,9 +67,9 @@ public class MensaExit extends EndStation {
             super.endSimulation();
             //datenAbfrage();
             Statistics.show("hier PopUp");
-
             XMLStatistics x1 = new XMLStatistics();
             x1.theXMLspeichern();
+
         }
     }
 
@@ -78,4 +79,5 @@ public class MensaExit extends EndStation {
         }
         return false;
     }
+
 }

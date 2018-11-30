@@ -18,7 +18,7 @@ public abstract class Station extends Actor {
 
 	/** the view of the station */
 	@SuppressWarnings("unused")
-	private StationView theView;
+	protected StationView theView;
 
 	/** Constructor for all stations
 	 *
@@ -145,5 +145,7 @@ public abstract class Station extends Actor {
 	public abstract ArrayList<SynchronizedQueue> getAllOutQueues();
 
 	protected abstract void increaseIdleTime();
+
+
 
 }

@@ -36,6 +36,9 @@ public class StartButton extends JButton implements ActionListener {
 
         MensaStationen.setStartTime(Simulation.getGlobalTime());
         Student.setStartTime(Simulation.getGlobalTime());
+        for(MensaStationen ms :MensaStationen.getAllWarmesEssen()){
+            System.out.println("\n"+ms.getLabel());
+        }
        // setzeVisible();
 
         //wake up the start station -> lets the simulation run
@@ -43,10 +46,10 @@ public class StartButton extends JButton implements ActionListener {
 
     }
 
-    private void setzeVisible(){
+    /*private void setzeVisible(){
        MensaStationen.setzeVisible();
        Student.setzeVisible();
-    }
+    }*/
 
 
 }

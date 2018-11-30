@@ -264,6 +264,8 @@ public class FactoryJSON {
 				int yPos = 0;
 				String image = null;
 				double preis =0;
+				boolean pOffenZ;
+				String gruppierung= null;
 
 				//label
 				label = (String) st.get("label");
@@ -272,6 +274,9 @@ public class FactoryJSON {
 
 				preis= Double.parseDouble(st.getString("preis"));
 
+				pOffenZ= Boolean.valueOf(st.getString("initZustand"));
+
+				gruppierung= (String) st.get("gruppierung");
 				//location
 				xPos= Integer.parseInt(st.getString("x_Position"));
 				yPos=Integer.parseInt(st.getString("y_Position"));
@@ -303,7 +308,7 @@ public class FactoryJSON {
 					int yOutqueuePos = Integer.parseInt(outqueue.getString("y_Position"));
 					theOutqueues.add(SynchronizedQueue.createQueue(QueueViewText.class,xOutqueuePos,yOutqueuePos));
 				}
-				MensaStationen.create(label,theInqueues,theOutqueues,troughPut,xPos,yPos,image,preis);
+				MensaStationen.create(label,theInqueues,theOutqueues,troughPut,xPos,yPos,image,preis,pOffenZ,gruppierung);
 			}
 
 

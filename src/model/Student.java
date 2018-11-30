@@ -36,18 +36,20 @@ public class Student extends TheObject   {
      */
     private Student(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait) {
 
-        super(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
-        this.maxWait=pMaxWait;
-        measurement= new Measurement(this);
+        super(label, stationsToGo, processtime, speed, xPos, yPos, image, pMaxWait);
+        this.maxWait = pMaxWait;
+        measurement = new Measurement(this);
         allStudents.add(this);
-        kostenpunkte.add(new CustomPoint((int)Simulation.getGlobalTime(),this.measurement.guthaben));
-        warteZeitPoints.add(new CustomPoint((int)Simulation.getGlobalTime(),this.measurement.gesWarteZeit));
-        dataDias= new ArrayList<PlotterPane>();
+        kostenpunkte.add(new CustomPoint((int) Simulation.getGlobalTime(), this.measurement.guthaben));
+        warteZeitPoints.add(new CustomPoint((int) Simulation.getGlobalTime(), this.measurement.gesWarteZeit));
+        dataDias = new ArrayList<PlotterPane>();
         initDias();
     }
 
-    public static void setStartTime(long globalTime) {
-        startTime= globalTime;
+    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait) {
+
+        new Student(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
+        Statistics.show("Student create() methode wurde aufgerufen");
     }
 
     private void initDias() {
@@ -55,11 +57,8 @@ public class Student extends TheObject   {
         dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"WarteZeit","Globaltime","GesamtWarteZeit"));
     }
 
-
-    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait) {
-
-        new Student(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
-        Statistics.show("Student create() methode wurde aufgerufen");
+    public static void setStartTime(long globalTime) {
+        startTime= globalTime;
     }
 
     public int getMaxWait() {
@@ -78,11 +77,74 @@ public class Student extends TheObject   {
     }
 
     public ArrayList<PlotterPane> getDataDias() {
+
         return dataDias;
     }
 
     public Measurement getMeasurement() {
         return this.measurement;
+    }
+
+    @Override
+    protected Station getNextStation() {
+        System.out.println("Override getNextStation Student");
+        Station st;
+        //we are at the end of the list
+        if(this.stationsToGo.size() < stationListPointer) return null;
+
+        //get the label of the next station from the list and increase the list pointer
+        String stationLabel = this.stationsToGo.get(stationListPointer++);
+
+
+        if(stationLabel.equals("End_Station")||stationLabel.equals("Start_Station")) {
+            //looking for the matching station and return it
+            for (Station station : Station.getAllStations()) {
+
+                if (stationLabel.equals(station.getLabel())) {
+                    return station;
+                }
+
+
+            }
+        }
+        st=findeBesteMensaStation(stationLabel);
+
+
+        return st; //the matching station isn't found
+    }
+
+    private Station findeBesteMensaStation(String stationLabel) {
+        System.out.println("");
+        switch(stationLabel){
+            case "Salatebar":
+                   return findeKuerzesteWarteSchlange(MensaStationen.getAllSalatBar());
+            case"WarmesEssen":
+                return findeKuerzesteWarteSchlange(MensaStationen.getAllWarmesEssen());
+
+            case "Burger":
+                return findeKuerzesteWarteSchlange(MensaStationen.getAllBurgerEssen());
+
+            case "Kasse":
+                return findeKuerzesteWarteSchlange(MensaStationen.getAllKassen());
+
+        }
+        return null;
+    }
+
+    private MensaStationen findeKuerzesteWarteSchlange(ArrayList<MensaStationen> groupList) {
+        MensaStationen bufferStation= groupList.get(0);
+        for(MensaStationen ms : groupList){
+            if(ms.numberOfInQueueObjects()<bufferStation.numberOfInQueueObjects()){
+                if(ms.isOffenZustand()==true){
+                    bufferStation= ms;
+                }
+
+            }
+        }
+        if(bufferStation != null){
+            return bufferStation;
+        }
+        return null;
     }
 
     /**
@@ -126,18 +188,18 @@ public class Student extends TheObject   {
         }
 
         public Student getOuterClass(){
-            System.out.println();
             return outObject;
         }
 
         void aenderGuthaben(double preis){
             this.guthaben= this.guthaben+preis;
+            guthabenP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.guthaben));
             notifyObservers(this.guthaben);
         }
 
         void aenderWarteZeit(int pWarteZeit){
             this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
-
+            gesWarteP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.gesWarteZeit));
             notifyObservers(this.gesWarteZeit);
         }
 

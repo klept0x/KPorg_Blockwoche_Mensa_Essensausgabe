@@ -41,11 +41,11 @@ public class OurStatistic extends Statistics {
         for(MensaStationen ms : MensaStationen.getAllMensaStation()){
             if (ms.getLabel().equals(label)){
                 MensaStationen.Measurement m = ms.getMeasurement();
-                PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),400,400,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
+                PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),200,200,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
                 p1.setVisible(true);
-                PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),400,400,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
-                p2.setVisible(true);
-                PlotterPane p3 = new PlotterPane(m.getNumberOVP(),400,400,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
+                //PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),200,200,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
+               // p2.setVisible(true);
+                PlotterPane p3 = new PlotterPane(m.getNumberOVP(),200,200,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
                 p3.setVisible(true);
             }
         }
@@ -53,9 +53,9 @@ public class OurStatistic extends Statistics {
         for(Student st : Student.getAllStudents()){
             if (st.getLabel().equals(label)){
                 Student.Measurement m = st.getMeasurement();
-                PlotterPane p1 = new PlotterPane(m.getGesWarteP(),400,400,true,"time","GesammtWartezeit",st.getLabel()+" GesammtWartezeit/time");
+                PlotterPane p1 = new PlotterPane(m.getGesWarteP(),200,200,true,"time","GesammtWartezeit",st.getLabel()+" GesammtWartezeit/time");
                 p1.setVisible(true);
-                PlotterPane p2 = new PlotterPane(m.getGuthabenP(),400,400,true,"time","Rechnungsbetrag",st.getLabel()+" Rechnungsbetrag/time");
+                PlotterPane p2 = new PlotterPane(m.getGuthabenP(),200,200,true,"time","Rechnungsbetrag",st.getLabel()+" Rechnungsbetrag/time");
                 p2.setVisible(true);
 
             }
@@ -86,7 +86,7 @@ public class OurStatistic extends Statistics {
      * trage daten ein für Live daten sameln
      * @param measurement
      */
-    private void trageDatenEin(Student.Measurement measurement) {
+   /* private void trageDatenEin(Student.Measurement measurement) {
         for (Student s1 : Student.getAllStudents()){
             if(measurement.getOuterClass().getLabel().equals(s1.getLabel())) {
                 for (PlotterPane p : s1.getDataDias()) {
@@ -106,7 +106,7 @@ public class OurStatistic extends Statistics {
                 }
             }
         }
-    }
+    }*/
     }
 
     static class MensaStationenBeobachter implements Observer{
@@ -130,7 +130,7 @@ public class OurStatistic extends Statistics {
 
             }
 
-        private void trageDatenEin(MensaStationen.Measurement measurement) {
+       /* private void trageDatenEin(MensaStationen.Measurement measurement) {
             for (MensaStationen m : MensaStationen.getAllMensaStation()){
                 if(measurement.getOuterClass().getLabel().equals(m.getLabel())) {
                     for (PlotterPane p : m.getDatenDias()) {
@@ -153,7 +153,7 @@ public class OurStatistic extends Statistics {
                     }
                 }
             }
-        }
+        }*/
     }
 
 

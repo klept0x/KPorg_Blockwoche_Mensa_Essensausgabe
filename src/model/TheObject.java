@@ -30,10 +30,10 @@ public class TheObject extends Actor {
     private int mySpeed;
 
     /** all the station (labels) where the object have to go to*/
-    private ArrayList<String> stationsToGo = new ArrayList<String>();
+    protected ArrayList<String> stationsToGo = new ArrayList<String>();
 
     /** a pointer to the actual position of the stationsToGo list, start position is 0*/
-    private int stationListPointer = 0;
+    protected int stationListPointer = 0;
 
     /** list of all objects */
     private static ArrayList<TheObject> allObjects = new ArrayList<TheObject>();

@@ -11,7 +11,7 @@ class MensaStationenTest {
     @BeforeEach
     void setUp() throws MensaStationen.CashRegisterLimitExceededException {
         for(int testCounter = 0; testCounter < 3; testCounter++){
-            MensaStationen.create("Kasse",null,null,2.2,1,1,"Kasse.jpg",0);
+            MensaStationen.create("Kasse",null,null,2.2,1,1,"Kasse.jpg",0,true,"Kasse");
         }
     }
 
@@ -19,7 +19,7 @@ class MensaStationenTest {
     void testExcpectedException() {
         // wirft Exception weil probiert wird noch eine Kasse zu erzeugen
         Assertions.assertThrows(MensaStationen.CashRegisterLimitExceededException.class, () -> {
-            MensaStationen.create("Kasse",null,null,2.2,1,1,"Kasse.jpg",0);
+            MensaStationen.create("Kasse",null,null,2.2,1,1,"Kasse.jpg",0,true,"Kasse");
         });
 
     }
