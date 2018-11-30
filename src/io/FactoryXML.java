@@ -76,7 +76,9 @@ public class FactoryXML extends Factory {
                 //
 
                 processtime = Integer.parseInt(theObject.getChildText("processtime"));
-                processtime= processtime+5;
+
+                processtime = processtime + 5;
+
                 speed = Integer.parseInt(theObject.getChildText("speed"));
                 maxWait= Integer.parseInt(theObject.getChildText("maxWait"));
 
@@ -177,6 +179,7 @@ public class FactoryXML extends Factory {
                 // read data
                 label = station.getChildText("label");
                 troughPut = Double.parseDouble(station.getChildText("troughput"));
+
                 xPos = Integer.parseInt(station.getChildText("x_position"));
                 yPos = Integer.parseInt(station.getChildText("y_position"));
                 // the price

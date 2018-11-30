@@ -20,6 +20,7 @@ public class OurStatistic extends Statistics {
 
 
     private OurStatistic(){
+        ;
 
     }
 
@@ -91,8 +92,8 @@ public class OurStatistic extends Statistics {
                 for (PlotterPane p : s1.getDataDias()) {
                     String title = p.getTheTitle();
                     switch (title) {
-                        case "GesamtKosten":
-                            System.out.println(s1.getLabel() + " Gesamtkosten");
+                        case "GesamtEinnahmen":
+                            System.out.println(s1.getLabel() + " GesamtEinnahmen");
                             p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-Student.getStartTime()),(int)measurement.getGuthaben()));
                             break;
                         case "GesamtWarteZeit":

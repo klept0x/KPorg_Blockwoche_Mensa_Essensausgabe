@@ -1,0 +1,29 @@
+{
+  "settings": [{
+    "end_station": [{
+      "label": "End_Station",
+      "x_Position": "800",
+      "y_Position": "300",
+      "view": [
+        {
+          "image": "tisch.png"
+        }
+        ],
+      "inqueue": [
+        {
+          "x_Position": "820",
+          "y_Position": "260"
+        }
+        ],
+      "outqueue": [{
+        "x_Position": "820",
+        "y_Position": "380"
+      }
+      ]
+
+      }
+      ]
+  }
+  ]
+}
+

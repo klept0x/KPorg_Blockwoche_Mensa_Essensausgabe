@@ -42,9 +42,9 @@ public class MensaStationen extends ProcessStation{
         startTime =globalTime;
     }
     private void initDias() {
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"Globaltime","Benutzungszeit","InUseTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"Globaltime","Zeit ohne Object","IdleTime"));
+        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"Globaltime","Anzahl der Visitors","numberOfVisitedObject"));
     }
 
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis) throws CashRegisterLimitExceededException {
