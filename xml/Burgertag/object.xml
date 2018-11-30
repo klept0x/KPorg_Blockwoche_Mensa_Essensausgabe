@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <settings>
     <object>
-        <label>Männlein</label>
-        <schleife>10</schleife>
+        <label>Maennlein</label>
+        <schleife>20</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
         <maxWait>7</maxWait>
-
         <view>
             <image>object.png</image>
         </view>
@@ -41,8 +40,8 @@
         </sequence>
     </object>
     <object>
-        <label>Männlein</label>
-        <schleife>4</schleife>
+        <label>Maennlein</label>
+        <schleife>44</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
         <maxWait>2</maxWait>
@@ -86,7 +85,6 @@
         <processtime>12</processtime>
         <speed>3</speed>
         <maxWait>10</maxWait>
-
         <view>
             <image>object.png</image>
         </view>

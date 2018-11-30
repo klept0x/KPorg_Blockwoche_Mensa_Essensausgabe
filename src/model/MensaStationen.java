@@ -54,9 +54,6 @@ public class MensaStationen extends ProcessStation{
         //initDias();
     }
 
-
-
-
     /*private void initDias() {
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
