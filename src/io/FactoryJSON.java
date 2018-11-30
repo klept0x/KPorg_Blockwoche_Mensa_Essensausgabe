@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -183,8 +184,8 @@ public class FactoryJSON {
 				}
 
 				for(int i = 0; i<schleife;i++) {
-					label=label+i;
-					Student.create(label, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
+					stationsToGo= shuffelStationen(stationsToGo);
+					Student.create(label+" "+i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
 				}
 			}
 
@@ -194,6 +195,32 @@ public class FactoryJSON {
 			e.printStackTrace();
 		}
 	}
+
+	private static ArrayList<String> shuffelStationen(ArrayList<String> allStations) {
+		String start= "Start_Station";
+		String end="End_Station";
+		String kasse= "Kasse";
+		ArrayList<String>shuffelliste = new ArrayList<>();
+		ArrayList<String>stationToGoNeu = new ArrayList<>();
+		for(String s : allStations){
+			if(s.equals(start)||s.equals(end)||s.equals(kasse)){
+
+			}else{
+				shuffelliste.add(s);
+			}
+		}
+		System.out.println(shuffelliste);
+		Collections.shuffle(shuffelliste);
+		System.out.println(shuffelliste);
+		stationToGoNeu.add(start);
+		for(String s: shuffelliste){
+			stationToGoNeu.add(s);
+		}
+		stationToGoNeu.add(kasse);
+		stationToGoNeu.add(end);
+		return stationToGoNeu;
+	}
+
 
 	/**
 	 * create some process stations out of the JSon file

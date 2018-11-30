@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<daten>
+<kennzahlen id="1">
+<stationen>Salate_1</stationen>
+<idelTime>218</idelTime>
+<inUseTime>34</inUseTime>
+</kennzahlen>
+<kennzahlen id="2">
+<stationen>Salate_2</stationen>
+<idelTime>228</idelTime>
+<inUseTime>24</inUseTime>
+</kennzahlen>
+<kennzahlen id="3">
+<stationen>Salate_3</stationen>
+<idelTime>115</idelTime>
+<inUseTime>72</inUseTime>
+</kennzahlen>
+<kennzahlen id="4">
+<stationen>Warmes_Essen_1</stationen>
+<idelTime>180</idelTime>
+<inUseTime>55</inUseTime>
+</kennzahlen>
+<kennzahlen id="5">
+<stationen>Warmes_Essen_2</stationen>
+<idelTime>250</idelTime>
+<inUseTime>20</inUseTime>
+</kennzahlen>
+<kennzahlen id="6">
+<stationen>Warmes_Essen_3</stationen>
+<idelTime>230</idelTime>
+<inUseTime>40</inUseTime>
+</kennzahlen>
+<kennzahlen id="7">
+<stationen>Burger_Stand</stationen>
+<idelTime>157</idelTime>
+<inUseTime>28</inUseTime>
+</kennzahlen>
+<kennzahlen id="8">
+    <stationen>Kasse</stationen>
+    <idelTime>98</idelTime>
+    <inUseTime>34</inUseTime>
+</kennzahlen>
+</daten>

@@ -36,7 +36,7 @@ public class StartButton extends JButton implements ActionListener {
 
         MensaStationen.setStartTime(Simulation.getGlobalTime());
         Student.setStartTime(Simulation.getGlobalTime());
-        setzeVisible();
+       // setzeVisible();
 
         //wake up the start station -> lets the simulation run
         MensaEntrance.getStartStation().wakeUp();

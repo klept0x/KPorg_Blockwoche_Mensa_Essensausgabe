@@ -3,7 +3,7 @@
 	<object>
 		<label>Maennlein</label>
 		<schleife>2</schleife>
-		<processtime>1</processtime>
+		<processtime>20</processtime>
 		<speed>1</speed>
 		<maxWait>2</maxWait>
 		<view>
@@ -22,7 +22,7 @@
 	<object>
 		<label>Weiblein</label>
 		<schleife>4</schleife>
-		<processtime>1</processtime>
+		<processtime>12</processtime>
 		<speed>1</speed>
 		<maxWait>2</maxWait>
 		<view>
@@ -40,7 +40,7 @@
 	<object>
 		<label>Maennlein</label>
 		<schleife>1</schleife>
-		<processtime>2</processtime>
+		<processtime>12</processtime>
 		<speed>1</speed>
 		<maxWait>2</maxWait>
 		<view>
@@ -76,9 +76,9 @@
 	<object>
 		<label>Weiblein</label>
 		<schleife>12</schleife>
-		<processtime>2</processtime>
+		<processtime>10</processtime>
 		<speed>2</speed>
-		<maxWait>2</maxWait>
+		<maxWait>5</maxWait>
 		<view>
 			<image>object.png</image>
 		</view>

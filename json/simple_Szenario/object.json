@@ -1,11 +1,11 @@
 {
   "settings":[{
     "object":[{
-      "label": "Object_1",
-      "schleife":"2",
+      "label": "Student",
+      "schleife":"4",
       "processtime":"10",
       "speed":"10",
-      "maxWait":"2",
+      "maxWait":"7",
       "view":[{
         "image": "hamburger.png"
       }
@@ -17,11 +17,11 @@
         "End_Station"
       ]
     },{
-      "label": "Object_2",
+      "label": "Studentin",
       "processtime":"10",
-      "schleife":"1",
+      "schleife":"3",
       "speed":"10",
-      "maxWait":"2",
+      "maxWait":"5",
       "view":[{
         "image": "hamburger.png"
       }

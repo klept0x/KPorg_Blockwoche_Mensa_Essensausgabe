@@ -1,9 +1,13 @@
 package model;
 
 import io.Statistics;
+import io.XMLStatistics;
+
 import javax.swing.*;
 
 public class MensaExit extends EndStation {
+
+    private static MensaExit theExit;
 
 
     /**
@@ -18,10 +22,15 @@ public class MensaExit extends EndStation {
      */
     private MensaExit(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image) {
         super(label, inQueue, outQueue, xPos, yPos, image);
+        theExit= this;
     }
 
     public static void create(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
         new MensaExit(label,inQueue,outQueue,xPos,yPos,image);
+    }
+
+    public static MensaExit getMensaExit() {
+        return theExit;
     }
 
     /**
@@ -57,6 +66,16 @@ public class MensaExit extends EndStation {
             super.endSimulation();
             //datenAbfrage();
             Statistics.show("hier PopUp");
+
+            XMLStatistics x1 = new XMLStatistics();
+            x1.theXMLspeichern();
         }
+    }
+
+    public  boolean isEnd(){
+        if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()){
+            return true;
+        }
+        return false;
     }
 }

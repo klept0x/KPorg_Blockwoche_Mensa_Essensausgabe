@@ -2,6 +2,8 @@ package model;
 
 import io.Statistics;
 import io.OurStatistic;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Observable;
@@ -202,6 +204,9 @@ public class ProcessStation extends Station {
     }
 
     protected void increaseIdleTime() {
+        if(this.label.equals("Kasse")) {
+            System.out.println(this.label + " idleTime ++-------------------------------------------------------------------------------------------");
+        }
         measurement.idleTime++;
     }
 

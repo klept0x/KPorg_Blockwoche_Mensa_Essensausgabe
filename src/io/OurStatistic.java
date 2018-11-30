@@ -21,6 +21,7 @@ public class OurStatistic extends Statistics {
 
     private OurStatistic(){
         ;
+
     }
 
     public static OurStatistic createStatistic(){
@@ -36,6 +37,32 @@ public class OurStatistic extends Statistics {
         return mensaBeo;
     }
 
+    public static void printEndstatistic(String label){
+        for(MensaStationen ms : MensaStationen.getAllMensaStation()){
+            if (ms.getLabel().equals(label)){
+                MensaStationen.Measurement m = ms.getMeasurement();
+                PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),400,400,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
+                p1.setVisible(true);
+                PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),400,400,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
+                p2.setVisible(true);
+                PlotterPane p3 = new PlotterPane(m.getNumberOVP(),400,400,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
+                p3.setVisible(true);
+            }
+        }
+
+        for(Student st : Student.getAllStudents()){
+            if (st.getLabel().equals(label)){
+                Student.Measurement m = st.getMeasurement();
+                PlotterPane p1 = new PlotterPane(m.getGesWarteP(),400,400,true,"time","GesammtWartezeit",st.getLabel()+" GesammtWartezeit/time");
+                p1.setVisible(true);
+                PlotterPane p2 = new PlotterPane(m.getGuthabenP(),400,400,true,"time","Rechnungsbetrag",st.getLabel()+" Rechnungsbetrag/time");
+                p2.setVisible(true);
+
+            }
+        }
+
+    }
+
 
 
 /**----------------------------------------------------------------------INNER CLASSES-------------------------------------------------------------------------------------*/
@@ -48,13 +75,17 @@ public class OurStatistic extends Statistics {
     @Override
         public void update(Observable o, Object arg) {
         System.out.println("\n"+" Student update");
-        Student.Measurement s = (Student.Measurement)o;
+        /*Student.Measurement s = (Student.Measurement)o;
         Student theStudent = s.getOuterClass();
         trageDatenEin(s);
-        System.out.println(theStudent.getLabel());
+        System.out.println(theStudent.getLabel());*/
 
         }
 
+    /**
+     * trage daten ein für Live daten sameln
+     * @param measurement
+     */
     private void trageDatenEin(Student.Measurement measurement) {
         for (Student s1 : Student.getAllStudents()){
             if(measurement.getOuterClass().getLabel().equals(s1.getLabel())) {
@@ -93,7 +124,7 @@ public class OurStatistic extends Statistics {
             System.out.println("\n"+" MensaStation update");
             MensaStationen.Measurement measurement = (MensaStationen.Measurement)o;
             MensaStationen theStation = measurement.getOuterClass();
-            trageDatenEin(measurement);
+            //trageDatenEin(measurement);
             System.out.println("\n"+theStation.getLabel());
 
 
