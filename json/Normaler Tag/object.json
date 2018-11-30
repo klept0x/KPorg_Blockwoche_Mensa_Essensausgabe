@@ -1,0 +1,109 @@
+{
+  "settings": [
+    {
+      "object": [
+        {
+          "label": "Maennlein",
+          "schleife": "5",
+          "processtime": "4",
+          "speed": "1",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "Salatebar",
+            "WarmesEssen",
+            "WarmesEssen",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "5",
+          "processtime": "2",
+          "speed": "3",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Maennlein",
+          "schleife": "3",
+          "processtime": "3",
+          "speed": "4",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "5",
+          "processtime": "1",
+          "speed": "2",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Kasse",
+            "End_Station"
+          ]
+        },
+        {
+          "label": "Weiblein",
+          "schleife": "7",
+          "processtime": "3",
+          "speed": "3",
+          "maxWait": "2",
+          "view": [
+            {
+              "image": "object.png"
+            }
+          ],
+          "sequence": [
+            "Start_Station",
+            "Salatebar",
+            "WarmesEssen",
+            "Salatebar",
+            "Kasse",
+            "End_Station"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
 	<object>
-		<label>Männlein</label>
+		<label>Maennlein</label>
 		<schleife>5</schleife>
 		<processtime>4</processtime>
 		<speed>1</speed>
@@ -38,7 +38,7 @@
 		</sequence>
 	</object>
 	<object>
-		<label>Männlein</label>
+		<label>Maennlein</label>
 		<schleife>3</schleife>
 		<processtime>3</processtime>
 		<speed>4</speed>
