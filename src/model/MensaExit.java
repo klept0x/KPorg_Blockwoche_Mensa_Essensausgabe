@@ -1,6 +1,8 @@
 package model;
 
 import io.Statistics;
+import io.XMLStatistics;
+
 import javax.swing.*;
 
 public class MensaExit extends EndStation {
@@ -64,6 +66,9 @@ public class MensaExit extends EndStation {
             super.endSimulation();
             //datenAbfrage();
             Statistics.show("hier PopUp");
+
+            XMLStatistics x1 = new XMLStatistics();
+            x1.theXMLspeichern();
         }
     }
 

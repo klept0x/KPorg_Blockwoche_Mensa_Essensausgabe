@@ -111,6 +111,8 @@ public class FactoryXML extends Factory {
                     Student.create(label + "_" + i, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
                     Statistics.show(label +" Student wurde erzeugt" + i);
                 }
+
+
             }
 
         } catch (JDOMException e) {

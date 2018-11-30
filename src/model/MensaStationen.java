@@ -74,7 +74,6 @@ public class MensaStationen extends ProcessStation{
         System.out.println(s.getLabel()+" "+s.measurement.guthaben);
         s.measurement.aenderWarteZeit((int)(Simulation.getGlobalTime()-s.getInqueueStartTime()));
         super.handleObject(theObject);
-        this.measurement.aenderIdleTime(super.measurement.idleTime);
         this.measurement.aenderNumOV(super.measurement.numbOfVisitedObjects);
         this.measurement.aenderInUseTime(super.measurement.inUseTime);
     }

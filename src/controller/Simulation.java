@@ -51,6 +51,8 @@ public class Simulation {
     //the clock must be thread safe -> AtomicLong. The primitive type long isn't, even if synchronized
     private static AtomicLong clock = new AtomicLong(0);
 
+    public static String szeanrio;
+
 
     /**
      * create a Simulation object and starts the "XML or JSON" query,
@@ -127,6 +129,7 @@ public class Simulation {
             FactoryJSON.setTheStartStationDataFile("json/" + directories[i] + "/startstation" + dateiEndung);
             FactoryJSON.setTheStationDataFile("json/" + directories[i] + "/station" + dateiEndung);
             FactoryJSON.setTheEndStationDataFile("json/" + directories[i] + "/endstation" + dateiEndung);
+            szeanrio = directories[i];
         } catch (ArrayIndexOutOfBoundsException e) {
             // e.printStackTrace();
             System.exit(0);
@@ -171,6 +174,7 @@ public class Simulation {
             Factory.setTheStartStationDataFile("xml/" + directories[i] + "/startstation" + xmlDateiEndung);
             Factory.setTheStationDataFile("xml/" + directories[i] + "/station" + xmlDateiEndung);
             Factory.setTheEndStationDataFile("xml/" + directories[i] + "/endstation" + xmlDateiEndung);
+            szeanrio = directories[i];
         } catch (ArrayIndexOutOfBoundsException e) {
             // e.printStackTrace();
             System.exit(0);
