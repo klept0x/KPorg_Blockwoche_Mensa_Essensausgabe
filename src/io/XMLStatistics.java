@@ -38,7 +38,7 @@ import java.nio.file.Paths;
                 }
 
             Document doc = icBuilder.newDocument();
-            Element mainRootElement = doc.createElement("Daten");
+            Element mainRootElement = doc.createElement("daten");
             doc.appendChild(mainRootElement);
 
                 int id = 1;
@@ -72,11 +72,11 @@ import java.nio.file.Paths;
         }
 
         private static Node getAppendChild(Document doc, String id, String name, String idelTime, String inUseTime) {
-            Element kennzahlen = doc.createElement("Kennzahlen");
+            Element kennzahlen = doc.createElement("kennzahlen");
             kennzahlen.setAttribute("id", id);
-            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "Stationen", name));
-            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "IdelTime", idelTime));
-            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "InUseTime", inUseTime));
+            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "stationen", name));
+            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "idelTime", idelTime));
+            kennzahlen.appendChild(getCompanyElements(doc, kennzahlen, "inUseTime", inUseTime));
             return kennzahlen;
         }
 
