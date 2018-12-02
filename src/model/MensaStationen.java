@@ -13,14 +13,12 @@ import java.util.Observable;
 /**
  * Beschreibung der Klasse MensaStationen.
  * Weiter Beschreibung
- * <p>
- * Die Klasse wurde am 28.November.2018 um 16:16 Uhr erstellt.
  *
  * @author Team5
  * @version 1.0
  */
 
-public class MensaStationen extends ProcessStation{
+public class MensaStationen extends ProcessStation implements Cloneable{
 
     private static long startTime;
     private static final int  maxSalatbarInObjects=6;
@@ -33,12 +31,29 @@ public class MensaStationen extends ProcessStation{
     private static ArrayList<MensaStationen> allSalatBar= new ArrayList<MensaStationen>();
     private static ArrayList<MensaStationen> allWarmesEssen= new ArrayList<MensaStationen>();
     private static ArrayList<MensaStationen> allBurgerEssen= new ArrayList<MensaStationen>();
+    private static ArrayList<MensaStationen> allKassen= new ArrayList<MensaStationen>();
     private boolean offenZustand;
     private ArrayList<PlotterPane> datenDias;
-    private static final int  maximalOfCashRegister = 3;
-    private static ArrayList<MensaStationen>allKassen= new ArrayList<MensaStationen>();
-    private static final int maxKasseInObjects=4;
 
+    /** The maximal amount of MensaStation with label "Kasse", Singelton Pattern*/
+    private static int  maximalOfCashRegister = 3;
+
+
+    private static final int maxKasseInObjects = 4;
+
+    /**
+     *
+     * @param label
+     * @param inQueues
+     * @param outQueues
+     * @param troughPut
+     * @param xPos
+     * @param yPos
+     * @param image
+     * @param pPreis
+     * @param pOffenZ
+     * @param pGruppe
+     */
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis,boolean pOffenZ,String pGruppe) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
@@ -60,14 +75,28 @@ public class MensaStationen extends ProcessStation{
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
     }*/
 
+    /**
+     *
+     * @param label
+     * @param inQueues
+     * @param outQueues
+     * @param troughPut
+     * @param xPos
+     * @param yPos
+     * @param image
+     * @param preis
+     * @param pOffenZ
+     * @param pGruppe
+     * @throws CashRegisterLimitExceededException is thrown when there are already 3 MensaStation with label "Kasse"
+     */
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis,boolean pOffenZ,String pGruppe) throws CashRegisterLimitExceededException {
-
-        //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
-       int zaehler = maximalOfCashRegister;
-        if(label == "Kasse" && maximalOfCashRegister > 0){
-            zaehler = maximalOfCashRegister -1;
+        //Statistics.show("create MensaStation");
+        //If label is "Kasse" and if the "maximalOfCashRegister" amount isn't "0" create MensaStation with label "Kasse"
+        if(label == "Kasse" && maximalOfCashRegister > 0 ){
+            //counts down for each MensaStation with label "Kasse"
+            maximalOfCashRegister = maximalOfCashRegister -1;
             new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
-            Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
+            //Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
         }
         else if(label == "Kasse" && maximalOfCashRegister == 0){
             throw new CashRegisterLimitExceededException();
@@ -75,6 +104,11 @@ public class MensaStationen extends ProcessStation{
         else{
             new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
         }
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        throw new CloneNotSupportedException("To clone an object of the class 'MensaStation' is not allowed.");
     }
 
 
@@ -92,10 +126,6 @@ public class MensaStationen extends ProcessStation{
             case"Kasse":
                 allKassen.add(mensaStationen);
         }
-
-
-
-
     }
 
 
@@ -211,6 +241,11 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
+    /**
+     * Getter for all existing Mensastations
+     *
+     * @return returns a ArrayList of the existing Mensastations
+     */
     public static ArrayList<MensaStationen> getAllMensaStation() {
         return allMensaStation;
     }
@@ -240,7 +275,7 @@ public class MensaStationen extends ProcessStation{
     /**
      * checking idleTime every heartbeat
      */
-    public static void Tacktruf(){
+    public static void tacktruf(){
         if(Simulation.isRunning && !(MensaExit.getMensaExit().isEnd())){
             for (MensaStationen ms : getAllMensaStation()){
                 ms.pruefeIdleTime();
@@ -280,7 +315,7 @@ public class MensaStationen extends ProcessStation{
 
     /**
      *
-     * @param liste list of all Object from a specific kind
+     * @param liste list of all Objects from a specific kind
      */
     private void oeffneStation(ArrayList<MensaStationen> liste ) {
         int zaehler=0;
@@ -376,7 +411,6 @@ public class MensaStationen extends ProcessStation{
             setChanged();
             super.notifyObservers(arg);
         }
-
 
         public int getInUseTime() {
             return inUseTime;
