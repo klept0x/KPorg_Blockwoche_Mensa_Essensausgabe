@@ -23,7 +23,7 @@ import static model.Actor.getAllActors;
  * The main class, controls the flow of the simulation
  *
  * @author Jaeger, Schmidt modified by Gruppe 5
- * @version 2016-07-07
+ * @version 2018-11-30
  */
 public class Simulation {
 
@@ -170,10 +170,10 @@ public class Simulation {
 
             String xmlDateiEndung = ".xml";
             //Statistics.show("xml/" + directories[i] + "/object");
-            Factory.setTheObjectDataFile("xml/" + directories[i] + "/object" + xmlDateiEndung);
-            Factory.setTheStartStationDataFile("xml/" + directories[i] + "/startstation" + xmlDateiEndung);
-            Factory.setTheStationDataFile("xml/" + directories[i] + "/station" + xmlDateiEndung);
-            Factory.setTheEndStationDataFile("xml/" + directories[i] + "/endstation" + xmlDateiEndung);
+            FactoryXML.setTheObjectDataFile("xml/" + directories[i] + "/object" + xmlDateiEndung);
+            FactoryXML.setTheStartStationDataFile("xml/" + directories[i] + "/startstation" + xmlDateiEndung);
+            FactoryXML.setTheStationDataFile("xml/" + directories[i] + "/station" + xmlDateiEndung);
+            FactoryXML.setTheEndStationDataFile("xml/" + directories[i] + "/endstation" + xmlDateiEndung);
             szeanrio = directories[i];
         } catch (ArrayIndexOutOfBoundsException e) {
             // e.printStackTrace();
@@ -186,9 +186,7 @@ public class Simulation {
      * initialize the simulation
      */
     private void init() {
-        
-        //erstellt Statistik Objekt
-        statistic = OurStatistic.createStatistic();
+
         
         //the view of our simulation
         new SimulationView();

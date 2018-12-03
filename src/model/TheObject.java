@@ -10,16 +10,16 @@ import controller.Simulation;
 
 /**
  * Class for the objects
- * Modified by Team5:
+ *
  * Constructor and printStatistics changed from private to protected
  *
- * @author Jaeger, Schmidt modified by Team5
+ * @author Jaeger, Schmidt
  * @version 2016-07-08
  */
 
 public class TheObject extends Actor {
 
-    private int maxWait;
+
     /** the view of the object */
     public TheObjectView theView;
 
@@ -27,7 +27,7 @@ public class TheObject extends Actor {
     private int processTime;
 
     /** the speed of the object, the higher the lower */
-    private int mySpeed;
+    protected int mySpeed;
 
     /** all the station (labels) where the object have to go to*/
     protected ArrayList<String> stationsToGo = new ArrayList<String>();
@@ -39,14 +39,14 @@ public class TheObject extends Actor {
     private static ArrayList<TheObject> allObjects = new ArrayList<TheObject>();
 
     /** the actual station where this object is in, null if it's not in a station or a stations queue */
-    private Station actualStation = null;
+    protected Station actualStation = null;
 
     /** the instance of our static inner Measurement class*/
     Measurement measurement = new Measurement();
 
-    private long inQueueTime;
 
-    private String image;
+
+
 
 
     /** (private!) Constructor, creates a new object model and send it to the start station
@@ -59,9 +59,9 @@ public class TheObject extends Actor {
      * @param yPos y position of the object
      * @param image image of the object
      */
-    protected TheObject(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image,int pMaxWait){
+    protected TheObject(String label, ArrayList<String> stationsToGo, int processtime, int speed, int xPos, int yPos, String image){
         super(label, xPos, yPos);
-        this.image = image;
+
         //create the view
         this.theView = TheObjectView.create(label, image, xPos, yPos);
 
@@ -70,7 +70,6 @@ public class TheObject extends Actor {
         this.stationsToGo = stationsToGo;
         this.processTime = processtime;
         this.mySpeed = speed;
-        this.maxWait=pMaxWait;
 
         //the first station to go to is the start station
         Station station = this.getNextStation();
@@ -90,9 +89,9 @@ public class TheObject extends Actor {
      * @param yPos y position of the object
      * @param image image of the object
      */
-    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed ,int xPos, int yPos, String image,int pMaxWait){
+    public static void create(String label, ArrayList<String> stationsToGo, int processtime, int speed ,int xPos, int yPos, String image){
 
-        new TheObject(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
+        new TheObject(label, stationsToGo, processtime, speed, xPos, yPos, image);
         Statistics.show("TheObject create() methode wurde aufgerufen");
     }
 
@@ -156,7 +155,7 @@ public class TheObject extends Actor {
         //set actual station to the just entered station
         this.actualStation = station;
 
-        this.inQueueTime=Simulation.getGlobalTime();
+
     }
 
 
@@ -251,20 +250,14 @@ public class TheObject extends Actor {
 
     }
 
-    public int getMaxWait() {
-        return this.maxWait;
-    }
 
-    public long getInqueueStartTime() {
-        return inQueueTime;
-    }
 
     /**
      * A (static) inner class for measurement jobs. The class records specific values of the object during the simulation.
      * These values can be used for statistic evaluation.
      */
     static class Measurement {
-        public int gesWarteZeit;
+
         /** the treated time by all processing stations, in seconds */
         int myTreatmentTime = 0;
 
@@ -277,7 +270,6 @@ public class TheObject extends Actor {
 
         String theString = "\nObjekt: " + this.label;
         theString = theString + "\nZeit zum Behandeln des Objekts: " + measurement.myTreatmentTime;
-        theString = theString + "\nDer Student hat isgesammt: " + measurement.gesWarteZeit+" an den Stationen gewartet";
 
         Statistics.show(theString);
 
@@ -318,7 +310,4 @@ public class TheObject extends Actor {
         return stationsToGo;
     }
 
-    public String getImage() {
-        return image;
-    }
 }

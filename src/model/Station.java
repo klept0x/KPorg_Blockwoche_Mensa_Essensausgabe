@@ -144,7 +144,7 @@ public abstract class Station extends Actor {
 	 */
 	public abstract ArrayList<SynchronizedQueue> getAllOutQueues();
 
-	protected abstract void increaseIdleTime();
+
 
 
 

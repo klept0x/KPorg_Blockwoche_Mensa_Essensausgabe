@@ -1,12 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import io.OurStatistic;
 import io.Statistics;
 
-import javax.swing.*;
+import java.util.Collection;
 
 /**
  * Class for the end station. This is the last station where all objects are collected
@@ -102,19 +98,6 @@ public class EndStation extends SimpleStation {
 				((TheObject) object).printStatistics();
 			}
 
-			ArrayList<String> op= new ArrayList<String>();
-			for (MensaStationen stationen : MensaStationen.getAllMensaStation()){
-				op.add(stationen.label);
-			}
-			for (Student st : Student.getAllStudents()){
-				op.add(st.label);
-			}
-			String[] optionen = op.toArray(new String[op.size()]);
-			for (int i = 0; i <optionen.length ; i++) {
-				System.out.println(optionen[i]);
-			}
-			String theOption = (String) JOptionPane.showInputDialog(null,"Wählen sie ein Objekt aus ","Statistik",JOptionPane.QUESTION_MESSAGE,null,optionen,optionen[0]);
-			OurStatistic.printEndstatistic(theOption);
 			//System.out.println(optionen);
 			// end simulation
 			// System.exit(0);
@@ -136,10 +119,7 @@ public class EndStation extends SimpleStation {
 		return null;
 	}
 
-	@Override
-	protected void increaseIdleTime() {
 
-	}
 
 
 }

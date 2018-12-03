@@ -1,12 +1,16 @@
 package model;
 
+import io.OurStatistic;
 import io.Statistics;
 import io.XMLStatistics;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class MensaExit extends EndStation {
-
+    /**
+     * the instance of the EndStation
+     */
     private static MensaExit theExit;
 
 
@@ -24,11 +28,23 @@ public class MensaExit extends EndStation {
         super(label, inQueue, outQueue, xPos, yPos, image);
         theExit= this;
     }
-
+    /** creates a new MensaExit
+     *
+     * @param label of the station
+     * @param inQueue the incoming queue
+     * @param outQueue the outgoing queue
+     * @param xPos x position of the station
+     * @param yPos y position of the station
+     * @param image image of the station
+     */
     public static void create(String label, SynchronizedQueue inQueue, SynchronizedQueue outQueue, int xPos, int yPos, String image){
         new MensaExit(label,inQueue,outQueue,xPos,yPos,image);
     }
 
+    /**
+     * getter for the EndStation
+     * @return
+     */
     public static MensaExit getMensaExit() {
 
         return theExit;
@@ -66,13 +82,30 @@ public class MensaExit extends EndStation {
         if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()) {
             super.endSimulation();
             //datenAbfrage();
-            Statistics.show("hier PopUp");
+
+            ArrayList<String> op= new ArrayList<String>();
+            for (MensaStationen stationen : MensaStationen.getAllMensaStation()){
+                op.add(stationen.label);
+            }
+            for (Student st : Student.getAllStudents()){
+                op.add(st.label);
+            }
+            String[] optionen = op.toArray(new String[op.size()]);
+            for (int i = 0; i <optionen.length ; i++) {
+                System.out.println(optionen[i]);
+            }
+            String theOption = (String) JOptionPane.showInputDialog(null,"Wählen sie ein Objekt aus ","Statistik",JOptionPane.QUESTION_MESSAGE,null,optionen,optionen[0]);
+            OurStatistic.printEndstatistic(theOption);
             XMLStatistics x1 = new XMLStatistics();
             x1.theXMLspeichern();
 
         }
     }
 
+    /**
+     * check if all Objects had arrived the EndStation
+     * @return boolean
+     */
     public  boolean isEnd(){
         if(TheObject.getAllObjects().size() == numberOfOutQueueObjects()){
             return true;
