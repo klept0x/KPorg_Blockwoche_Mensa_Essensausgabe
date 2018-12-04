@@ -26,7 +26,7 @@ public class VisualisationStation {
 
     /**
      * (private!) Constructor, creates a new visualisation label
-     * 
+     *
      * @param label    of the visualisation label
      * @param idelTime   the idel time of the visualisation label
      * @param inUseTime  the time that the visualisation label was be used
@@ -53,7 +53,7 @@ public class VisualisationStation {
 
     /**
      * Gets the name of the visualisation staion
-     * 
+     *
      * @return the name of the visualisation staion
      */
     public String getLabel() {
