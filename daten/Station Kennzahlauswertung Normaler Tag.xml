@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><daten>
+<kennzahlen id="1">
+<stationen>Salate_1</stationen>
+<idelTime>33</idelTime>
+<inUseTime>25</inUseTime>
+</kennzahlen>
+<kennzahlen id="2">
+<stationen>Warmes_Essen_1</stationen>
+<idelTime>40</idelTime>
+<inUseTime>22</inUseTime>
+</kennzahlen>
+<kennzahlen id="3">
+<stationen>Kasse</stationen>
+<idelTime>37</idelTime>
+<inUseTime>0</inUseTime>
+</kennzahlen>
+</daten>

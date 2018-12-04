@@ -4,10 +4,12 @@
 		<label>Salate_1</label>
 		<preis>5.2</preis>
 		<troughput>4</troughput>
+		<initZustand>true</initZustand>
+		<gruppierung>Salatebar</gruppierung>
 		<x_position>400</x_position>
 		<y_position>150</y_position>
 		<view>
-			<image>salad.png</image>
+			<image>saladGruen.png</image>
 		</view>
 		<inqueue>
 			<x_position>370</x_position>
@@ -22,10 +24,12 @@
 		<label>Salate_2</label>
 		<preis>2.1</preis>
 		<troughput>4</troughput>
+		<initZustand>false</initZustand>
+		<gruppierung>Salatebar</gruppierung>
 		<x_position>400</x_position>
 		<y_position>50</y_position>
 		<view>
-			<image>salad.png</image>
+			<image>saladRot.png</image>
 		</view>
 		<inqueue>
 			<x_position>370</x_position>
@@ -40,10 +44,12 @@
 		<label>Salate_3</label>
 		<preis>4.0</preis>
 		<troughput>4</troughput>
+		<initZustand>false</initZustand>
+		<gruppierung>Salatebar</gruppierung>
 		<x_position>575</x_position>
 		<y_position>150</y_position>
 		<view>
-			<image>salad.png</image>
+			<image>saladRot.png</image>
 		</view>
 		<inqueue>
 			<x_position>545</x_position>
@@ -58,10 +64,12 @@
 		<label>Warmes_Essen_1</label>
 		<preis>4.3</preis>
 		<troughput>4</troughput>
+		<initZustand>true</initZustand>
+		<gruppierung>WarmesEssen</gruppierung>
 		<x_position>225</x_position>
 		<y_position>150</y_position>
 		<view>
-			<image>fleisch.png</image>
+			<image>fleischGruen.png</image>
 		</view>
 		<inqueue>
 			<x_position>195</x_position>
@@ -76,10 +84,12 @@
 		<label>Warmes_Essen_2</label>
 		<preis>3.2</preis>
 		<troughput>4</troughput>
+		<initZustand>false</initZustand>
+		<gruppierung>WarmesEssen</gruppierung>
 		<x_position>225</x_position>
 		<y_position>50</y_position>
 		<view>
-			<image>fleisch.png</image>
+			<image>fleischRot.png</image>
 		</view>
 		<inqueue>
 			<x_position>195</x_position>
@@ -94,10 +104,12 @@
 		<label>Warmes_Essen_3</label>
 		<preis>7.2</preis>
 		<troughput>4</troughput>
+		<initZustand>false</initZustand>
+		<gruppierung>WarmesEssen</gruppierung>
 		<x_position>50</x_position>
 		<y_position>150</y_position>
 		<view>
-			<image>fleisch.png</image>
+			<image>fleischRot.png</image>
 		</view>
 		<inqueue>
 			<x_position>20</x_position>
@@ -107,17 +119,17 @@
 			<x_position>125</x_position>
 			<y_position>180</y_position>
 		</outqueue>
-
-
 	</station>
 	<station>
 		<label>Kasse</label>
 		<preis>0.0</preis>
 		<troughput>10</troughput>
+		<initZustand>true</initZustand>
+		<gruppierung>Kasse</gruppierung>
 		<x_position>400</x_position>
 		<y_position>300</y_position>
 		<view>
-			<image>kasse.png</image>
+			<image>kasseGruen.png</image>
 		</view>
 		<inqueue>
 			<x_position>370</x_position>
@@ -127,7 +139,5 @@
 			<x_position>475</x_position>
 			<y_position>310</y_position>
 		</outqueue>
-
-
 	</station>
 </settings>

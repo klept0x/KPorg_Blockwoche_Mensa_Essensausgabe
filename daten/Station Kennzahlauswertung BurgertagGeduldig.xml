@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?><daten>
 <kennzahlen id="1">
 <stationen>Salate_1</stationen>
-<idelTime>21</idelTime>
-<inUseTime>29</inUseTime>
+<idelTime>47</idelTime>
+<inUseTime>43</inUseTime>
 </kennzahlen>
 <kennzahlen id="2">
 <stationen>Salate_2</stationen>
-<idelTime>7</idelTime>
-<inUseTime>4</inUseTime>
+<idelTime>28</idelTime>
+<inUseTime>25</inUseTime>
 </kennzahlen>
 <kennzahlen id="3">
 <stationen>Salate_3</stationen>
-<idelTime>59</idelTime>
-<inUseTime>24</inUseTime>
+<idelTime>28</idelTime>
+<inUseTime>8</inUseTime>
 </kennzahlen>
 <kennzahlen id="4">
 <stationen>Warmes_Essen_1</stationen>
-<idelTime>97</idelTime>
-<inUseTime>26</inUseTime>
+<idelTime>65</idelTime>
+<inUseTime>44</inUseTime>
 </kennzahlen>
 <kennzahlen id="5">
 <stationen>Warmes_Essen_2</stationen>
-<idelTime>7</idelTime>
-<inUseTime>9</inUseTime>
+<idelTime>0</idelTime>
+<inUseTime>0</inUseTime>
 </kennzahlen>
 <kennzahlen id="6">
 <stationen>Warmes_Essen_3</stationen>
@@ -31,12 +31,12 @@
 </kennzahlen>
 <kennzahlen id="7">
 <stationen>Burger_Stand</stationen>
-<idelTime>104</idelTime>
+<idelTime>110</idelTime>
 <inUseTime>11</inUseTime>
 </kennzahlen>
 <kennzahlen id="8">
 <stationen>Kasse</stationen>
-<idelTime>82</idelTime>
+<idelTime>104</idelTime>
 <inUseTime>12</inUseTime>
 </kennzahlen>
 </daten>

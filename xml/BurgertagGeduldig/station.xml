@@ -2,12 +2,14 @@
 <settings>
     <station>
         <label>Salate_1</label>
-        <preis>7.2</preis>
+        <preis>5.2</preis>
         <troughput>4</troughput>
+        <initZustand>true</initZustand>
+        <gruppierung>Salatebar</gruppierung>
         <x_position>400</x_position>
         <y_position>150</y_position>
         <view>
-            <image>salad.png</image>
+            <image>saladGruen.png</image>
         </view>
         <inqueue>
             <x_position>370</x_position>
@@ -20,12 +22,14 @@
     </station>
     <station>
         <label>Salate_2</label>
-        <preis>1.1</preis>
+        <preis>2.1</preis>
         <troughput>4</troughput>
+        <initZustand>false</initZustand>
+        <gruppierung>Salatebar</gruppierung>
         <x_position>400</x_position>
         <y_position>50</y_position>
         <view>
-            <image>salad.png</image>
+            <image>saladRot.png</image>
         </view>
         <inqueue>
             <x_position>370</x_position>
@@ -38,12 +42,14 @@
     </station>
     <station>
         <label>Salate_3</label>
-        <preis>0.9</preis>
+        <preis>4.0</preis>
         <troughput>4</troughput>
+        <initZustand>false</initZustand>
+        <gruppierung>Salatebar</gruppierung>
         <x_position>575</x_position>
         <y_position>150</y_position>
         <view>
-            <image>salad.png</image>
+            <image>saladRot.png</image>
         </view>
         <inqueue>
             <x_position>545</x_position>
@@ -56,12 +62,14 @@
     </station>
     <station>
         <label>Warmes_Essen_1</label>
-        <preis>0.7</preis>
+        <preis>4.3</preis>
         <troughput>4</troughput>
+        <initZustand>true</initZustand>
+        <gruppierung>WarmesEssen</gruppierung>
         <x_position>225</x_position>
         <y_position>150</y_position>
         <view>
-            <image>fleisch.png</image>
+            <image>fleischGruen.png</image>
         </view>
         <inqueue>
             <x_position>195</x_position>
@@ -74,12 +82,14 @@
     </station>
     <station>
         <label>Warmes_Essen_2</label>
-        <preis>0.8</preis>
+        <preis>3.2</preis>
         <troughput>4</troughput>
+        <initZustand>false</initZustand>
+        <gruppierung>WarmesEssen</gruppierung>
         <x_position>225</x_position>
         <y_position>50</y_position>
         <view>
-            <image>fleisch.png</image>
+            <image>fleischRot.png</image>
         </view>
         <inqueue>
             <x_position>195</x_position>
@@ -92,12 +102,14 @@
     </station>
     <station>
         <label>Warmes_Essen_3</label>
-        <preis>0.3</preis>
+        <preis>7.2</preis>
         <troughput>4</troughput>
+        <initZustand>false</initZustand>
+        <gruppierung>WarmesEssen</gruppierung>
         <x_position>50</x_position>
         <y_position>150</y_position>
         <view>
-            <image>fleisch.png</image>
+            <image>fleischRot.png</image>
         </view>
         <inqueue>
             <x_position>20</x_position>
@@ -110,12 +122,14 @@
     </station>
     <station>
         <label>Burger_Stand</label>
-        <preis>12.2</preis>
+        <preis>7.5</preis>
         <troughput>8</troughput>
+        <initZustand>true</initZustand>
+        <gruppierung>Burger</gruppierung>
         <x_position>800</x_position>
         <y_position>50</y_position>
         <view>
-            <image>burgerino.png</image>
+            <image>burgerinoGruen.png</image>
         </view>
         <inqueue>
             <x_position>770</x_position>
@@ -130,10 +144,12 @@
         <label>Kasse</label>
         <preis>0.0</preis>
         <troughput>10</troughput>
+        <initZustand>true</initZustand>
+        <gruppierung>Kasse</gruppierung>
         <x_position>400</x_position>
         <y_position>300</y_position>
         <view>
-            <image>kasse.png</image>
+            <image>kasseGruen.png</image>
         </view>
         <inqueue>
             <x_position>370</x_position>
@@ -143,7 +159,5 @@
             <x_position>475</x_position>
             <y_position>310</y_position>
         </outqueue>
-
-
     </station>
 </settings>

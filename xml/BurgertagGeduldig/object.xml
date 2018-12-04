@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <settings>
     <object>
-        <label>Pascal</label>
-        <schleife>1</schleife>
+        <label>Maennlein</label>
+        <schleife>2</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
-        <maxWait>2</maxWait>
+        <maxWait>999</maxWait>
         <view>
             <image>object.png</image>
         </view>
         <sequence>
             <station>Start_Station</station>
-            <station>Salate_2</station>
+            <station>WarmesEssen</station>
             <station>Salatebar</station>
             <station>WarmesEssen</station>
-            <station>Warmes_Essen_1</station>
-            <station>Burger_Stand</station>
+            <station>Burger</station>
             <station>Kasse</station>
             <station>End_Station</station>
         </sequence>
     </object>
     <object>
-        <label>Malte</label>
-        <schleife>1</schleife>
+        <label>Weiblein</label>
+        <schleife>3</schleife>
         <processtime>5</processtime>
         <speed>5</speed>
-        <maxWait>2</maxWait>
+        <maxWait>15999</maxWait>
+
         <view>
             <image>object.png</image>
         </view>
@@ -33,18 +33,19 @@
             <station>Start_Station</station>
             <station>Salatebar</station>
             <station>WarmesEssen</station>
-            <station>Salate_3</station>
-            <station>Burger_Stand</station>
+            <station>Salatebar</station>
+            <station>Burger</station>
             <station>Kasse</station>
             <station>End_Station</station>
         </sequence>
     </object>
     <object>
-        <label>Benny</label>
-        <schleife>1</schleife>
+        <label>Maennlein</label>
+        <schleife>3</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
-        <maxWait>2</maxWait>
+        <maxWait>29999</maxWait>
+
         <view>
             <image>object.png</image>
         </view>
@@ -53,17 +54,18 @@
             <station>Salatebar</station>
             <station>WarmesEssen</station>
             <station>Salatebar</station>
-            <station>Burger_Stand</station>
+            <station>Burger</station>
             <station>Kasse</station>
             <station>End_Station</station>
         </sequence>
     </object>
     <object>
-        <label>Marvin</label>
-        <schleife>1</schleife>
+        <label>Weiblein</label>
+        <schleife>3</schleife>
         <processtime>9</processtime>
         <speed>2</speed>
-        <maxWait>2</maxWait>
+        <maxWait>2999990</maxWait>
+
         <view>
             <image>object.png</image>
         </view>
@@ -72,7 +74,25 @@
             <station>Salatebar</station>
             <station>WarmesEssen</station>
             <station>Salatebar</station>
-            <station>Burger_Stand</station>
+            <station>Burger</station>
+            <station>Kasse</station>
+            <station>End_Station</station>
+        </sequence>
+    </object>
+    <object>
+        <label>Weiblein</label>
+        <schleife>3</schleife>
+        <processtime>12</processtime>
+        <speed>3</speed>
+        <maxWait>1099999</maxWait>
+        <view>
+            <image>object.png</image>
+        </view>
+        <sequence>
+            <station>Start_Station</station>
+            <station>Salatebar</station>
+            <station>WarmesEssen</station>
+            <station>Salatebar</station>
             <station>Kasse</station>
             <station>End_Station</station>
         </sequence>
