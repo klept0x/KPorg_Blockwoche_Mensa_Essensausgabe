@@ -1,11 +1,10 @@
 package visu.io;
 
-import io.Statistics;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import visu.model.VisualisirungStation;
+import visu.model.VisualisationStation;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,7 +80,7 @@ public class VisualisierungFactory {
                 inUseTime = Integer.parseInt(theStations.getChildText("inUseTime"));
 
                 //creating a new TheObject object
-                VisualisirungStation.create(station, idelTime, inUseTime);
+                VisualisationStation.create(station, idelTime, inUseTime);
                 //Statistics.show("Station erstellt!");
 
             }

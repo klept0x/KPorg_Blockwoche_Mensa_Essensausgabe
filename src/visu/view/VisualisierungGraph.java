@@ -3,7 +3,7 @@ package visu.view;
 import io.Statistics;
 import plotter.src.main.java.model.CustomPoint;
 import plotter.src.main.java.view.PlotterPane;
-import visu.model.VisualisirungStation;
+import visu.model.VisualisationStation;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class VisualisierungGraph {
 
         int x = 1;
 
-        for(VisualisirungStation s: VisualisirungStation.getAllVisualisirungStations()) {
+        for(VisualisationStation s: VisualisationStation.getAllVisualisirungStations()) {
             points.add(new CustomPoint(x, s.getInUseTime()));
             x++;
             Statistics.show("Punkt in Liste");
