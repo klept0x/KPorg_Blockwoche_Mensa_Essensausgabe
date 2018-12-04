@@ -18,10 +18,10 @@ import java.util.Iterator;
  * This is an abstract factory that creates instances
  * of actor types like objects, stations and their queues 
  * 
- * @author Neumann
+ * @author Team 5
  * @version 2018-11-26
  */
-public class FactoryJSON {
+public class FactoryJSON  {
 
 	/**
 	 * the objects Json data file
@@ -69,7 +69,7 @@ public class FactoryJSON {
 	}
 
 	/**
-	 * create the start station
+	 * create the start station out of the JSON File
 	 */
 	private static void createStartStation() {
 		ArrayList<JSONObject> objects= new ArrayList<JSONObject>();
@@ -133,7 +133,7 @@ public class FactoryJSON {
 	}
 
 	/**
-	 * create some objects out of the Json file
+	 * create some objects out of the JSON file
 	 */
 	private static void createObjects() {
 		ArrayList<JSONObject> objects = new ArrayList<JSONObject>();
@@ -196,6 +196,11 @@ public class FactoryJSON {
 		}
 	}
 
+	/**
+	 * shuffle the stationToGo list without StartStation,Kasse and EndStation
+	 * @param allStations list of stationToGo
+	 * @return new stationToGo list
+	 */
 	private static ArrayList<String> shuffelStationen(ArrayList<String> allStations) {
 		String start= "Start_Station";
 		String end="End_Station";
@@ -223,7 +228,7 @@ public class FactoryJSON {
 
 
 	/**
-	 * create some process stations out of the JSon file
+	 * create some process stations out of the JSON file
 	 */
 	private static void createProcessStations() {
 		ArrayList<JSONObject> station = new ArrayList<JSONObject>();
@@ -323,7 +328,7 @@ public class FactoryJSON {
 	}
 
 	/**
-	 * create the end station
+	 * create the end station out of the JSON file
 	 */
 	private static void createEndStation() {
 		ArrayList<JSONObject> objects= new ArrayList<JSONObject>();

@@ -2,7 +2,7 @@
 <settings>
     <object>
         <label>Maennlein</label>
-        <schleife>20</schleife>
+        <schleife>2</schleife>
         <processtime>4</processtime>
         <speed>6</speed>
         <maxWait>7</maxWait>
@@ -21,7 +21,7 @@
     </object>
     <object>
         <label>Weiblein</label>
-        <schleife>10</schleife>
+        <schleife>3</schleife>
         <processtime>5</processtime>
         <speed>5</speed>
         <maxWait>15</maxWait>
@@ -41,7 +41,7 @@
     </object>
     <object>
         <label>Maennlein</label>
-        <schleife>44</schleife>
+        <schleife>3</schleife>
         <processtime>7</processtime>
         <speed>4</speed>
         <maxWait>2</maxWait>
@@ -61,7 +61,7 @@
     </object>
     <object>
         <label>Weiblein</label>
-        <schleife>15</schleife>
+        <schleife>3</schleife>
         <processtime>9</processtime>
         <speed>2</speed>
         <maxWait>20</maxWait>
@@ -81,7 +81,7 @@
     </object>
     <object>
         <label>Weiblein</label>
-        <schleife>5</schleife>
+        <schleife>3</schleife>
         <processtime>12</processtime>
         <speed>3</speed>
         <maxWait>10</maxWait>

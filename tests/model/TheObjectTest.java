@@ -27,10 +27,10 @@ class TheObjectTest {
 
         Simulation s1 = new Simulation();
 
-        Factory.setTheObjectDataFile("xml/test/object.xml");
-        Factory.setTheStartStationDataFile("xml/test/startstation.xml");
-        Factory.setTheStationDataFile("xml/test/station.xml");
-        Factory.setTheEndStationDataFile("xml/test/endstation.xml");
+        FactoryXML.setTheObjectDataFile("xml/test/object.xml");
+        FactoryXML.setTheStartStationDataFile("xml/test/startstation.xml");
+        FactoryXML.setTheStationDataFile("xml/test/station.xml");
+        FactoryXML.setTheEndStationDataFile("xml/test/endstation.xml");
 
         FactoryXML.createStartScenario();
 

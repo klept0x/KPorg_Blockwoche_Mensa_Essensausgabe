@@ -164,13 +164,13 @@ public class Factory {
                 int processtime = 0;
                 int speed = 0;
                 String image = null;
-                int maxWait=0;
+
 
                 // read data
                 label = theObject.getChildText("label");
                 processtime = Integer.parseInt(theObject.getChildText("processtime"));
                 speed = Integer.parseInt(theObject.getChildText("speed"));
-                maxWait=Integer.parseInt(theObject.getChildText("maxWait"));
+
                 //the <view> ... </view> node
                 Element viewGroup = theObject.getChild("view");
                 // read data
@@ -192,7 +192,7 @@ public class Factory {
                 }
 
                 //creating a new TheObject object
-                TheObject.create(label, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image,maxWait);
+                TheObject.create(label, stationsToGo, processtime, speed, XPOS_STARTSTATION, YPOS_STARTSTATION, image);
                 Statistics.show("TheObject wurde erzeugt");
 
             }
@@ -348,42 +348,6 @@ public class Factory {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * setter for theObjectDataFile
-     *
-     * @param theObjectDataFile the objects XML data file
-     */
-    public static void setTheObjectDataFile(String theObjectDataFile) {
-        Factory.theObjectDataFile = theObjectDataFile;
-    }
-
-    /**
-     * setter for theStationDataFile
-     *
-     * @param theStationDataFile the station XML data file
-     */
-    public static void setTheStationDataFile(String theStationDataFile) {
-        Factory.theStationDataFile = theStationDataFile;
-    }
-
-    /**
-     * setter for theStartStationDataFile
-     *
-     * @param theStartStationDataFile the start-station XML data file
-     */
-    public static void setTheStartStationDataFile(String theStartStationDataFile) {
-        Factory.theStartStationDataFile = theStartStationDataFile;
-    }
-
-    /**
-     * setter for theEndStationDataFile
-     *
-     * @param theEndStationDataFile the end-station XML data file
-     */
-    public static void setTheEndStationDataFile(String theEndStationDataFile) {
-        Factory.theEndStationDataFile = theEndStationDataFile;
     }
 
 }
