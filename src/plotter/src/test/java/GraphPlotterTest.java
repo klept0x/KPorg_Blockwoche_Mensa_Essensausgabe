@@ -1,5 +1,4 @@
-package visu.view;
-
+package plotter.src.test.java;
 
 import plotter.src.main.java.model.CustomPoint;
 import plotter.src.main.java.view.PlotterPane;

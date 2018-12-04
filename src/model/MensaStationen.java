@@ -35,8 +35,8 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     private boolean offenZustand;
     private ArrayList<PlotterPane> datenDias;
 
-    /** The maximal amount of MensaStation with label "Kasse", Singelton Pattern*/
-    private static int  maximalOfCashRegister = 3;
+    /** The maximal amount of MensaStation with label "Kasse" is 3 (Singelton Pattern)*/
+    private static int maximalAmountCashRegister = 3;
 
 
     private static final int maxKasseInObjects = 4;
@@ -91,20 +91,22 @@ public class MensaStationen extends ProcessStation implements Cloneable{
      */
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis,boolean pOffenZ,String pGruppe) throws CashRegisterLimitExceededException {
         //Statistics.show("create MensaStation");
-        //If label is "Kasse" and if the "maximalOfCashRegister" amount isn't "0" create MensaStation with label "Kasse"
-        if(label == "Kasse" && maximalOfCashRegister > 0 ){
+        //If label is "Kasse" and if the "maximalAmountCashRegister" amount isn't "0" create MensaStation with label "Kasse"
+        if(label == "Kasse" && maximalAmountCashRegister > 0 ){
             //counts down for each MensaStation with label "Kasse"
-            maximalOfCashRegister = maximalOfCashRegister -1;
+            maximalAmountCashRegister = maximalAmountCashRegister -1;
             new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
-            //Statistics.show("Kasse erzeugt. Es können noch " + maximalOfCashRegister + " Kassen erzeugt werden.");
+            //Statistics.show("Kasse erzeugt. Es können noch " + maximalAmountCashRegister + " Kassen erzeugt werden.");
         }
-        else if(label == "Kasse" && maximalOfCashRegister == 0){
+        else if(label == "Kasse" && maximalAmountCashRegister == 0){
             throw new CashRegisterLimitExceededException();
         }
         else{
             new MensaStationen(label, inQueues, outQueues, troughPut, xPos, yPos, image, preis,pOffenZ,pGruppe);
         }
     }
+
+
 
     @Override
     public Object clone() throws CloneNotSupportedException{

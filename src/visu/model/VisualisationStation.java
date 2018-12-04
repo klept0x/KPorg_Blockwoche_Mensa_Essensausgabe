@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class VisualisirungStation {
+public class VisualisationStation {
 
     private String station;
     private int idelTime;
     private int inUseTime;
 
-    private static ArrayList<VisualisirungStation> allVisualisirungStations = new ArrayList<VisualisirungStation>();
+    private static ArrayList<VisualisationStation> allVisualisationStations = new ArrayList<VisualisationStation>();
 
-    private VisualisirungStation(String station, int idelTime, int inUseTime) {
+    private VisualisationStation(String station, int idelTime, int inUseTime) {
         this.station = station;
         this.idelTime = idelTime;
         this.inUseTime = inUseTime;
 
-        allVisualisirungStations.add(this);
+        allVisualisationStations.add(this);
 
     }
 
     public static void create(String station, int idelTime, int inUseTime) {
-        new VisualisirungStation(station,idelTime,inUseTime);
+        new VisualisationStation(station,idelTime,inUseTime);
     }
 
     public String getStation() {
@@ -38,13 +38,13 @@ public class VisualisirungStation {
     }
 
     private static void sortiereVisualisirungStation(){
-        Collections.sort(allVisualisirungStations, Comparator.comparingInt(VisualisirungStation::getInUseTime).reversed());
+        Collections.sort(allVisualisationStations, Comparator.comparingInt(VisualisationStation::getInUseTime).reversed());
 
     }
 
-    public static ArrayList<VisualisirungStation> getAllVisualisirungStations() {
+    public static ArrayList<VisualisationStation> getAllVisualisationStations() {
         sortiereVisualisirungStation();
 
-        return allVisualisirungStations;
+        return allVisualisationStations;
     }
 }

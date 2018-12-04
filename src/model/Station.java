@@ -47,7 +47,7 @@ public abstract class Station extends Actor {
 			return false;
 		}
 
-		//If there is an inqueue object found, handle it
+		//If there is an in queue object found, handle it
 		if (numberOfInQueueObjects() > 0) {
 			this.handleObject(this.getNextInQueueObject());
 		}
