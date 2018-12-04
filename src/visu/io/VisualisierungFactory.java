@@ -1,11 +1,10 @@
 package visu.io;
 
-import io.Statistics;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import visu.model.VisualisirungStation;
+import visu.model.VisualisationStation;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,16 +15,16 @@ import java.util.List;
  * Modified by Team 5:
  * Data-fields and createStartStation(), createObjects(), createProcessStations(), createEndStation() were set to protected,
  * because FactoryXML inherits from VisualisierungFactory.
- * Setter-Methods for following data-fields : theObjectDataFile, theStationDataFile, theStartStationDataFile, theEndStationDataFile
+ * Setter-Methods for following data-f
+ * ields : theObjectDataFile, theStationDataFile, theStartStationDataFile, theEndStationDataFile
  *
  * @author Jaeger, Schmidt modified by Team 5
  * @version 2017-10-29
  */
 public class VisualisierungFactory {
 
+    /** path to file for the xml reader */
     private static String theObjectDataFile = "daten/Station Kennzahlauswertung Burgertag.xml";
-
-
 
     /**
      * create the actors for the starting scenario
@@ -71,7 +70,7 @@ public class VisualisierungFactory {
                 //Statistics.show("In der Schleife");
 
                 // data variables:
-                String station = "";
+                String station = "Keine Daten wurden uebergeben!";
                 int idelTime = 0;
                 int inUseTime = 0;
 
@@ -81,13 +80,9 @@ public class VisualisierungFactory {
                 inUseTime = Integer.parseInt(theStations.getChildText("inUseTime"));
 
                 //creating a new TheObject object
-                VisualisirungStation.create(station, idelTime, inUseTime);
+                VisualisationStation.create(station, idelTime, inUseTime);
                 //Statistics.show("Station erstellt!");
-
             }
-
-
-
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -274,7 +274,7 @@ public class Simulation {
 
                     //Increase the global clock
                     clock.incrementAndGet();
-                   MensaStationen.Tacktruf();
+                   MensaStationen.tacktruf();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
