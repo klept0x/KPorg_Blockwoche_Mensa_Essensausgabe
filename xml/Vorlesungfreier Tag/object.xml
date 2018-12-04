@@ -11,10 +11,10 @@
 		</view>
 		<sequence>
 			<station>Start_Station</station>
-			<station>Salate_2</station>
-			<station>Salate_3</station>
+			<station>Salatebar</station>
+			<station>Salatebar</station>
 			<station>Warmes_Essen_3</station>
-			<station>Warmes_Essen_1</station>
+			<station>WarmesEssen</station>
 			<station>Kasse</station>
 			<station>End_Station</station>
 		</sequence>
@@ -30,9 +30,9 @@
 		</view>
 		<sequence>
 			<station>Start_Station</station>
-			<station>Salate_1</station>
-			<station>Warmes_Essen_2</station>
-			<station>Salate_3</station>
+			<station>Salatebar</station>
+			<station>WarmesEssen</station>
+			<station>Salatebar</station>
 			<station>Kasse</station>
 			<station>End_Station</station>
 		</sequence>
@@ -48,9 +48,9 @@
 		</view>
 		<sequence>
 			<station>Start_Station</station>
-			<station>Salate_3</station>
-			<station>Warmes_Essen_1</station>
-			<station>Salate_2</station>
+			<station>Salatebar</station>
+			<station>WarmesEssen</station>
+			<station>Salatebar</station>
 			<station>Kasse</station>
 			<station>End_Station</station>
 		</sequence>
@@ -66,9 +66,9 @@
 		</view>
 		<sequence>
 			<station>Start_Station</station>
-			<station>Salate_3</station>
-			<station>Warmes_Essen_1</station>
-			<station>Salate_3</station>
+			<station>Salatebar</station>
+			<station>WarmesEssen</station>
+			<station>Salatebar</station>
 			<station>Kasse</station>
 			<station>End_Station</station>
 		</sequence>
@@ -84,9 +84,9 @@
 		</view>
 		<sequence>
 			<station>Start_Station</station>
-			<station>Salate_3</station>
-			<station>Warmes_Essen_3</station>
-			<station>Salate_1</station>
+			<station>Salatebar</station>
+			<station>WarmesEssen</station>
+			<station>Salatebar</station>
 			<station>Kasse</station>
 			<station>End_Station</station>
 		</sequence>
