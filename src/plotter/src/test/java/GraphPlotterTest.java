@@ -5,9 +5,8 @@ import plotter.src.main.java.view.PlotterPane;
 
 import java.util.ArrayList;
 
+//Test für Plotter
 public class GraphPlotterTest {
-
-
     public void createDiagramWithInitialDataPoints() {
         ArrayList<CustomPoint> points = new ArrayList<>();
         points.add(new CustomPoint(10, 23.0));

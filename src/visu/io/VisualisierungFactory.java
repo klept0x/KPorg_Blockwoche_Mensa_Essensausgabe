@@ -23,9 +23,8 @@ import java.util.List;
  */
 public class VisualisierungFactory {
 
+    /** path to file for the xml reader */
     private static String theObjectDataFile = "daten/Station Kennzahlauswertung Burgertag.xml";
-
-
 
     /**
      * create the actors for the starting scenario
@@ -71,7 +70,7 @@ public class VisualisierungFactory {
                 //Statistics.show("In der Schleife");
 
                 // data variables:
-                String station = "";
+                String station = "Keine Daten wurden uebergeben!";
                 int idelTime = 0;
                 int inUseTime = 0;
 
@@ -83,11 +82,7 @@ public class VisualisierungFactory {
                 //creating a new TheObject object
                 VisualisationStation.create(station, idelTime, inUseTime);
                 //Statistics.show("Station erstellt!");
-
             }
-
-
-
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException e) {
