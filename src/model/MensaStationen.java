@@ -5,7 +5,9 @@ import io.OurStatistic;
 import io.Statistics;
 import plotter.src.main.java.model.CustomPoint;
 import plotter.src.main.java.view.PlotterPane;
+import view.StationView;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Observable;
@@ -21,24 +23,83 @@ import java.util.Observable;
  */
 
 public class MensaStationen extends ProcessStation{
-
+    /**
+     * the StartTime
+     */
     private static long startTime;
-    private static final int  maxSalatbarInObjects=6;
-    private static final int  maxWarmesEssenInObjects=6;
-    private static final int  maxBurgerInObjects=6;
-    double preis;
-    private String gruppierung="";
-    Measurement measurement;
-    private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
-    private static ArrayList<MensaStationen> allSalatBar= new ArrayList<MensaStationen>();
-    private static ArrayList<MensaStationen> allWarmesEssen= new ArrayList<MensaStationen>();
-    private static ArrayList<MensaStationen> allBurgerEssen= new ArrayList<MensaStationen>();
-    private boolean offenZustand;
-    private ArrayList<PlotterPane> datenDias;
-    private static final int  maximalOfCashRegister = 3;
-    private static ArrayList<MensaStationen>allKassen= new ArrayList<MensaStationen>();
+    /**
+     * konstant value of maximal Inqueue objects before open another station
+     */
+    private static final int  maxSalatbarInObjects=3;
+    /**
+     * konstant value of maximal Inqueue objects before open another station
+     */
+    private static final int  maxWarmesEssenInObjects=3;
+    /**
+     * konstant value of maximal Inqueue objects before open another station
+     */
+    private static final int  maxBurgerInObjects=3;
+    /**
+     * konstant value of maximal Inqueue objects before open another station
+     */
     private static final int maxKasseInObjects=4;
+    /**
+     * the prize of the station
+     */
+    double preis;
+    /**
+     * the kind of the station
+     */
+    private String gruppierung="";
+    /**
+     * the instance of maesurement
+     */
+    Measurement measurement;
+    /**
+     * list of all MensaStation Objects
+     */
+    private static ArrayList<MensaStationen> allMensaStation= new ArrayList<MensaStationen>();
+    /**
+     * list of all Salatbar Objects
+     */
+    private static ArrayList<MensaStationen> allSalatBar= new ArrayList<MensaStationen>();
+    /**
+     * list of all WarmesEssen objects
+     */
+    private static ArrayList<MensaStationen> allWarmesEssen= new ArrayList<MensaStationen>();
+    /**
+     * list of all Burgerstation objects
+     */
+    private static ArrayList<MensaStationen> allBurgerEssen= new ArrayList<MensaStationen>();
+    /**
+     * list of all Kassen Objects
+     */
+    private static ArrayList<MensaStationen>allKassen= new ArrayList<MensaStationen>();
+    /**
+     * boolean if the station open or not
+     */
+    private boolean offenZustand;
+    /**
+     * List of all Diagramms
+     */
+    private ArrayList<PlotterPane> datenDias;
 
+    private static  int  maximalOfCashRegister = 3;
+
+
+    /**
+     *  constructor of Mensastation
+     * @param label label of the Station
+     * @param inQueues Inqueue of the Station
+     * @param outQueues Outqueue of the Station
+     * @param troughPut the Troughput of the Statiom
+     * @param xPos x Position
+     * @param yPos y Position
+     * @param image the Image
+     * @param pPreis the prize
+     * @param pOffenZ the status
+     * @param pGruppe the kind
+     */
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis,boolean pOffenZ,String pGruppe) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
         measurement = new Measurement(this);
@@ -60,6 +121,20 @@ public class MensaStationen extends ProcessStation{
         datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
     }*/
 
+    /**
+     * create the Station
+     * @param label label of the Station
+     * @param inQueues Inqueue of the Station
+     * @param outQueues Outqueue of the Station
+     * @param troughPut the Troughput of the Statiom
+     * @param xPos x Position
+     * @param yPos y Position
+     * @param image the Image
+     * @param preis the prize
+     * @param pOffenZ the status
+     * @param pGruppe the kind
+     * @throws CashRegisterLimitExceededException
+     */
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis,boolean pOffenZ,String pGruppe) throws CashRegisterLimitExceededException {
 
         //If MensaStation is labeled "Kasse" and if the maximal amount doesn't exceeed the limt create MensaStation with label "Kasse"
@@ -77,7 +152,10 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
-
+    /**
+     * add the station in the specific list
+     * @param mensaStationen the Station
+     */
     private void trageKategorieListe(MensaStationen mensaStationen) {
         switch (mensaStationen.gruppierung){
             case "Salatebar":
@@ -98,13 +176,19 @@ public class MensaStationen extends ProcessStation{
 
     }
 
-
+    /**
+     * se the Starttime of the Simulation
+     * @param globalTime the global time
+     */
     public static void setStartTime(long globalTime) {
         startTime =globalTime;
     }
 
 
-
+    /**
+     * handle the object
+     * @param theObject
+     */
     @Override
     protected void handleObject(TheObject theObject) {
         Statistics.show(this.label);
@@ -123,7 +207,7 @@ public class MensaStationen extends ProcessStation{
 
 
     /**
-     *
+     *get the Next Inqueue Object
      * @return
      */
     @Override
@@ -136,8 +220,10 @@ public class MensaStationen extends ProcessStation{
     }
 
 
-
-
+    /**
+     * get all Inqueue objects
+     * @return
+     */
     @Override
     protected Collection<TheObject> getNextInQueueObjects() {
         ArrayList<TheObject> liste = new ArrayList<TheObject>();
@@ -151,8 +237,8 @@ public class MensaStationen extends ProcessStation{
     }
 
     /**
-     *
-     * @param o
+     * remove the specific Object from the Inqueue
+     * @param o the Object
      */
     private void loescheAusInqueue(TheObject o) {
         System.out.println(o.label+" loesche aus Inqueue");
@@ -169,9 +255,9 @@ public class MensaStationen extends ProcessStation{
     }
 
     /**
-     *
-     * @param o
-     * @return
+     * check if the remove Object the next Object for handeling
+     * @param o the Object
+     * @return true if the Obect the next and false is not
      */
     private boolean checkIndexHead(TheObject o) {
         ArrayList<TheObject> liste = (ArrayList<TheObject>)getNextInQueueObjects();
@@ -182,14 +268,16 @@ public class MensaStationen extends ProcessStation{
         return false;
     }
 
-
+    /**
+     * check if the waiting time bigger than the specific max Waiting time of the Object
+     */
     private void checkObjectWarte() {
         long actuelTime=Simulation.getGlobalTime();
         for(TheObject o: getNextInQueueObjects()){
-
-            int inQueueWaitTime= (int)(actuelTime-o.getInqueueStartTime());
-            if(inQueueWaitTime>=o.getMaxWait()&& checkIndexHead(o)!=true){
-                System.out.println("juhu "+o.getMaxWait()+" "+inQueueWaitTime);
+            Student student = (Student) o;
+            int inQueueWaitTime= (int)(actuelTime-student.getInqueueStartTime());
+            if(inQueueWaitTime>=student.getMaxWait()&& checkIndexHead(o)!=true){
+                System.out.println("juhu "+student.getMaxWait()+" "+inQueueWaitTime);
                 loescheAusInqueue(o);
                 o.wakeUp();
             }
@@ -197,10 +285,18 @@ public class MensaStationen extends ProcessStation{
 
     }
 
+    /**
+     * get the startTime
+     * @return startTime
+     */
     public static long getStartTime() {
         return startTime;
     }
 
+    /**
+     * get the measurement instance
+     * @return the measurement instance
+     */
     public Measurement getMeasurement() {
         return this.measurement;
     }
@@ -211,10 +307,18 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
+    /**
+     * get the list of all MensaStation objects
+     * @return
+     */
     public static ArrayList<MensaStationen> getAllMensaStation() {
         return allMensaStation;
     }
 
+    /**
+     * get the list of all diagramms
+     * @return
+     */
     public ArrayList<PlotterPane> getDatenDias() {
         return datenDias;
     }
@@ -257,37 +361,37 @@ public class MensaStationen extends ProcessStation{
         switch (this.gruppierung){
             case "Salatebar":
                 if(this.numberOfInQueueObjects()>=maxSalatbarInObjects){
-                    this.oeffneStation(allSalatBar);
+                    this.oeffneStation(allSalatBar,"saladGruen.png");
                 }
                 break;
             case"WarmesEssen":
                 if(this.numberOfInQueueObjects()>=maxWarmesEssenInObjects){
-                    this.oeffneStation(allWarmesEssen);
+                    this.oeffneStation(allWarmesEssen,"fleischGruen.png");
                 }
                 break;
             case "Burger":
                 if(this.numberOfInQueueObjects()>=maxBurgerInObjects){
-                    this.oeffneStation(allBurgerEssen);
+                    this.oeffneStation(allBurgerEssen,"burgerino.png");
                 }
                 break;
             case "Kasse":
                 if(this.numberOfInQueueObjects()>=maxKasseInObjects){
-                    this.oeffneStation(allKassen);
+                    this.oeffneStation(allKassen,"kasse.png");
                 }
                 break;
         }
     }
 
     /**
-     *
+     *open one Station of the same kind and change the image
      * @param liste list of all Object from a specific kind
      */
-    private void oeffneStation(ArrayList<MensaStationen> liste ) {
+    private void oeffneStation(ArrayList<MensaStationen> liste ,String image ) {
         int zaehler=0;
         for (MensaStationen m : liste){
             if(m.offenZustand== false&& zaehler==0){
                 m.offenZustand= true;
-
+                m.theView.setIcon(new ImageIcon(image));
                 System.out.println(m.label+" wurde geöffnet");
                 zaehler=1;
             }
@@ -295,36 +399,122 @@ public class MensaStationen extends ProcessStation{
         }
     }
 
+    /**
+     * check wich kind the Station has and close one station till one is still open
+     */
+    private void pruefeSchliessseStation(){
+        switch (this.gruppierung){
+            case "Salatebar":
+                  this.schliesseStation(allSalatBar,"saladRot.png");
+                break;
+            case"WarmesEssen":
+                    this.schliesseStation(allWarmesEssen,"fleischRot.png");
+                break;
+            case "Burger":
+                   this.schliesseStation(allBurgerEssen,"burgerino.png");
+                break;
+            case "Kasse":
+                    this.schliesseStation(allKassen,"kasse.png");
+                break;
+        }
+    }
+
+    /**
+     * close one Station till one is still open and change the image
+     * @param gruppeList list of the specific Station
+     * @param image the image
+     */
+    private void schliesseStation(ArrayList<MensaStationen> gruppeList,String image ) {
+       int zaehlerZu=0;
+       for (MensaStationen ms : gruppeList ){
+           if(ms.offenZustand==false){
+               zaehlerZu++;
+           }
+       }
+       if(zaehlerZu<(gruppeList.size()-1)){
+           this.offenZustand=false;
+           this.theView.setIcon(new ImageIcon(image));
+       }
+    }
+
+    /**
+     * get the list of all Salatbar Objects
+     * @return ArrayList
+     */
     public static ArrayList<MensaStationen> getAllSalatBar() {
         return allSalatBar;
     }
 
+    /**
+     * get the list of all Warmes Essen Objects
+     * @return ArrayList
+     */
     public static ArrayList<MensaStationen> getAllWarmesEssen() {
         return allWarmesEssen;
     }
 
+    /**
+     * get the list of all Burger station Objects
+     * @return ArrayList
+     */
     public static ArrayList<MensaStationen> getAllBurgerEssen() {
         return allBurgerEssen;
     }
 
+    /**
+     * get the list of all Kassen Objects
+     * @return ArrayList
+     */
     public static ArrayList<MensaStationen> getAllKassen() {
         return allKassen;
     }
 
+    /**
+     * get the status
+     * @return boolean
+     */
     public boolean isOffenZustand() {
         return offenZustand;
+    }
+
+    /**
+     * print the statistic
+     */
+    @Override
+    public void printStatistics() {
+        super.printStatistics();
+        String theString = "\nZeit ohne Betrieb: " + measurement.idleTime;
+        Statistics.show(theString);
+    }
+
+    /**
+     * getter for gruppierung
+     * @return gruppierung value
+     */
+    public String getGruppierung() {
+        return gruppierung;
     }
 
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
 
     public static class Measurement extends Observable {
-
+        /**
+         * List of all Statistic points for inUseTime
+         */
         protected ArrayList<CustomPoint>inUseTimeP;
+        /**
+         * List of all Statistic points for numberOfVisitedObjects
+         */
         protected ArrayList<CustomPoint>numberOVP;
+        /**
+         * List of all Statistic points for idleTime
+         */
         protected ArrayList<CustomPoint>idleTimeP;
 
 
-
+        /**
+         *  the object of the station
+         */
         protected MensaStationen theOutObject;
         /**
          * the total time the station is in use
@@ -335,9 +525,20 @@ public class MensaStationen extends ProcessStation{
          * the number of all objects that visited this station
          */
         protected int numbOfVisitedObjects = 0;
-
+        /**
+         * the total time the station is open but not in use
+         */
         protected int idleTime = 0;
 
+        /**
+         * counter of idle time for closing the station
+         */
+        protected int bufferedIdleTimeTick= 0;
+
+        /**
+         * constructor from measurement
+         * @param outObject the outer Object
+         */
         public Measurement( MensaStationen outObject) {
             theOutObject= outObject;
             inUseTimeP= new ArrayList<CustomPoint>();
@@ -348,69 +549,101 @@ public class MensaStationen extends ProcessStation{
         }
 
         /**
-         * Get the average time for treatment
-         *
-         * @return the average time for treatment
+         * get the station object of this measurement
+         * @return the MensaStation Object
          */
-       /* protected int avgTreatmentTime() {
-
-            if (numbOfVisitedObjects == 0) return 0; //in case that a station wasn't visited
-            else
-                return inUseTime / numbOfVisitedObjects;
-
-        }*/
-
-
         public MensaStationen getOuterClass() {
             return theOutObject;
         }
 
+        /**
+         * change the InUse field
+         * @param pInUseTime new InUse value
+         */
         void aenderInUseTime(int pInUseTime){
             this.inUseTime= pInUseTime;
             this.inUseTimeP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.inUseTime));
             notifyObservers(this.inUseTime);
         }
 
+        /**
+         * notfied all Observers
+         * @param arg  the info
+         */
         @Override
         public void notifyObservers(Object arg) {
             setChanged();
             super.notifyObservers(arg);
         }
 
-
+        /**
+         * getter for InUse value
+         * @return
+         */
         public int getInUseTime() {
             return inUseTime;
         }
 
+        /**
+         * getter for numberOfVisitedObject value
+         * @return
+         */
         public int getNumbOfVisitedObjects() {
             return numbOfVisitedObjects;
         }
 
+        /**
+         * getter for IdleTime value
+         * @return
+         */
         public int getIdleTime() {
             return idleTime;
         }
 
+        /**
+         * change the IdleTime field
+         * @param idleTime new IdleTime value
+         */
         public void aenderIdleTime(int idleTime) {
-
-            this.idleTime= idleTime;
-            this.idleTimeP.add(new CustomPoint((int)(Simulation.getGlobalTime()),this.idleTime));
-            notifyObservers(this.idleTime);
+           if(bufferedIdleTimeTick<6) {
+               bufferedIdleTimeTick++;
+               this.idleTime = idleTime;
+               this.idleTimeP.add(new CustomPoint((int) (Simulation.getGlobalTime()), this.idleTime));
+               notifyObservers(this.idleTime);
+           }else{
+            theOutObject.pruefeSchliessseStation();
+            bufferedIdleTimeTick=0;
+           }
         }
 
+        /**
+         * change the number of visited Objects
+         * @param numbOfVisitedObjects new numberOfVisitedObjects value
+         */
         public void aenderNumOV(int numbOfVisitedObjects) {
             this.numbOfVisitedObjects= numbOfVisitedObjects;
             this.numberOVP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.numbOfVisitedObjects));
             this.notifyObservers(this.numbOfVisitedObjects);
         }
 
+        /**
+         * getter for the List of statistic Points
+         * @return ArrayList
+         */
         public ArrayList<CustomPoint> getInUseTimeP() {
             return inUseTimeP;
         }
-
+        /**
+         * getter for the List of statistic Points
+         * @return ArrayList
+         */
         public ArrayList<CustomPoint> getNumberOVP() {
             return numberOVP;
         }
-
+        /**
+         * getter for the List of statistic Points
+         * @return ArrayList
+         */
         public ArrayList<CustomPoint> getIdleTimeP() {
             return idleTimeP;
         }

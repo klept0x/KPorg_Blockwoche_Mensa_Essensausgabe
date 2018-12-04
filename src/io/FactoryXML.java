@@ -367,4 +367,40 @@ public class FactoryXML extends Factory {
         }
     }
 
+    /**
+     * setter for theObjectDataFile
+     *
+     * @param theObjectDataFile the objects XML data file
+     */
+    public static void setTheObjectDataFile(String theObjectDataFile) {
+        Factory.theObjectDataFile = theObjectDataFile;
+    }
+
+    /**
+     * setter for theStationDataFile
+     *
+     * @param theStationDataFile the station XML data file
+     */
+    public static void setTheStationDataFile(String theStationDataFile) {
+        Factory.theStationDataFile = theStationDataFile;
+    }
+
+    /**
+     * setter for theStartStationDataFile
+     *
+     * @param theStartStationDataFile the start-station XML data file
+     */
+    public static void setTheStartStationDataFile(String theStartStationDataFile) {
+        Factory.theStartStationDataFile = theStartStationDataFile;
+    }
+
+    /**
+     * setter for theEndStationDataFile
+     *
+     * @param theEndStationDataFile the end-station XML data file
+     */
+    public static void setTheEndStationDataFile(String theEndStationDataFile) {
+        Factory.theEndStationDataFile = theEndStationDataFile;
+    }
+
 }

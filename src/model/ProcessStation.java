@@ -203,12 +203,7 @@ public class ProcessStation extends Station {
 
     }
 
-    protected void increaseIdleTime() {
-        if(this.label.equals("Kasse")) {
-            System.out.println(this.label + " idleTime ++-------------------------------------------------------------------------------------------");
-        }
-        measurement.idleTime++;
-    }
+
 
 
     /**
@@ -228,7 +223,7 @@ public class ProcessStation extends Station {
          */
         protected int numbOfVisitedObjects = 0;
 
-        protected int idleTime = 0;
+
 
         public Measurement(ProcessStation outObject) {
             theOutObject= outObject;
@@ -271,7 +266,6 @@ public class ProcessStation extends Station {
         theString = theString + "\nAnzahl der behandelten Objekte: " + measurement.numbOfVisitedObjects;
         theString = theString + "\nZeit zum Behandeln aller Objekte: " + measurement.inUseTime;
         theString = theString + "\nDurchnittliche Behandlungsdauer: " + measurement.avgTreatmentTime();
-        theString = theString + "\nZeit ohne Betrieb: " + measurement.idleTime;
         Statistics.show(theString);
 
     }

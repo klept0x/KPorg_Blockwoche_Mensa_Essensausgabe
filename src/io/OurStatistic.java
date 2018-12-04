@@ -1,50 +1,58 @@
 package io;
 
 
-import controller.Simulation;
 import model.MensaStationen;
 import model.Student;
-import plotter.src.main.java.model.CustomPoint;
 import plotter.src.main.java.view.PlotterPane;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * @author Team 5
+ * @version 2018-11-30
+ */
 public class OurStatistic extends Statistics {
 
-    private static OurStatistic statistic;
+    /**
+     * instance of Objectbeobachter
+     */
     static Objectbeobachter obectb= new Objectbeobachter();
+    /**
+     * instance of MensaStationbeobachter
+     */
     static MensaStationenBeobachter mensaBeo= new MensaStationenBeobachter();
 
 
-    private OurStatistic(){
-        ;
 
-    }
 
-    public static OurStatistic createStatistic(){
-        statistic = new OurStatistic();
-        return  statistic;
-    }
-
+    /**
+     *  getter for the observer instance for Student
+     * @return observer instance
+     */
     public static Objectbeobachter getObjectBeobachter() {
         return obectb;
     }
-
+    /**
+     *  getter for the observer instance for MernsaStation
+     * @return observer instance
+     */
     public static MensaStationenBeobachter getMensaBeo() {
         return mensaBeo;
     }
 
+    /**
+     * print the Endstatistic of the choosen object
+     * @param label the label of the chossen object
+     */
     public static void printEndstatistic(String label){
         for(MensaStationen ms : MensaStationen.getAllMensaStation()){
             if (ms.getLabel().equals(label)){
                 MensaStationen.Measurement m = ms.getMeasurement();
                 PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),200,200,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
                 p1.setVisible(true);
-                //PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),200,200,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
-               // p2.setVisible(true);
+                PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),200,200,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
+                 p2.setVisible(true);
                 PlotterPane p3 = new PlotterPane(m.getNumberOVP(),200,200,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
                 p3.setVisible(true);
             }
@@ -71,7 +79,11 @@ public class OurStatistic extends Statistics {
 
         static class Objectbeobachter implements Observer {
 
-
+    /**
+     * update the statistic
+     * @param o the measuremnet instance
+     * @param arg the info
+     */
     @Override
         public void update(Observable o, Object arg) {
         System.out.println("\n"+" Student update");
@@ -113,10 +125,11 @@ public class OurStatistic extends Statistics {
 
 
 
-        public MensaStationenBeobachter() {
-
-        }
-
+        /**
+         * update the statistic
+         * @param o the measuremnet instance
+         * @param arg the info
+         */
         @Override
         public void update(Observable o, Object arg) {
 
