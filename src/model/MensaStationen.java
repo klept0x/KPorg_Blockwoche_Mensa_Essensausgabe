@@ -92,8 +92,6 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     /** The maximal amount of MensaStation with label "Kasse" is 3 (Singelton Pattern)*/
     private static int maximalAmountCashRegister = 3;
 
-    private static final int maxKasseInObjects = 4;
-
     /**
      *
      * @param label
