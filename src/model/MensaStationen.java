@@ -191,6 +191,7 @@ public class MensaStationen extends ProcessStation{
      */
     @Override
     protected void handleObject(TheObject theObject) {
+
         Statistics.show(this.label);
         this.pruefeFreischalten();
         Student s = (Student) theObject;
@@ -208,7 +209,7 @@ public class MensaStationen extends ProcessStation{
 
     /**
      *get the Next Inqueue Object
-     * @return
+     * @return The Object
      */
     @Override
     protected TheObject getNextInQueueObject() {
@@ -222,7 +223,7 @@ public class MensaStationen extends ProcessStation{
 
     /**
      * get all Inqueue objects
-     * @return
+     * @return Collection <TheObject>
      */
     @Override
     protected Collection<TheObject> getNextInQueueObjects() {
@@ -354,7 +355,7 @@ public class MensaStationen extends ProcessStation{
     }
 
     /**
-     * check if we need to open another station
+     * check wich kind the station is
      */
     private void pruefeFreischalten() {
 
@@ -371,12 +372,12 @@ public class MensaStationen extends ProcessStation{
                 break;
             case "Burger":
                 if(this.numberOfInQueueObjects()>=maxBurgerInObjects){
-                    this.oeffneStation(allBurgerEssen,"burgerino.png");
+                    this.oeffneStation(allBurgerEssen,"burgerinoGruen.png");
                 }
                 break;
             case "Kasse":
                 if(this.numberOfInQueueObjects()>=maxKasseInObjects){
-                    this.oeffneStation(allKassen,"kasse.png");
+                    this.oeffneStation(allKassen,"kasseGruen.png");
                 }
                 break;
         }
@@ -411,10 +412,10 @@ public class MensaStationen extends ProcessStation{
                     this.schliesseStation(allWarmesEssen,"fleischRot.png");
                 break;
             case "Burger":
-                   this.schliesseStation(allBurgerEssen,"burgerino.png");
+                   this.schliesseStation(allBurgerEssen,"burgerinoRot.png");
                 break;
             case "Kasse":
-                    this.schliesseStation(allKassen,"kasse.png");
+                    this.schliesseStation(allKassen,"kasseRot.png");
                 break;
         }
     }
@@ -494,6 +495,8 @@ public class MensaStationen extends ProcessStation{
     public String getGruppierung() {
         return gruppierung;
     }
+
+
 
     /**------------------------------------------------------------InnerClASS-------------------------------------------------------------------------------------------*/
 
