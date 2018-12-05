@@ -302,12 +302,21 @@ public class TheObject extends Actor {
         return processTime;
     }
 
+    /**
+     * Getter for speed
+     *
+     * @return the speed
+     */
     public int getMySpeed() {
         return mySpeed;
     }
 
+    /**
+     * Getter for mensa stations to go
+     *
+     * @return mensa stations to go
+     */
     public ArrayList<String> getStationsToGo() {
         return stationsToGo;
     }
-
 }

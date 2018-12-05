@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class MensaStationenTest {
 
+    /** a list of the mensa stations */
     private static ArrayList<MensaStationen> testMensaStationListe;
 
     /** Starts befor all tests. Sets up the test environment.
@@ -54,8 +55,6 @@ class MensaStationenTest {
      */
     @Test
     void testShouldThrowExcpectedCloneNotSupportedException() {
-
-
         assertThrows(CloneNotSupportedException.class, () -> testMensaStationListe.get(0).clone());
     }
 }

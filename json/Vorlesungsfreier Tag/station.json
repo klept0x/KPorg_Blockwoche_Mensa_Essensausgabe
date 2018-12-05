@@ -8,9 +8,11 @@
           "x_Position": "400",
           "y_Position": "150",
           "preis": "5.2",
+          "initZustand": "true",
+          "gruppierung": "Salatebar",
           "view": [
             {
-              "image": "salad.png"
+              "image": "saladGruen.png"
             }
           ],
           "inqueue": [
@@ -32,9 +34,11 @@
           "x_Position": "400",
           "y_Position": "50",
           "preis": "2.1",
+          "initZustand": "false",
+          "gruppierung": "Salatebar",
           "view": [
             {
-              "image": "salad.png"
+              "image": "saladRot.png"
             }
           ],
           "inqueue": [
@@ -56,9 +60,11 @@
           "x_Position": "575",
           "y_Position": "150",
           "preis": "4.0",
+          "initZustand": "false",
+          "gruppierung": "Salatebar",
           "view": [
             {
-              "image": "salad.png"
+              "image": "saladRot.png"
             }
           ],
           "inqueue": [
@@ -80,9 +86,11 @@
           "x_Position": "225",
           "y_Position": "150",
           "preis": "4.3",
+          "initZustand": "true",
+          "gruppierung": "WarmesEssen",
           "view": [
             {
-              "image": "fleisch.png"
+              "image": "fleischGruen.png"
             }
           ],
           "inqueue": [
@@ -104,9 +112,11 @@
           "x_Position": "225",
           "y_Position": "50",
           "preis": "3.2",
+          "initZustand": "false",
+          "gruppierung": "WarmesEssen",
           "view": [
             {
-              "image": "fleisch.png"
+              "image": "fleischRot.png"
             }
           ],
           "inqueue": [
@@ -128,9 +138,11 @@
           "x_Position": "50",
           "y_Position": "150",
           "preis": "7.2",
+          "initZustand": "false",
+          "gruppierung": "WarmesEssen",
           "view": [
             {
-              "image": "fleisch.png"
+              "image": "fleischRot.png"
             }
           ],
           "inqueue": [
@@ -152,9 +164,11 @@
           "x_Position": "400",
           "y_Position": "300",
           "preis": "0.0",
+          "initZustand": "true",
+          "gruppierung": "Kasse",
           "view": [
             {
-              "image": "kasse.png"
+              "image": "kasseGruen.png"
             }
           ],
           "inqueue": [

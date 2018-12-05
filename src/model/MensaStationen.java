@@ -10,6 +10,7 @@ import view.StationView;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
@@ -80,30 +81,35 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     private static ArrayList<MensaStationen> allBurgerEssen= new ArrayList<MensaStationen>();
 
     /**
-     * boolean if the station open or not
+     * list of all Kasse objects
      */
     private static ArrayList<MensaStationen> allKassen= new ArrayList<MensaStationen>();
+
+    /**
+     * boolean if the station open or not
+     */
     private boolean offenZustand;
+
     /**
      * List of all Diagramms
      */
-    private ArrayList<PlotterPane> datenDias;
+    private HashMap<String,PlotterPane> datenDias;
 
     /** The maximal amount of MensaStation with label "Kasse" is 3 (Singelton Pattern)*/
     private static int maximalAmountCashRegister = 3;
 
     /**
-     *
-     * @param label
-     * @param inQueues
-     * @param outQueues
-     * @param troughPut
-     * @param xPos
-     * @param yPos
-     * @param image
-     * @param pPreis
-     * @param pOffenZ
-     * @param pGruppe
+     *  constructor of Mensastation
+     * @param label label of the Station
+     * @param inQueues Inqueue of the Station
+     * @param outQueues Outqueue of the Station
+     * @param troughPut the Troughput of the Statiom
+     * @param xPos x Position
+     * @param yPos y Position
+     * @param image the Image
+     * @param pPreis the prize
+     * @param pOffenZ the status
+     * @param pGruppe the kind
      */
     private MensaStationen(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double pPreis,boolean pOffenZ,String pGruppe) {
         super(label, inQueues, outQueues, troughPut, xPos, yPos, image);
@@ -114,31 +120,31 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         System.out.println(this.label+" "+this.gruppierung);
         allMensaStation.add(this);
         trageKategorieListe(this);
-        datenDias= new ArrayList<PlotterPane>();
+        datenDias= new HashMap<String,PlotterPane>();
         System.out.println(this.label+" "+pOffenZ);
 
         //initDias();
     }
 
-    /*private void initDias() {
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Benutzungszeit","Globaltime","InUseTime"));
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Zeit ohne Object","Globaltime","IdleTime"));
-        datenDias.add(new PlotterPane(new ArrayList<CustomPoint>(),800,600,true,"Anzahl der Visitors","Globaltime","numberOfVisitedObject"));
-    }*/
+    private void initDias() {
+        datenDias.put("inUseTime",new PlotterPane(new ArrayList<CustomPoint>(),200,200,true,"time","InUseTime",this.label+" InUseTime/time"));
+        datenDias.put("idleTime",new PlotterPane(new ArrayList<CustomPoint>(),200,200,true,"time","IdleTime",this.label+" IdleTime/time"));
+        datenDias.put("numberOVO",new PlotterPane(new ArrayList<CustomPoint>(),200,200,true,"time","numberOfVisitedObjects" ,this.label+" numberOfVisitedObjects/time"));
+    }
 
     /**
-     *
-     * @param label
-     * @param inQueues
-     * @param outQueues
-     * @param troughPut
-     * @param xPos
-     * @param yPos
-     * @param image
-     * @param preis
-     * @param pOffenZ
-     * @param pGruppe
-     * @throws CashRegisterLimitExceededException is thrown when there are already 3 MensaStation with label "Kasse"
+     * create the Station
+     * @param label label of the Station
+     * @param inQueues Inqueue of the Station
+     * @param outQueues Outqueue of the Station
+     * @param troughPut the Troughput of the Statiom
+     * @param xPos x Position
+     * @param yPos y Position
+     * @param image the Image
+     * @param preis the prize
+     * @param pOffenZ the status
+     * @param pGruppe the kind
+     * @throws CashRegisterLimitExceededException
      */
     public static void create(String label, ArrayList<SynchronizedQueue> inQueues, ArrayList<SynchronizedQueue> outQueues, double troughPut, int xPos, int yPos, String image, double preis,boolean pOffenZ,String pGruppe) throws CashRegisterLimitExceededException {
         //Statistics.show("create MensaStation");
@@ -163,6 +169,10 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     }
 
 
+    /**
+     * add the station in the specific list
+     * @param mensaStationen the Station
+     */
     private void trageKategorieListe(MensaStationen mensaStationen) {
         switch (mensaStationen.gruppierung){
             case "Salatebar":
@@ -259,9 +269,10 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     }
 
     /**
-     * check if the remove Object the next Object for handeling
+     * check if the removed Object is the next Object that should be handled
+     *
      * @param o the Object
-     * @return true if the Obect the next and false is not
+     * @return true if the Object the next and false is not
      */
     private boolean checkIndexHead(TheObject o) {
         ArrayList<TheObject> liste = (ArrayList<TheObject>)getNextInQueueObjects();
@@ -273,7 +284,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
     }
 
     /**
-     * check if the waiting time bigger than the specific max Waiting time of the Object
+     * check if the waiting time is bigger than the specific max Waiting time for the Object
      */
     private void checkObjectWarte() {
         long actuelTime=Simulation.getGlobalTime();
@@ -324,7 +335,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
      * get the list of all diagramms
      * @return
      */
-    public ArrayList<PlotterPane> getDatenDias() {
+    public HashMap<String,PlotterPane> getDatenDias() {
         return datenDias;
     }
 
@@ -570,7 +581,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         void aenderInUseTime(int pInUseTime){
             this.inUseTime= pInUseTime;
             this.inUseTimeP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.inUseTime));
-            notifyObservers(this.inUseTime);
+            notifyObservers("inUseTime");
         }
 
         /**
@@ -617,7 +628,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
                bufferedIdleTimeTick++;
                this.idleTime = idleTime;
                this.idleTimeP.add(new CustomPoint((int) (Simulation.getGlobalTime()), this.idleTime));
-               notifyObservers(this.idleTime);
+               notifyObservers("idleTime");
            }else{
             theOutObject.pruefeSchliessseStation();
             bufferedIdleTimeTick=0;
@@ -631,7 +642,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         public void aenderNumOV(int numbOfVisitedObjects) {
             this.numbOfVisitedObjects= numbOfVisitedObjects;
             this.numberOVP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.numbOfVisitedObjects));
-            this.notifyObservers(this.numbOfVisitedObjects);
+            this.notifyObservers("numberOVO");
         }
 
         /**
@@ -641,6 +652,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         public ArrayList<CustomPoint> getInUseTimeP() {
             return inUseTimeP;
         }
+
         /**
          * getter for the List of statistic Points
          * @return ArrayList
@@ -648,6 +660,7 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         public ArrayList<CustomPoint> getNumberOVP() {
             return numberOVP;
         }
+
         /**
          * getter for the List of statistic Points
          * @return ArrayList
@@ -655,6 +668,5 @@ public class MensaStationen extends ProcessStation implements Cloneable{
         public ArrayList<CustomPoint> getIdleTimeP() {
             return idleTimeP;
         }
-
     }
 }

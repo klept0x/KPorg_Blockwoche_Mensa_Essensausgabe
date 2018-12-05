@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?><daten>
 <kennzahlen id="1">
 <stationen>Salate_1</stationen>
-<idelTime>33</idelTime>
-<inUseTime>25</inUseTime>
+<idelTime>142</idelTime>
+<inUseTime>13</inUseTime>
 </kennzahlen>
 <kennzahlen id="2">
-<stationen>Warmes_Essen_1</stationen>
-<idelTime>40</idelTime>
-<inUseTime>22</inUseTime>
+<stationen>Salate_2</stationen>
+<idelTime>14</idelTime>
+<inUseTime>1</inUseTime>
 </kennzahlen>
 <kennzahlen id="3">
-<stationen>Kasse</stationen>
-<idelTime>37</idelTime>
+<stationen>Salate_3</stationen>
+<idelTime>0</idelTime>
 <inUseTime>0</inUseTime>
+</kennzahlen>
+<kennzahlen id="4">
+<stationen>Warmes_Essen_1</stationen>
+<idelTime>140</idelTime>
+<inUseTime>17</inUseTime>
+</kennzahlen>
+<kennzahlen id="5">
+<stationen>Warmes_Essen_2</stationen>
+<idelTime>0</idelTime>
+<inUseTime>0</inUseTime>
+</kennzahlen>
+<kennzahlen id="6">
+<stationen>Warmes_Essen_3</stationen>
+<idelTime>0</idelTime>
+<inUseTime>0</inUseTime>
+</kennzahlen>
+<kennzahlen id="7">
+<stationen>Kasse</stationen>
+<idelTime>44</idelTime>
+<inUseTime>65</inUseTime>
 </kennzahlen>
 </daten>

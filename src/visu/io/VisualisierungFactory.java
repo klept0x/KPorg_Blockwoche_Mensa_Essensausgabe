@@ -24,8 +24,8 @@ import java.util.List;
 public class VisualisierungFactory {
 
     /** path to file for the xml reader */
-    private static String theObjectDataFile = "daten/Station Kennzahlauswertung BurgertagGeduldig.xml";
-    //private static String theObjectDataFile = "daten/Station Kennzahlauswertung Burgertag.xml";
+    //private static String theObjectDataFile = "daten/Station Kennzahlauswertung BurgertagGeduldig.xml";
+    private static String theObjectDataFile = "daten/Station Kennzahlauswertung Burgertag.xml";
 
     /**
      * create the actors for the starting scenario

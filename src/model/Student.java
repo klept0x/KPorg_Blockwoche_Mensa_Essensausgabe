@@ -8,9 +8,12 @@ import plotter.src.main.java.view.PlotterPane;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
+ * Class for a Student
+ *
  * @author Team 5
  * @version 2018-12-03
  */
@@ -27,7 +30,7 @@ public class Student extends TheObject   {
     /**
      * list of all diagramms
      */
-    private ArrayList<PlotterPane> dataDias;
+    private HashMap<String,PlotterPane> dataDias;
     /**
      * instance of measurement
      */
@@ -62,8 +65,8 @@ public class Student extends TheObject   {
         this.maxWait = pMaxWait;
         measurement = new Measurement(this);
         allStudents.add(this);
-        dataDias = new ArrayList<PlotterPane>();
-        //initDias();
+        dataDias = new HashMap<String,PlotterPane>();
+        initDias();
     }
     /** Create a new Student model
      *
@@ -80,11 +83,11 @@ public class Student extends TheObject   {
         new Student(label, stationsToGo, processtime, speed, xPos, yPos, image,pMaxWait);
         Statistics.show("Student create() methode wurde aufgerufen");
     }
-/*
+
     private void initDias() {
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"Kosten","Globaltime","GesamtEinnahmen"));
-        dataDias.add(new PlotterPane(new ArrayList<CustomPoint>(),600,400,true,"WarteZeit","Globaltime","GesamtWarteZeit"));
-    }*/
+        dataDias.put("guthaben",new PlotterPane(new ArrayList<CustomPoint>(),200,200,true,"time","Rechnungsbetrag",this.label+" Rechnungsbetrag/time"));
+        dataDias.put("gesWarteZeit",new PlotterPane(new ArrayList<CustomPoint>(),200,200,true,"time","GesammtWartezeit",this.label+" GesammtWartezeit/time"));
+    }
 
     /**
      * set the Start time
@@ -126,7 +129,7 @@ public class Student extends TheObject   {
      * getter for the list of all diagrams
      * @return
      */
-    public ArrayList<PlotterPane> getDataDias() {
+    public HashMap<String, PlotterPane> getDataDias() {
 
         return dataDias;
     }
@@ -172,6 +175,7 @@ public class Student extends TheObject   {
     }
 
     /**
+     * Returns the station with the matching "Gruppierung"
      *
      * @param gruppierung the gruppierung of the next Station to go
      * @return the matching station
@@ -195,6 +199,7 @@ public class Student extends TheObject   {
     }
 
     /**
+     * Searches for the shortes queue
      *
      * @param groupList the list with all station of the specific kind
      * @return the matching station
@@ -302,6 +307,7 @@ public class Student extends TheObject   {
          * list of all Statistic points for gesWarteZeit
          */
        protected ArrayList<CustomPoint> gesWarteP;
+
         /**
          * list of all statistic points for guthaben
          */
@@ -311,11 +317,14 @@ public class Student extends TheObject   {
 
         private Student outObject;
 
+        /** the time the object wasn't handeled*/
         int gesWarteZeit=0;
+
         /**
          * the treated time by all processing stations, in seconds
          */
         int myTreatmentTime = 0;
+
         /**
          * number of payment
          */
@@ -323,6 +332,8 @@ public class Student extends TheObject   {
 
         /**
          * constructor
+         *
+         * @param pOutObject a object of the class Student
          */
         public Measurement(Student pOutObject) {
 
@@ -357,7 +368,7 @@ public class Student extends TheObject   {
         void aenderGuthaben(double preis){
             this.guthaben= this.guthaben+preis;
             guthabenP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.guthaben));
-            notifyObservers(this.guthaben);
+            notifyObservers("guthaben");
         }
 
         /**
@@ -367,7 +378,7 @@ public class Student extends TheObject   {
         void aenderWarteZeit(int pWarteZeit){
             this.gesWarteZeit= this.gesWarteZeit+pWarteZeit;
             gesWarteP.add(new CustomPoint((int)Simulation.getGlobalTime(),this.gesWarteZeit));
-            notifyObservers(this.gesWarteZeit);
+            notifyObservers("gesWarteZeit");
         }
 
         /**

@@ -52,7 +52,7 @@ public class OurStatistic extends Statistics {
                 PlotterPane p1 = new PlotterPane(m.getIdleTimeP(),200,200,true,"time","IdleTime",ms.getLabel()+" IdleTime/time");
                 p1.setVisible(true);
                 PlotterPane p2 = new PlotterPane(m.getInUseTimeP(),200,200,true,"time","InUseTime",ms.getLabel()+" InUseTime/time");
-                 p2.setVisible(true);
+                p2.setVisible(true);
                 PlotterPane p3 = new PlotterPane(m.getNumberOVP(),200,200,true,"time","numberOfVisitedObjects" ,ms.getLabel()+" numberOfVisitedObjects/time");
                 p3.setVisible(true);
             }
@@ -71,54 +71,55 @@ public class OurStatistic extends Statistics {
 
     }
 
+/*for(String key : st.getDataDias().keySet()){
+        st.getDataDias().get(key).setVisible(true);
+    }*/
+/*for(String key : ms.getDatenDias().keySet()){
+        ms.getDatenDias().get(key).setVisible(true);
+    }*/
+
+    /**----------------------------------------------------------------------INNER CLASSES-------------------------------------------------------------------------------------*/
 
 
-/**----------------------------------------------------------------------INNER CLASSES-------------------------------------------------------------------------------------*/
 
+    static class Objectbeobachter implements Observer {
 
-
-        static class Objectbeobachter implements Observer {
-
-    /**
-     * update the statistic
-     * @param o the measuremnet instance
-     * @param arg the info
-     */
-    @Override
+        /**
+         * update the statistic
+         * @param o the measuremnet instance
+         * @param arg the info
+         */
+        @Override
         public void update(Observable o, Object arg) {
-        System.out.println("\n"+" Student update");
-        /*Student.Measurement s = (Student.Measurement)o;
-        Student theStudent = s.getOuterClass();
-        trageDatenEin(s);
-        System.out.println(theStudent.getLabel());*/
+            System.out.println("\n"+" Student update");
+            String info= (String) arg;
+            Student.Measurement s = (Student.Measurement)o;
+            Student theStudent = s.getOuterClass();
+            //trageDatenEin(s,info);
+
 
         }
 
-    /**
-     * trage daten ein für Live daten sameln
-     * @param measurement
-     */
-   /* private void trageDatenEin(Student.Measurement measurement) {
-        for (Student s1 : Student.getAllStudents()){
-            if(measurement.getOuterClass().getLabel().equals(s1.getLabel())) {
-                for (PlotterPane p : s1.getDataDias()) {
-                    String title = p.getTheTitle();
-                    switch (title) {
-                        case "GesamtEinnahmen":
-                            System.out.println(s1.getLabel() + " GesamtEinnahmen");
-                            p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-Student.getStartTime()),(int)measurement.getGuthaben()));
-                            break;
-                        case "GesamtWarteZeit":
-                            System.out.println(s1.getLabel() + " Gesamtkosten");
-                            p.addPoint(new CustomPoint(((int)(Simulation.getGlobalTime())),measurement.getGesWarteZeit()));
-                            break;
+        /**
+         * trage daten ein für Live daten sameln
+         * @param measurement
+         */
+        private void trageDatenEin(Student.Measurement measurement,String info) {
+            for (Student s1 : Student.getAllStudents()){
+                if(measurement.getOuterClass().getLabel().equals(s1.getLabel())) {
 
-
+                    for(String key : s1.getDataDias().keySet()){
+                        if(key.equals(info)){
+                            switch (info){
+                                case "gesWarteZeit":s1.getDataDias().get(key).addPoint(measurement.getGesWarteP().get(measurement.getGesWarteP().size()-1));
+                                    break;
+                                case"guthaben":s1.getDataDias().get(key).addPoint(measurement.getGuthabenP().get(measurement.getGuthabenP().size()-1));
+                            }
+                        }
                     }
                 }
             }
         }
-    }*/
     }
 
     static class MensaStationenBeobachter implements Observer{
@@ -137,37 +138,31 @@ public class OurStatistic extends Statistics {
             System.out.println("\n"+" MensaStation update");
             MensaStationen.Measurement measurement = (MensaStationen.Measurement)o;
             MensaStationen theStation = measurement.getOuterClass();
-            //trageDatenEin(measurement);
+            String info = (String) arg;
+            //trageDatenEin(measurement,info);
             System.out.println("\n"+theStation.getLabel());
 
 
-            }
+        }
 
-       /* private void trageDatenEin(MensaStationen.Measurement measurement) {
-            for (MensaStationen m : MensaStationen.getAllMensaStation()){
-                if(measurement.getOuterClass().getLabel().equals(m.getLabel())) {
-                    for (PlotterPane p : m.getDatenDias()) {
-                        String title = p.getTheTitle();
-                        switch (title) {
-                            case "InUseTime":
-                                System.out.println(m.getLabel() + " InUse");
-                                System.out.println();
-                                p.addPoint(new CustomPoint((int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getInUseTime()));
-                                break;
-                            case "IdleTime":
-                                System.out.println(m.getLabel() + " IdleTime");
-                                p.addPoint(new CustomPoint((int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getIdleTime()));
-                                break;
-                            case "numberOfVisitedObject":
-                                System.out.println(m.getLabel() + " number");
-                                p.addPoint(new CustomPoint( (int) (Simulation.getGlobalTime()-MensaStationen.getStartTime()),measurement.getNumbOfVisitedObjects()));
+        private void trageDatenEin(MensaStationen.Measurement measurement,String info) {
+            for (MensaStationen ms : MensaStationen.getAllMensaStation()){
+                if(measurement.getOuterClass().getLabel().equals(ms.getLabel())) {
 
+                    for(String key : ms.getDatenDias().keySet()){
+                        if(key.equals(info)){
+                            switch (info){
+                                case "idleTime":ms.getDatenDias().get(key).addPoint(measurement.getIdleTimeP().get(measurement.getIdleTimeP().size()-1));
+                                    break;
+                                case"numberOVO":ms.getDatenDias().get(key).addPoint(measurement.getNumberOVP().get(measurement.getNumberOVP().size()-1));
+                                    break;
+                                case"inUseTime":ms.getDatenDias().get(key).addPoint(measurement.getInUseTimeP().get(measurement.getInUseTimeP().size()-1));
+
+                            }
                         }
                     }
                 }
             }
-        }*/
+        }
     }
-
-
 }

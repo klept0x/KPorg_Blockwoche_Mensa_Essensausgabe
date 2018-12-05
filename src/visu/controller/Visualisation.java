@@ -12,7 +12,7 @@ import visu.view.VisualisationGraph;
 public class Visualisation {
 
     /**
-     *
+     *Starts the Visualisation
      *
      * @param args
      */
@@ -21,13 +21,12 @@ public class Visualisation {
         theVisualisation.init();
     }
 
+    /**
+     * create the Factory and the VisualisationGraph
+     */
     private void init(){
         VisualisierungFactory.createStartScenario();
-
-
         VisualisationGraph g1 = new VisualisationGraph();
         g1.createDiagramWithInitialDataPoints();
-
-
     }
 }

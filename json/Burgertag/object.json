@@ -4,7 +4,7 @@
       "object": [
         {
           "label": "Maennlein",
-          "schleife": "20",
+          "schleife": "2",
           "processtime": "4",
           "speed": "6",
           "maxWait": "2",
@@ -19,14 +19,14 @@
             "Salatebar",
             "WarmesEssen",
             "WarmesEssen",
-            "Burger_Stand",
+            "Burger",
             "Kasse",
             "End_Station"
           ]
         },
         {
           "label": "Weiblein",
-          "schleife": "20",
+          "schleife": "2",
           "processtime": "5",
           "speed": "5",
           "maxWait": "2",
@@ -40,14 +40,14 @@
             "Salatebar",
             "WarmesEssen",
             "Salatebar",
-            "Burger_Stand",
+            "Burger",
             "Kasse",
             "End_Station"
           ]
         },
         {
           "label": "Maennlein",
-          "schleife": "44",
+          "schleife": "4",
           "processtime": "7",
           "speed": "4",
           "maxWait": "2",
@@ -61,14 +61,14 @@
             "Salatebar",
             "WarmesEssen",
             "Salatebar",
-            "Burger_Stand",
+            "Burger",
             "Kasse",
             "End_Station"
           ]
         },
         {
           "label": "Weiblein",
-          "schleife": "15",
+          "schleife": "1",
           "processtime": "9",
           "speed": "2",
           "maxWait": "2",
@@ -82,14 +82,14 @@
             "Salatebar",
             "WarmesEssen",
             "Salatebar",
-            "Burger_Stand",
+            "Burger",
             "Kasse",
             "End_Station"
           ]
         },
         {
           "label": "Weiblein",
-          "schleife": "12",
+          "schleife": "2",
           "processtime": "12",
           "speed": "3",
           "maxWait": "2",
